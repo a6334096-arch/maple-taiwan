@@ -1,0 +1,339 @@
+{
+  "aowanda": {
+    "months": [
+      11,
+      12,
+      1
+    ],
+    "period": "一般約 11 月至翌年 1 月",
+    "source": "林業保育署南投分署・常見問答",
+    "source_url": "https://nantou.forest.gov.tw/search/faqs?p=0",
+    "note": "一般季節會隨氣候改變；不是今年楓況或轉紅預測。",
+    "checked_at": "2026-10-07T09:58:17+08:00"
+  },
+  "wuling": {
+    "months": [
+      11,
+      12,
+      1
+    ],
+    "period": "一般約 11 月中旬至翌年 1 月",
+    "source": "武陵農場・四季景觀",
+    "source_url": "https://www.wuling-farm.com.tw/tw/travel/index.php?num=26",
+    "note": "官網分列 11 月中旬～12 月的楓葉、銀杏，以及 12 月下旬～1 月的楓葉；不同區域與氣候會有差異。",
+    "checked_at": "2026-10-07T09:58:17+08:00"
+  },
+  "fushoushan": {
+    "months": [
+      10,
+      11
+    ],
+    "period": "一般約 10～11 月",
+    "source": "福壽山農場・常見問答",
+    "source_url": "https://fushoushan.com.tw/Outer/QuestionAns",
+    "note": "鴛鴦湖畔約 10 月，松廬約 11 月；各區與品種賞楓期不同，仍須確認最新公告。",
+    "checked_at": "2026-10-07T09:58:17+08:00"
+  },
+  "taipingshan": {
+    "months": [
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "period": "紫葉槭一般約 4～10 月",
+    "source": "太平山官方・春夏來太平山欣賞楓紅美景",
+    "source_url": "https://tps.forest.gov.tw/TPSWeb/wSite/ct?ctNode=251&mp=1&xItem=6668",
+    "note": "此筆專指太平山莊中央階梯的紫葉槭。春夏新葉即呈紫紅，不能套用一般秋季轉紅規則；來源為一般季節介紹，不是 2026 年觀測。",
+    "checked_at": "2026-10-07T09:58:17+08:00"
+  },
+  "alishan": {
+    "months": [
+      12
+    ],
+    "period": "官方活動介紹以 12 月為賞楓季",
+    "source": "交通部觀光署・阿里山林鐵賞楓主題列車介紹",
+    "source_url": "https://www.taiwan.net.tw/m1.aspx?lid=081887&sNo=0001019",
+    "note": "來源介紹阿里山林鐵賞楓季，涵蓋林鐵支線沿途；不是全園逐月楓況，也不代表其他月份無紅葉。",
+    "checked_at": "2026-10-07T09:58:17+08:00"
+  },
+  "manabang": {
+    "months": null,
+    "period": "深秋（官方未列明確月份）",
+    "source": "觀光署開放資料・馬那邦山登山步道（原提供單位：林業保育署）",
+    "source_url": "https://media.taiwan.net.tw/zh-tw/portal/travel/details/trail_345040000g_004700",
+    "note": "官方文字描述深秋楓紅，未提供明確月分。本版不自行換算成固定月份。",
+    "checked_at": "2026-10-07T09:58:17+08:00"
+  },
+  "xitou": {
+    "months": null,
+    "period": "尚無經確認的官方賞楓月份",
+    "source": "溪頭自然教育園區官方網站",
+    "source_url": "https://exfo.ntu.edu.tw/xitou/",
+    "note": "此連結供查看園區資訊；本次未確認明確賞楓月份，因此不填入推測值。",
+    "checked_at": "2026-10-07T09:58:17+08:00"
+  },
+  "shimen": {
+    "months": [
+      11,
+      12
+    ],
+    "period": "一般約 11～12 月",
+    "source": "桃園觀光導覽網・石門水庫行",
+    "source_url": "https://travel.tycg.gov.tw/zh-tw/travel/shihmen-reservoir-tour",
+    "note": "官方介紹的賞楓區域包括高線公路、槭樹公園與楓林步道；實際轉色仍依當年天候。",
+    "checked_at": "2026-10-07T09:58:17+08:00"
+  },
+  "yangmingshan": {
+    "months": null,
+    "period": "秋季（官方未列明確月份）",
+    "source": "官方景點／季節介紹",
+    "source_url": "https://www.taiwan.net.tw/m1.aspx?id=738&sno=0001016",
+    "note": "涵蓋廣大山區；圖示為官方代表位置，秋色依步道與樹種而異。",
+    "checked_at": "2026-10-07T10:55:49+08:00"
+  },
+  "jiaobanshan": {
+    "months": null,
+    "period": "深秋（官方未列明確月份）",
+    "source": "官方景點／季節介紹",
+    "source_url": "https://www.taiwan.net.tw/m1.aspx?id=775&sno=0001016",
+    "note": "月份待確認；實際葉色與開放狀況請查閱官方公告。",
+    "checked_at": "2026-10-07T10:55:49+08:00"
+  },
+  "manyueyuan": {
+    "months": null,
+    "period": "官方未列明確賞楓月份",
+    "source": "官方景點／季節介紹",
+    "source_url": "https://www.taiwan.net.tw/m1.aspx?id=r150&sno=0001016",
+    "note": "園區有規劃賞楓自導式步道；明確月份待確認。",
+    "checked_at": "2026-10-07T10:55:49+08:00"
+  },
+  "lalashan": {
+    "months": null,
+    "period": "深秋（官方未列明確月份）",
+    "source": "官方景點／季節介紹",
+    "source_url": "https://www.taiwan.net.tw/m1.aspx?id=r147&sno=0001016",
+    "note": "青楓、紅榨槭等變色葉木；不同樹種葉色不同。",
+    "checked_at": "2026-10-07T10:55:49+08:00"
+  },
+  "huisun": {
+    "months": null,
+    "period": "官方未列明確賞楓月份",
+    "source": "官方景點／季節介紹",
+    "source_url": "https://www.taiwan.net.tw/m1.aspx?id=2489&sno=0001016",
+    "note": "官方介紹設有賞楓區；未列明確月份。",
+    "checked_at": "2026-10-07T10:55:49+08:00"
+  },
+  "daxueshan": {
+    "months": null,
+    "period": "秋季（官方未列明確月份）",
+    "source": "官方景點／季節介紹",
+    "source_url": "https://recreation.forest.gov.tw/Forest/RA?typ_id=0300003",
+    "note": "紅榨槭等紅葉景觀；圖示座標依觀光署景點資料。",
+    "checked_at": "2026-10-07T10:55:49+08:00"
+  },
+  "xiakelo": {
+    "months": null,
+    "period": "秋冬（官方未列明確月份）",
+    "source": "官方景點／季節介紹",
+    "source_url": "https://www.taiwan.net.tw/m1.aspx?id=9486&sno=0001016",
+    "note": "長距離山區步道；代表點並非整段路線，出發前請確認步道公告。",
+    "checked_at": "2026-10-07T10:55:49+08:00"
+  },
+  "shanlinxi": {
+    "months": null,
+    "period": "冬季（官方未列明確月份）",
+    "source": "官方景點／季節介紹",
+    "source_url": "https://www.taiwan.net.tw/m1.aspx?id=c100_247&sno=0001016",
+    "note": "月份待確認；實際葉色與開放狀況請查閱官方公告。",
+    "checked_at": "2026-10-07T10:55:49+08:00"
+  },
+  "taipei-aowanda": {
+    "months": [
+      3,
+      4
+    ],
+    "period": "春季約 3～4 月",
+    "source": "官方景點／季節介紹",
+    "source_url": "https://media.taiwan.net.tw/en-us/portal/travel/details/attraction_379000000a_002180",
+    "note": "嫁接日本品種的新芽呈紅色，與秋季轉紅不同；官府介紹引用園方說明。",
+    "checked_at": "2026-10-07T10:55:49+08:00"
+  },
+  "gongbei": {
+    "months": [
+      11,
+      12,
+      1
+    ],
+    "period": "一般約 11 月下旬至翌年 1 月上旬",
+    "source": "官方景點／季節介紹",
+    "source_url": "https://newtaipei.travel/zh-tw/attractions/detail/109859",
+    "note": "槭樹賞楓季參考；實際葉色仍依當年氣候。",
+    "checked_at": "2026-10-07T10:55:49+08:00"
+  },
+  "fenglin": {
+    "months": null,
+    "period": "官方未列明確賞楓月份",
+    "source": "官方景點／季節介紹",
+    "source_url": "https://media.taiwan.net.tw/en-us/portal/travel/details/attraction_376550000a_000175",
+    "note": "楓樹步道，可眺望花蓮平原；楓況須另查有日期的公告。",
+    "checked_at": "2026-10-07T10:55:49+08:00"
+  },
+  "xiuluan": {
+    "months": null,
+    "period": "秋季（官方未列明確月份）",
+    "source": "官方景點／季節介紹",
+    "source_url": "https://media.taiwan.net.tw/en-us/portal/travel/details/attraction_376440000a_000450",
+    "note": "吊橋周邊楓香林；圖示採官方秀巒景點代表位置。",
+    "checked_at": "2026-10-07T10:55:49+08:00"
+  },
+  "hongye-village": {
+    "months": null,
+    "period": "秋季（官方未列明確月份）",
+    "source": "官方景點／季節介紹",
+    "source_url": "https://media.taiwan.net.tw/en-us/portal/travel/details/attraction_376540000a_000233",
+    "note": "村落因秋日楓紅得名；圖示為村內紅葉少棒紀念館代表點。",
+    "checked_at": "2026-10-07T10:55:49+08:00"
+  },
+  "hongye-park": {
+    "months": [
+      12
+    ],
+    "period": "一般約 12 月中下旬開始轉紅",
+    "source": "官方景點／季節介紹",
+    "source_url": "https://www.siraya-nsa.gov.tw/zh-tw/attractions/detail/157",
+    "note": "來源提到 12 月中下旬轉紅；未據此推估後續月份或今年楓況。",
+    "checked_at": "2026-10-07T10:55:49+08:00"
+  },
+  "puli-maple": {
+    "months": null,
+    "period": "官方未列明確賞楓月份",
+    "source": "官方景點／季節介紹",
+    "source_url": "https://media.taiwan.net.tw/zh-tw/portal/travel/details/attraction_376480000a_000020",
+    "note": "楓香巨木景點；未取得固定紅葉月份。",
+    "checked_at": "2026-10-07T10:55:49+08:00"
+  },
+  "neidong": {
+    "months": null,
+    "period": "官方未列明確賞楓月份",
+    "source": "官方景點／季節介紹",
+    "source_url": "https://recreation.forest.gov.tw/Topic/Topic?region=ALL&word=%E8%B3%9E%E6%A5%93",
+    "note": "列入林業保育署全台賞楓主題推薦；未列明確月份。",
+    "checked_at": "2026-10-07T10:55:49+08:00"
+  },
+  "dongyanshan": {
+    "months": null,
+    "period": "官方未列明確賞楓月份",
+    "source": "官方景點／季節介紹",
+    "source_url": "https://recreation.forest.gov.tw/Topic/Topic?region=ALL&word=%E8%B3%9E%E6%A5%93",
+    "note": "列入林業保育署全台賞楓主題推薦；未列明確月份。",
+    "checked_at": "2026-10-07T10:55:49+08:00"
+  },
+  "wuling-forest": {
+    "months": null,
+    "period": "官方未列明確賞楓月份",
+    "source": "官方景點／季節介紹",
+    "source_url": "https://recreation.forest.gov.tw/Topic/Topic?region=ALL&word=%E8%B3%9E%E6%A5%93",
+    "note": "列入林業保育署全台賞楓主題推薦；未列明確月份。",
+    "checked_at": "2026-10-07T10:55:49+08:00"
+  },
+  "tengzhi": {
+    "months": null,
+    "period": "官方未列明確賞楓月份",
+    "source": "官方景點／季節介紹",
+    "source_url": "https://recreation.forest.gov.tw/Topic/Topic?region=ALL&word=%E8%B3%9E%E6%A5%93",
+    "note": "列入林業保育署全台賞楓主題推薦；未列明確月份。",
+    "checked_at": "2026-10-07T10:55:49+08:00"
+  },
+  "taiwan-beech": {
+    "months": null,
+    "period": "官方未列明確賞楓月份",
+    "source": "官方景點／季節介紹",
+    "source_url": "https://recreation.forest.gov.tw/Trail/RT?tr_id=013",
+    "note": "秋色以山毛櫸金黃葉為主，並非紅色楓葉。入口代表點與變葉林區有距離。",
+    "checked_at": "2026-10-07T10:55:49+08:00"
+  },
+  "cuifeng": {
+    "months": null,
+    "period": "官方未列明確賞楓月份",
+    "source": "官方景點／季節介紹",
+    "source_url": "https://recreation.forest.gov.tw/Topic/Topic?region=ALL&word=%E8%B3%9E%E6%A5%93",
+    "note": "官方賞楓主題推薦。地圖標示入口代表點，非完整路線；請先查閱官方步道現況。",
+    "checked_at": "2026-10-07T10:55:49+08:00"
+  },
+  "wangyang": {
+    "months": null,
+    "period": "官方未列明確賞楓月份",
+    "source": "官方景點／季節介紹",
+    "source_url": "https://recreation.forest.gov.tw/Topic/Topic?region=ALL&word=%E8%B3%9E%E6%A5%93",
+    "note": "官方賞楓主題推薦。地圖標示入口代表點，非完整路線；請先查閱官方步道現況。",
+    "checked_at": "2026-10-07T10:55:49+08:00"
+  },
+  "dongman": {
+    "months": null,
+    "period": "官方未列明確賞楓月份",
+    "source": "官方景點／季節介紹",
+    "source_url": "https://recreation.forest.gov.tw/Topic/Topic?region=ALL&word=%E8%B3%9E%E6%A5%93",
+    "note": "官方賞楓主題推薦。地圖標示入口代表點，非完整路線；請先查閱官方步道現況。",
+    "checked_at": "2026-10-07T10:55:49+08:00"
+  },
+  "beichatian": {
+    "months": null,
+    "period": "官方未列明確賞楓月份",
+    "source": "官方景點／季節介紹",
+    "source_url": "https://recreation.forest.gov.tw/Topic/Topic?region=ALL&word=%E8%B3%9E%E6%A5%93",
+    "note": "官方賞楓主題推薦。地圖標示入口代表點，非完整路線；請先查閱官方步道現況。",
+    "checked_at": "2026-10-07T10:55:49+08:00"
+  },
+  "dabajian": {
+    "months": null,
+    "period": "官方未列明確賞楓月份",
+    "source": "官方景點／季節介紹",
+    "source_url": "https://recreation.forest.gov.tw/Topic/Topic?region=ALL&word=%E8%B3%9E%E6%A5%93",
+    "note": "官方賞楓主題推薦。地圖標示入口代表點，非完整路線；請先查閱官方步道現況。",
+    "checked_at": "2026-10-07T10:55:49+08:00"
+  },
+  "beidelaman": {
+    "months": null,
+    "period": "官方未列明確賞楓月份",
+    "source": "官方景點／季節介紹",
+    "source_url": "https://recreation.forest.gov.tw/Topic/Topic?region=ALL&word=%E8%B3%9E%E6%A5%93",
+    "note": "官方賞楓主題推薦。地圖標示入口代表點，非完整路線；請先查閱官方步道現況。",
+    "checked_at": "2026-10-07T10:55:49+08:00"
+  },
+  "daxue-trails": {
+    "months": null,
+    "period": "官方未列明確賞楓月份",
+    "source": "官方景點／季節介紹",
+    "source_url": "https://recreation.forest.gov.tw/Topic/Topic?region=ALL&word=%E8%B3%9E%E6%A5%93",
+    "note": "官方賞楓主題推薦。地圖標示入口代表點，非完整路線；請先查閱官方步道現況。",
+    "checked_at": "2026-10-07T10:55:49+08:00"
+  },
+  "yuanzui": {
+    "months": null,
+    "period": "官方未列明確賞楓月份",
+    "source": "官方景點／季節介紹",
+    "source_url": "https://recreation.forest.gov.tw/Topic/Topic?region=ALL&word=%E8%B3%9E%E6%A5%93",
+    "note": "官方賞楓主題推薦。地圖標示入口代表點，非完整路線；請先查閱官方步道現況。",
+    "checked_at": "2026-10-07T10:55:49+08:00"
+  },
+  "taoshan": {
+    "months": null,
+    "period": "官方未列明確賞楓月份",
+    "source": "官方景點／季節介紹",
+    "source_url": "https://recreation.forest.gov.tw/Topic/Topic?region=ALL&word=%E8%B3%9E%E6%A5%93",
+    "note": "官方賞楓主題推薦。地圖標示入口代表點，非完整路線；請先查閱官方步道現況。",
+    "checked_at": "2026-10-07T10:55:49+08:00"
+  },
+  "tefuye": {
+    "months": null,
+    "period": "官方未列明確賞楓月份",
+    "source": "官方景點／季節介紹",
+    "source_url": "https://recreation.forest.gov.tw/Topic/Topic?region=ALL&word=%E8%B3%9E%E6%A5%93",
+    "note": "官方賞楓主題推薦。地圖標示入口代表點，非完整路線；請先查閱官方步道現況。",
+    "checked_at": "2026-10-07T10:55:49+08:00"
+  }
+}

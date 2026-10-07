@@ -1,0 +1,82 @@
+{
+  "foliage": {
+    "alishan": null,
+    "aowanda": null,
+    "beichatian": null,
+    "beidelaman": null,
+    "cuifeng": null,
+    "dabajian": null,
+    "daxue-trails": null,
+    "daxueshan": null,
+    "dongman": null,
+    "dongyanshan": null,
+    "fenglin": null,
+    "fushoushan": null,
+    "gongbei": null,
+    "hongye-park": null,
+    "hongye-village": null,
+    "huisun": null,
+    "jiaobanshan": null,
+    "lalashan": null,
+    "manabang": null,
+    "manyueyuan": null,
+    "neidong": null,
+    "puli-maple": null,
+    "shanlinxi": null,
+    "shimen": null,
+    "taipei-aowanda": null,
+    "taipingshan": null,
+    "taiwan-beech": null,
+    "taoshan": null,
+    "tefuye": null,
+    "tengzhi": null,
+    "wangyang": null,
+    "wuling": null,
+    "wuling-forest": null,
+    "xiakelo": null,
+    "xitou": null,
+    "xiuluan": null,
+    "yangmingshan": null,
+    "yuanzui": null
+  },
+  "sync": {
+    "attempted_at": "2026-10-07T02:45:00.675Z",
+    "checks": {
+      "alishan": {
+        "message": "公開存取驗證：未重新查核來源，保留原紀錄。",
+        "status": "failed"
+      },
+      "aowanda": {
+        "message": "公開存取驗證：未重新查核來源，保留原紀錄。",
+        "status": "failed"
+      },
+      "fushoushan": {
+        "message": "公開存取驗證：未重新查核來源，保留原紀錄。",
+        "status": "failed"
+      },
+      "manabang": {
+        "message": "公開存取驗證：未重新查核來源，保留原紀錄。",
+        "status": "failed"
+      },
+      "shimen": {
+        "message": "公開存取驗證：未重新查核來源，保留原紀錄。",
+        "status": "failed"
+      },
+      "taipingshan": {
+        "message": "公開存取驗證：未重新查核來源，保留原紀錄。",
+        "status": "failed"
+      },
+      "wuling": {
+        "message": "公開存取驗證：未重新查核來源，保留原紀錄。",
+        "status": "failed"
+      },
+      "xitou": {
+        "message": "公開存取驗證：未重新查核來源，保留原紀錄。",
+        "status": "failed"
+      }
+    },
+    "failed_sources": 8,
+    "run_id": "8cad60e2-094c-43d4-803e-5cb65def6095",
+    "successful_sources": 0
+  }
+}
