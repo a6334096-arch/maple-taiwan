@@ -1,0 +1,46 @@
+name: 同步台灣賞楓資料
+
+on:
+  schedule:
+    # UTC 00:30 / 02:30 = 台灣 08:30 / 10:30，第二次補抓較晚完成的查核。
+    - cron: '30 0,2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: maple-data-backup
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      MAPLE_SITE_URL: https://maple-taiwan-responsive.a6334096.chatgpt.site
+    steps:
+      - name: 取得儲存庫預設分支
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+      - name: 準備 Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+      - name: 下載並驗證網站公開資料
+        run: python scripts/sync-github-data.py
+      - name: 只提交有變更的資料
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add -- data/current/places.json data/current/seasons.json data/current/foliage.json
+          if git diff --cached --quiet; then
+            echo "資料沒有變更，不新增提交。"
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'data: sync official maple site snapshots'
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin HEAD
