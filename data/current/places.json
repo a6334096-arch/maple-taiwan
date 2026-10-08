@@ -16,19 +16,7 @@
     "city": "宜蘭縣・大同鄉",
     "coordinate_scope": "官方景點代表位置",
     "coordinate_source_url": "https://www.taiwan.net.tw/m1.aspx?id=618&sno=0001016",
-    "historical_photos": [
-      {
-        "author": "林業保育署宜蘭分署（原羅東林管處）",
-        "date": "2023-10-18",
-        "date_kind": "source-updated",
-        "license": "政府網站資料開放宣告",
-        "license_url": "https://tps.forest.gov.tw/TPSWeb/wSite/ct?ctNode=270&mp=1&xItem=3201",
-        "note": "春夏紫葉槭；拍攝日期未標示。",
-        "source_url": "https://tps.forest.gov.tw/TPSWeb/wSite/ct?ctNode=251&mp=1&xItem=6668",
-        "src": "https://tps.forest.gov.tw/TPSWeb/wSite/public/Data/f1682124319932.jpg",
-        "title": "中央階梯紫葉槭"
-      }
-    ],
+    "historical_photos": [],
     "id": "taipingshan",
     "intro": "",
     "lat": 24.497724,
@@ -121,8 +109,9 @@
         "license": "CC BY-SA 4.0",
         "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
         "note": "",
+        "original_image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/%E6%8B%B1%E5%8C%97%E6%AE%BF%E6%8B%B1%E6%A9%8B%E6%A5%93%E7%B4%85%E4%B9%8B%E7%BE%8E.jpg/330px-%E6%8B%B1%E5%8C%97%E6%AE%BF%E6%8B%B1%E6%A9%8B%E6%A5%93%E7%B4%85%E4%B9%8B%E7%BE%8E.jpg",
         "source_url": "https://commons.wikimedia.org/wiki/File:%E6%8B%B1%E5%8C%97%E6%AE%BF%E6%8B%B1%E6%A9%8B%E6%A5%93%E7%B4%85%E4%B9%8B%E7%BE%8E.jpg",
-        "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/%E6%8B%B1%E5%8C%97%E6%AE%BF%E6%8B%B1%E6%A9%8B%E6%A5%93%E7%B4%85%E4%B9%8B%E7%BE%8E.jpg/330px-%E6%8B%B1%E5%8C%97%E6%AE%BF%E6%8B%B1%E6%A9%8B%E6%A5%93%E7%B4%85%E4%B9%8B%E7%BE%8E.jpg",
+        "src": "/photos/gongbei-1.jpg",
         "title": "拱北殿拱橋楓紅"
       }
     ],
@@ -167,30 +156,7 @@
     "city": "新北市・三峽區",
     "coordinate_scope": "官方景點代表位置",
     "coordinate_source_url": "https://www.taiwan.net.tw/m1.aspx?id=r150&sno=0001016",
-    "historical_photos": [
-      {
-        "author": "滿月圓遊客中心",
-        "date": "2020-11-02",
-        "date_kind": "source-published",
-        "license": "政府網站資料開放宣告",
-        "license_url": "https://www.forest.gov.tw/opendata",
-        "note": "拍攝日期未標示。",
-        "source_url": "https://www.forest.gov.tw/link-topic/news/0066601",
-        "src": "https://www.forest.gov.tw/UserFiles/003/%E6%BB%BF%E6%9C%88%E5%9C%93%E6%A5%93%E7%B4%85%E7%85%A7%E7%89%87-%E6%BB%BF%E6%9C%88%E5%9C%93%E9%81%8A%E5%AE%A2%E4%B8%AD%E5%BF%83%E6%8F%90%E4%BE%9B%281%29.JPG",
-        "title": "滿月圓歷年楓紅 1"
-      },
-      {
-        "author": "滿月圓遊客中心",
-        "date": "2020-11-02",
-        "date_kind": "source-published",
-        "license": "政府網站資料開放宣告",
-        "license_url": "https://www.forest.gov.tw/opendata",
-        "note": "拍攝日期未標示。",
-        "source_url": "https://www.forest.gov.tw/link-topic/news/0066601",
-        "src": "https://www.forest.gov.tw/UserFiles/003/%E6%BB%BF%E6%9C%88%E5%9C%93%E6%A5%93%E7%B4%85%E7%85%A7%E7%89%87-%E6%BB%BF%E6%9C%88%E5%9C%93%E9%81%8A%E5%AE%A2%E4%B8%AD%E5%BF%83%E6%8F%90%E4%BE%9B%282%29.JPG",
-        "title": "滿月圓歷年楓紅 2"
-      }
-    ],
+    "historical_photos": [],
     "id": "manyueyuan",
     "intro": "園區有規劃賞楓自導式步道；明確月份待確認。",
     "lat": 24.830391,
@@ -331,6 +297,16 @@
   {
     "article_checked_at": "2026-10-08",
     "blog_photo_links": [
+      {
+        "checked_at": "2026-10-08",
+        "published_on": "2026-01-08",
+        "reference_period": "2025-12-27",
+        "route": "養老登山口 → 馬鞍賞楓區 → 武神駐在所 → 白石吊橋 → 原路返回",
+        "source": "健行筆記／包毛登山旅遊日記",
+        "summary": "記錄養老端沿路黃金楓、馬鞍楓林與吊橋行程；屬長距離健行，出發前需確認步道開放。",
+        "title": "霞喀羅養老端｜馬鞍楓林與白石吊橋賞楓行程",
+        "url": "https://hiking.biji.co/index.php?act=info&q=review&review_id=46374"
+      },
       {
         "checked_at": "2026-10-08",
         "published_on": "2025-01-12",
@@ -503,6 +479,16 @@
     "article_checked_at": "2026-10-08",
     "blog_photo_links": [
       {
+        "checked_at": "2026-10-08",
+        "published_on": "2026-08-05",
+        "route": "拉拉山國家森林遊樂區巨木群步道 → 巴陵周邊",
+        "source": "四方通行旅遊網 EasyTravel",
+        "summary": "整理原生變色植物、觀賞位置、北橫交通與一日動線；屬行程攻略，非當年楓況實拍。",
+        "title": "拉拉山｜賞楓月份與一日行程攻略",
+        "url": "https://blog.easytravel.com.tw/when-do-the-maple-leaves-in-lala-mountain-turn-red/"
+      },
+      {
+        "checked_at": "2026-10-08",
         "published_on": "2021-05-13",
         "route": "巴陵沿線 → 拉拉山周邊",
         "source": "黃連芳製香廠／WalkerLand",
@@ -572,8 +558,9 @@
         "license": "CC BY 3.0",
         "license_url": "https://creativecommons.org/licenses/by/3.0/",
         "note": "春季葉色，不是秋季轉紅樣本。",
+        "original_image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/28/Taipei_Aowanda_%E5%8F%B0%E5%8C%97%E5%A5%A7%E8%90%AC%E5%A4%A7_-_panoramio_%281%29.jpg/330px-Taipei_Aowanda_%E5%8F%B0%E5%8C%97%E5%A5%A7%E8%90%AC%E5%A4%A7_-_panoramio_%281%29.jpg",
         "source_url": "https://commons.wikimedia.org/wiki/File:Taipei%20Aowanda%20%E5%8F%B0%E5%8C%97%E5%A5%A7%E8%90%AC%E5%A4%A7%20-%20panoramio%20%281%29.jpg",
-        "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/28/Taipei_Aowanda_%E5%8F%B0%E5%8C%97%E5%A5%A7%E8%90%AC%E5%A4%A7_-_panoramio_%281%29.jpg/330px-Taipei_Aowanda_%E5%8F%B0%E5%8C%97%E5%A5%A7%E8%90%AC%E5%A4%A7_-_panoramio_%281%29.jpg",
+        "src": "/photos/taipei-aowanda-1.jpg",
         "title": "台北奧萬大春季葉色"
       }
     ],
@@ -686,26 +673,28 @@
     "coordinate_source_url": "https://www.taiwan.net.tw/m1.aspx?id=2146&sno=0001016",
     "historical_photos": [
       {
-        "author": "南投分署／原站未列攝影者",
-        "date": "2020-10-18",
-        "date_kind": "captured",
-        "license": "原站查閱",
-        "license_url": "https://media.forest.gov.tw/photo_page.php?mID=bronojzwve1760927430551",
-        "note": "影像平台照片僅提供原站連結。",
-        "source_url": "https://media.forest.gov.tw/photo_page.php?mID=bronojzwve1760927430551",
-        "src": null,
-        "title": "奧萬大歷年楓紅"
+        "author": "林業及自然保育署／南投分署（原站未列個別攝影者）",
+        "date": "",
+        "date_kind": "unknown",
+        "license": "政府網站資料開放宣告",
+        "license_url": "https://www.forest.gov.tw/opendata",
+        "note": "歷年秋季葉色；原站未標示拍攝日期。",
+        "original_image_url": "https://recreation.forest.gov.tw/Files/Forest/RA/photo/album/0400001/%E5%A5%A7%E8%90%AC%E5%A4%A7-%E7%A7%8B-%E9%9D%92%E6%A5%93.jpg",
+        "source_url": "https://recreation.forest.gov.tw/Forest/RA?typ_id=0400001",
+        "src": "/photos/aowanda-1.jpg",
+        "title": "奧萬大秋季青楓"
       },
       {
-        "author": "南投分署／劉永正",
-        "date": "2010-12-18",
-        "date_kind": "captured",
-        "license": "原站查閱",
-        "license_url": "https://media.forest.gov.tw/photo_page.php?mID=xeuuavfzwg1577083678091",
-        "note": "影像平台照片僅提供原站連結。",
-        "source_url": "https://media.forest.gov.tw/photo_page.php?mID=xeuuavfzwg1577083678091",
-        "src": null,
-        "title": "奧萬大歷年楓紅"
+        "author": "林業及自然保育署／南投分署（原站未列個別攝影者）",
+        "date": "",
+        "date_kind": "unknown",
+        "license": "政府網站資料開放宣告",
+        "license_url": "https://www.forest.gov.tw/opendata",
+        "note": "歷年秋季葉色；原站未標示拍攝日期。",
+        "original_image_url": "https://recreation.forest.gov.tw/Files/Forest/RA/photo/album/0400001/%E5%A5%A7%E8%90%AC%E5%A4%A7-%E7%A7%8B-%E6%A5%93%E9%A6%99.jpg",
+        "source_url": "https://recreation.forest.gov.tw/Forest/RA?typ_id=0400001",
+        "src": "/photos/aowanda-2.jpg",
+        "title": "奧萬大秋季楓香"
       }
     ],
     "id": "aowanda",
@@ -809,9 +798,10 @@
         "date_kind": "captured",
         "license": "CC BY-SA 4.0",
         "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-        "note": "請至原站查看照片。",
+        "note": "",
+        "original_image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9a/2020_Maple_Foliage_at_Wuling_Farm_Taiwan.jpg/960px-2020_Maple_Foliage_at_Wuling_Farm_Taiwan.jpg",
         "source_url": "https://commons.wikimedia.org/wiki/File:2020%20Maple%20Foliage%20at%20Wuling%20Farm%20Taiwan.jpg",
-        "src": null,
+        "src": "/photos/wuling-1.jpg",
         "title": "武陵農場歷年楓色"
       }
     ],
@@ -857,7 +847,19 @@
   },
   {
     "article_checked_at": "2026-10-08",
-    "blog_photo_links": [],
+    "blog_photo_links": [
+      {
+        "checked_at": "2026-10-08",
+        "date_kind": "undated",
+        "date_label": "發布日期未標示",
+        "official_guide": true,
+        "route": "園區賞楓路線與楓香林",
+        "source": "東勢林場遊樂區／官方賞楓路線",
+        "summary": "園方專頁介紹秋季楓香紅葉，供安排園內賞楓行程；頁面未標發布日期。",
+        "title": "東勢林場｜楓香林賞楓路線",
+        "url": "https://www.tsfa.com.tw/page/about/index.aspx?kind=57"
+      }
+    ],
     "category": "賞楓／秋色",
     "city": "臺中市・東勢區",
     "coordinate_scope": "官方林場代表位置",
@@ -892,19 +894,33 @@
     "blog_photo_links": [
       {
         "checked_at": "2026-10-08",
-        "published_on": "2023-12-01",
-        "route": "梨山賓館周邊 → 楓之谷步道",
-        "source": "氣泡水／方格子",
-        "summary": "介紹楓之谷步道與高山景觀，供安排賞葉散步參考。",
-        "title": "梨山行之１～高山農場風情畫丨楓之谷 1956 秘密花園丨遇見美猴王｜氣泡水《用照片影像聊聊天》",
-        "url": "https://vocus.cc/article/65668ea5fd89780001123770"
+        "date_kind": "updated",
+        "published_on": "2026-07-02",
+        "route": "梨山賓館旁入口 → 楓之谷步道 → 五福祈福鐘與觀星椅",
+        "source": "參山國家風景區管理處／官方玩賞攻略",
+        "summary": "介紹各品種葉色與園區散步設施；紫葉楓其他季節也呈暗紅，不代表秋季盛期。",
+        "title": "楓之谷｜多品種楓樹與園區散步攻略",
+        "url": "https://www.trimt-nsa.gov.tw/zh-tw/attraction/83/"
       }
     ],
     "category": "賞楓／秋色",
     "city": "臺中市・和平區",
     "coordinate_scope": "官方園區代表位置",
     "coordinate_source_url": "https://www.trimt-nsa.gov.tw/zh-tw/attraction/83/",
-    "historical_photos": [],
+    "historical_photos": [
+      {
+        "author": "參山國家風景區管理處",
+        "date": "2026-07-02",
+        "date_kind": "source-updated",
+        "license": "政府網站資料開放宣告",
+        "license_url": "https://www.trimt-nsa.gov.tw/zh-tw/copyright/",
+        "note": "拍攝日期未標示；來源日期不代表拍攝年份。",
+        "original_image_url": "https://www.trimt-nsa.gov.tw/_api/Image/150800/",
+        "source_url": "https://www.trimt-nsa.gov.tw/zh-tw/attraction/83/",
+        "src": "/photos/maple-valley-verified.jpg",
+        "title": "楓之谷橘紅楓葉"
+      }
+    ],
     "id": "maple-valley",
     "intro": "梨山賓館旁；紫葉楓等品種其他季節也有紅葉，不能當作秋季轉紅或全年盛期。",
     "lat": 24.2544472,
@@ -956,8 +972,9 @@
         "license": "CC BY-SA 4.0",
         "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
         "note": "",
+        "original_image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/53/%E7%A6%8F%E5%A3%BD%E5%B1%B1%E6%A5%93%E8%91%89.jpg/960px-%E7%A6%8F%E5%A3%BD%E5%B1%B1%E6%A5%93%E8%91%89.jpg",
         "source_url": "https://commons.wikimedia.org/wiki/File:%E7%A6%8F%E5%A3%BD%E5%B1%B1%E6%A5%93%E8%91%89.jpg",
-        "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/53/%E7%A6%8F%E5%A3%BD%E5%B1%B1%E6%A5%93%E8%91%89.jpg/960px-%E7%A6%8F%E5%A3%BD%E5%B1%B1%E6%A5%93%E8%91%89.jpg",
+        "src": "/photos/fushoushan-1.jpg",
         "title": "福壽山楓葉"
       }
     ],
@@ -1015,14 +1032,27 @@
     "coordinate_source_url": "https://www.taiwan.net.tw/m1.aspx?id=r24&sno=0001016",
     "historical_photos": [
       {
+        "author": "林業保育署臺中分署",
+        "date": "2025-12-19",
+        "date_kind": "source-published",
+        "license": "政府網站資料開放宣告",
+        "license_url": "https://www.forest.gov.tw/opendata",
+        "note": "拍攝日期未標示；來源日期不代表拍攝年份。",
+        "original_image_url": "https://recreation.forest.gov.tw/Files/News/Photo/20251219004_content_1.jpg",
+        "source_url": "https://recreation.forest.gov.tw/News/News?id=20251219004",
+        "src": "/photos/daxueshan-verified.jpg",
+        "title": "大雪山收費站楓紅"
+      },
+      {
         "author": "林業保育署臺中分署（原東勢林管處）",
         "date": "2022-12-31",
         "date_kind": "source-published",
         "license": "政府網站資料開放宣告",
         "license_url": "https://www.forest.gov.tw/opendata",
         "note": "拍攝日期未標示。",
+        "original_image_url": "https://recreation.forest.gov.tw/Files/News/Photo/20221231003_content_1.jpeg",
         "source_url": "https://recreation.forest.gov.tw/News/News?id=20221231003",
-        "src": "https://recreation.forest.gov.tw/Files/News/Photo/20221231003_content_1.jpeg",
+        "src": "/photos/daxueshan-1.jpg",
         "title": "大雪山歷年楓紅"
       }
     ],
@@ -1063,7 +1093,18 @@
   },
   {
     "article_checked_at": "2026-10-08",
-    "blog_photo_links": [],
+    "blog_photo_links": [
+      {
+        "checked_at": "2026-10-08",
+        "published_on": "2023-04-27",
+        "reference_period": "12月（年份未標示）",
+        "route": "鳶嘴山登山口 → 鳶嘴山 → 稍來山觀景平台",
+        "source": "相片中的菲莉絲／WalkerLand創作者遊記",
+        "summary": "記錄12月鳶嘴稍來登山、樹冠楓紅及觀景平台；含需攀岩的鳶嘴山段，依體能規劃。",
+        "title": "鳶嘴稍來｜攀岩登山與滿樹楓紅遊記",
+        "url": "https://www.walkerland.com.tw/article/view/357510"
+      }
+    ],
     "category": "賞楓／秋色",
     "city": "臺中市・和平區",
     "coordinate_scope": "大雪山林道27.5k",
@@ -1092,7 +1133,18 @@
   },
   {
     "article_checked_at": "2026-10-08",
-    "blog_photo_links": [],
+    "blog_photo_links": [
+      {
+        "checked_at": "2026-10-08",
+        "date_kind": "updated",
+        "published_on": "2026-05-20",
+        "route": "谷關遊客中心周邊 → 捎來吊橋 → 捎來步道 → 谷關吊橋 → 溫泉公園",
+        "source": "參山國家風景區管理處／官方玩賞攻略",
+        "summary": "官方明確介紹捎來步道秋季楓紅、兩處登山口與吊橋動線，可順遊溫泉公園；屬賞楓路線介紹，非2026年現場楓況。",
+        "title": "谷關｜捎來步道秋季楓紅與吊橋散步攻略",
+        "url": "https://www.trimt-nsa.gov.tw/zh-tw/attraction/6/"
+      }
+    ],
     "category": "賞楓／秋色",
     "city": "臺中市・和平區",
     "coordinate_scope": "官方谷關街區代表位置，非單一楓樹位置",
@@ -1124,20 +1176,33 @@
     "blog_photo_links": [
       {
         "checked_at": "2026-10-08",
-        "date_kind": "updated",
-        "published_on": "2026-09",
-        "route": "八仙山森林遊樂區 → 谷關溫泉區 → 捎來步道",
-        "source": "旅宿點編輯部",
-        "summary": "整理上午賞楓、下午健行與泡湯的行程，非當季現場楓況。",
-        "title": "八仙山｜賞楓、谷關步道與溫泉一日遊",
-        "url": "https://www.trippois.com/guide-taichung-guguan-1day"
+        "published_on": "2020-12-23",
+        "reference_period": "2020-12-11",
+        "route": "遊客中心 → 天籟步道 → 八仙山莊周邊 → 清風亭與望月亭 → 竹林與親水區",
+        "source": "快樂a吃喝玩耍過生活",
+        "summary": "文內記錄八仙山莊周邊的火紅楓葉照片，並串聯園區散步路線；公車、票價與優惠為2020年資料，出發前請查官方最新資訊。",
+        "title": "八仙山｜天籟步道、山莊楓紅與園區散步遊記",
+        "url": "https://w0973320589.pixnet.net/blog/posts/9556487729"
       }
     ],
     "category": "賞楓／秋色",
     "city": "臺中市・和平區",
     "coordinate_scope": "官方園區代表位置",
     "coordinate_source_url": "https://www.tad.gov.tw/m1.aspx?id=R5&sNo=0001016",
-    "historical_photos": [],
+    "historical_photos": [
+      {
+        "author": "林務局東勢林區管理處",
+        "date": "2019-11-26",
+        "date_kind": "source-published",
+        "license": "政府網站資料開放宣告",
+        "license_url": "https://www.forest.gov.tw/opendata",
+        "note": "拍攝日期未標示；來源日期不代表拍攝年份。",
+        "original_image_url": "https://recreation.forest.gov.tw/Files/News/Photo/20191126001_content_1.jpg",
+        "source_url": "https://recreation.forest.gov.tw/News/News?id=20191126001",
+        "src": "/photos/basianshan-verified.jpg",
+        "title": "八仙山園區秋色"
+      }
+    ],
     "id": "basianshan",
     "intro": "賞楓位置為森林遊樂區，不代表需要攀登八仙山主峰。",
     "lat": 24.192249,
@@ -1234,12 +1299,13 @@
       },
       {
         "checked_at": "2026-10-08",
-        "published_on": "2020-05-25",
-        "route": "台18線85～95K，自阿里山往自忠方向",
-        "source": "公路局／DT行旅台灣",
-        "summary": "官方路線介紹，包含89K楓紅照片與沿線休憩設施；未找到符合條件的較新公路賞楓行程文章。",
-        "title": "阿里山公路｜阿里山後花園賞楓路線",
-        "url": "https://www.drivetaiwan.tw/tw/cp-2-84-2da76-1.html",
+        "published_on": "2026-06-20",
+        "reference_period": "2025-01-19、2022-11-21",
+        "route": "台18線89.5K合法停車空間 → 傷心山日落雲海觀景台",
+        "source": "Go愛。旅行",
+        "summary": "記錄觀景台三角楓綠黃紅漸層樹冠、停車位置與日落雲海；非全紅盛期或今年現場葉況。",
+        "title": "阿里山公路｜89.5K賞楓與日落觀景攻略",
+        "url": "https://golovetraveling.com/sadmountain/",
         "viewing_area_group": "road"
       }
     ],
@@ -1318,7 +1384,18 @@
   },
   {
     "article_checked_at": "2026-10-08",
-    "blog_photo_links": [],
+    "blog_photo_links": [
+      {
+        "checked_at": "2026-10-08",
+        "date_kind": "updated",
+        "published_on": "2026-09-18",
+        "route": "169縣道50.1K南口 → 賞楓木棧階梯 → 49.3K北口",
+        "source": "阿里山國家風景區管理處／官方玩賞攻略",
+        "summary": "介紹青楓、楓香與木棧步道位置、交通；位於里佳部落，非阿里山森林遊樂區。",
+        "title": "里佳｜賞楓步道與部落散步攻略",
+        "url": "https://www.ali-nsa.net/zh-tw/attractions/detail/194"
+      }
+    ],
     "category": "賞楓／秋色",
     "city": "嘉義縣・阿里山鄉",
     "coordinate_scope": "官方賞楓步道代表位置",
@@ -1356,7 +1433,17 @@
   },
   {
     "article_checked_at": "2026-10-08",
-    "blog_photo_links": [],
+    "blog_photo_links": [
+      {
+        "checked_at": "2026-10-08",
+        "published_on": "2025-03-18",
+        "route": "停車場 → 木棧道景觀台 → 蝴蝶涼亭 → 園區步道 → 紅蜥蜴牌樓與關子嶺老街",
+        "source": "小玉兒趴趴走",
+        "summary": "介紹楓香與槭樹、園區入口及步行動線；作者記錄部分楓香葉片轉黃、泛紅，非整片楓紅盛期紀錄。",
+        "title": "紅葉公園｜楓香賞葉與關子嶺散步遊記",
+        "url": "https://as660707.com/%E7%B4%85%E8%91%89%E5%85%AC%E5%9C%922025/"
+      }
+    ],
     "category": "賞楓",
     "city": "臺南市・白河區",
     "coordinate_scope": "官方景點代表位置",
@@ -1386,7 +1473,19 @@
   },
   {
     "article_checked_at": "2026-10-08",
-    "blog_photo_links": [],
+    "blog_photo_links": [
+      {
+        "checked_at": "2026-10-08",
+        "date_kind": "undated",
+        "date_label": "發布日期未標示",
+        "official_guide": true,
+        "route": "大農大富森林園區 → 南環自行車道",
+        "source": "花東縱谷國家風景區管理處／官方遊程",
+        "summary": "安排森林秋冬賞葉遊程；頁面未標發布日期，並非目前葉況。",
+        "title": "大農大富｜秋冬賞楓自行車行程",
+        "url": "https://www.erv-nsa.gov.tw/zh-tw/travel/tour/92"
+      }
+    ],
     "category": "賞楓／秋色",
     "city": "花蓮縣・光復鄉",
     "coordinate_scope": "官方園區代表位置；賞楓路段位於南環自行車道",
@@ -1429,20 +1528,34 @@
     "blog_photo_links": [
       {
         "checked_at": "2026-10-08",
-        "date_kind": "updated",
-        "published_on": "2026-09-22",
-        "route": "翠峰湖旁步道入口 → 山毛櫸林 → 原路折返",
-        "source": "太平山國家森林遊樂區",
-        "summary": "官方介紹3.8公里步道與秋季黃金林；山毛櫸並非楓樹。",
-        "title": "台灣山毛櫸步道黃金林照片與攻略",
-        "url": "https://tps.forest.gov.tw/TPSWeb/wSite/ct?ctNode=244&mp=1&xItem=5085"
+        "date_kind": "undated",
+        "date_label": "攻略日期未標示",
+        "official_guide": true,
+        "route": "翠峰山屋旁步道入口 → 3.4～3.8K山毛櫸林 → 原路折返",
+        "source": "林業保育署／台灣山林悠遊網",
+        "summary": "官方介紹單程3.8公里步道、黃金林與路線；山毛櫸為秋季黃葉，非楓樹。",
+        "title": "台灣山毛櫸步道｜黃金林與步道攻略",
+        "url": "https://recreation.forest.gov.tw/Trail/RT?tr_id=013"
       }
     ],
     "category": "山毛櫸／秋季黃葉",
     "city": "宜蘭縣・南澳鄉",
     "coordinate_scope": "官方步道入口（翠峰山屋旁）",
     "coordinate_source_url": "https://recreation.forest.gov.tw/Trail/RT?tr_id=013",
-    "historical_photos": [],
+    "historical_photos": [
+      {
+        "author": "林業及自然保育署／台灣山林悠遊網（原站未列個別攝影者）",
+        "date": "",
+        "date_kind": "unknown",
+        "license": "政府網站資料開放宣告",
+        "license_url": "https://www.forest.gov.tw/opendata",
+        "note": "歷年秋季金黃枝葉；原站未標拍攝日期，山毛櫸並非楓樹。",
+        "original_image_url": "https://recreation.forest.gov.tw/Files/RT/Photo/013/05/%E5%8F%B0%E7%81%A3%E5%B1%B1%E6%AF%9B%E6%AB%B8%20%E6%B7%B1%E7%A7%8B%E9%87%91%E9%BB%83%E8%AE%8A%E8%91%89%2815%29.JPG",
+        "source_url": "https://recreation.forest.gov.tw/Trail/RT?tr_id=013",
+        "src": "/photos/taipingshan-beech-verified.jpg",
+        "title": "台灣山毛櫸深秋金黃變葉"
+      }
+    ],
     "id": "taipingshan-beech",
     "intro": "台灣山毛櫸秋季呈金黃色。單程 3.8 公里，原路折返；末段才可觀賞黃金林，往返需預留約 3～4 小時。",
     "lat": 24.5093091950423,
