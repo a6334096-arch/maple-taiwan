@@ -407,7 +407,11 @@ async function loadPlaces({refresh=false}={}){
     updateLegend();
     $('#data-label').textContent=dataMode==='seasonal'?'官方季節資料':dataMode==='demo'?'模擬資料':'匯入紀錄';
     const count=places.filter(p=>p.status!==null).length;
-    $('#data-note').textContent=dataMode==='seasonal'?seasonSyncText(references._sync):dataMode==='demo'?'模擬資料・非實際預測':`已載入 ${count} 筆正式紀錄・灰色表示尚無資料`;
+    $('#data-note').textContent = dataMode === 'seasonal'
+  ? seasonSyncText(references._sync)
+  : dataMode === 'demo'
+    ? '模擬資料，非實際預測'
+    : '已載入 ' + count + ' 筆正式紀錄，灰色表示尚無資料';;
     if(!refresh)selected=null;
     render();
   }catch(err){
