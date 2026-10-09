@@ -343,7 +343,7 @@ function renderDetail(){
 function choose(id){
  fittedView=false;selected=id;
  const p=places.find(p=>p.id===id);if(!p)return;
- scale=Math.max(scale,4);
+ scale=Math.min(Math.max(scale,1.5),2.35);
  $('#sidebar').classList.remove('open');$('#mobile-list').textContent='☰ 景點清單';$('#mobile-list').setAttribute('aria-expanded','false');render();
  const mapRect=svg.getBoundingClientRect(),card=$('#detail').getBoundingClientRect();
  const target=svg.createSVGPoint();
