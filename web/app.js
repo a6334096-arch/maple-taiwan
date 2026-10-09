@@ -330,7 +330,8 @@ function renderDetail(){
  let p=places.find(p=>p.id===selected);
  if(!p){$('#detail').innerHTML='';$('#detail').hidden=true;return;}
  $('#detail').hidden=false;const s=stage(p);
- $('#detail').innerHTML=`<div class="detail-head"><button class="detail-close" aria-label="關閉景點資訊">×</button><h2>${escapeHTML(p.name)}</h2><p>${escapeHTML(p.city)}</p><nav class="detail-nav" aria-label="景點資訊區塊"><button data-section="latest-panel">楓況與分享</button><button data-section="season-panel">歷年時間</button><button data-section="species-panel">品種</button>
+ $('#detail').innerHTML=`<div class="detail-head"><button class="detail-close" aria-label="關閉景點資訊">×</button><h2>${escapeHTML(p.name)}</h2><p>${escapeHTML(p.city)}</p><nav class="detail-nav" aria-label="景點資訊區塊"><button data-section="latest-panel">楓況與分享</button><button data-section="season-panel">歷年時間</button><button data-section="species-panel">品種</button><button data-section="location-disclosure">官方資訊</button></nav></div><div class="detail-body">${latestBlock(p)}<section class="season-panel"><h3>歷年賞楓時間</h3><p class="reference-note">${escapeHTML(p.dates||'尚無資料')}</p>${historicalPhotosBlock(p)}</section>${relatedRoutesBlock(p)}${speciesBlock(p)}<section class="location-disclosure"><h3>位置與交通</h3><div class="location-info">${navigationLink(p)}${officialInfoLink(p)}${liveCamerasBlock(p)}</div></section><button class="save" type="button">${saved.has(p.id)?'★ 已收藏':'☆ 加入收藏'}</button></div>`;
+ deduplicateDetailLinks($('#detail'));
  $('#detail').querySelectorAll('[data-section]').forEach(button=>{button.onclick=()=>{const target=$('#detail').querySelector('.'+button.dataset.section);if(target){if(target.tagName==='DETAILS')target.open=true;const head=$('#detail').querySelector('.detail-head');const container=$('#detail');container.scrollTop+=target.getBoundingClientRect().top-container.getBoundingClientRect().top-head.offsetHeight-14;}};});
  $('#detail').querySelectorAll('.share-preview img').forEach(img=>{img.onerror=()=>{img.hidden=true;img.nextElementSibling.hidden=false;};});
  $('#detail').querySelectorAll('.history-photo img').forEach(img=>{img.onerror=()=>{img.closest('.photo-image-link').hidden=true;img.closest('.history-photo').querySelector('.photo-unavailable').hidden=false;};});
@@ -367,7 +368,7 @@ const world=$('#map-world'),svg=$('#map-svg');function transform() {
 
   renderMarkers();
 };
-};}function zoom(f){fittedView=false;const before=scale;scale=Math.max(.4,Math.min(10,scale*f));panX*=scale/before;panY*=scale/before;transform();}$('#zoom-in').onclick=()=>zoom(1.2);$('#zoom-out').onclick=()=>zoom(1/1.2);$('#reset').onclick=()=>{fitIsland();transform();};$('#map').onwheel=e=>{e.preventDefault();zoom(e.deltaY>0?1/1.08:1.08);};
+function zoom(f){fittedView=false;const before=scale;scale=Math.max(.4,Math.min(10,scale*f));panX*=scale/before;panY*=scale/before;transform();}$('#zoom-in').onclick=()=>zoom(1.2);$('#zoom-out').onclick=()=>zoom(1/1.2);$('#reset').onclick=()=>{fitIsland();transform();};$('#map').onwheel=e=>{e.preventDefault();zoom(e.deltaY>0?1/1.08:1.08);};
 let pointers=new Map(),lastDistance=null,drag=null,moved=false;
 function point(e){const p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;return p.matrixTransform(svg.getScreenCTM().inverse());}
 $('#map').onpointerdown=e=>{if(e.target.closest('.marker'))return;fittedView=false;const p=point(e);pointers.set(e.pointerId,p);e.currentTarget.setPointerCapture(e.pointerId);drag=p;moved=false;};$('#map').onpointermove=e=>{if(!pointers.has(e.pointerId))return;const p=point(e);pointers.set(e.pointerId,p);if(pointers.size===2){const [a,b]=[...pointers.values()];const d=Math.hypot(a.x-b.x,a.y-b.y);if(lastDistance)zoom(d/lastDistance);lastDistance=d;drag=null;}else if(drag){panX=Math.max(-5000,Math.min(5000,panX+p.x-drag.x));panY=Math.max(-5000,Math.min(5000,panY+p.y-drag.y));drag=p;transform();moved=true;}};function end(e){pointers.delete(e.pointerId);lastDistance=null;drag=pointers.size===1?[...pointers.values()][0]:null;}$('#map').onpointerup=end;$('#map').onpointercancel=end;$('#map').onkeydown=e=>{if(e.target!==$('#map'))return;if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','+','-','0'].includes(e.key)){e.preventDefault();if(e.key==='+')zoom(1.2);else if(e.key==='-')zoom(1/1.2);else if(e.key==='0')$('#reset').click();else{panX+=e.key==='ArrowLeft'?25:e.key==='ArrowRight'?-25:0;panY+=e.key==='ArrowUp'?25:e.key==='ArrowDown'?-25:0;transform();}}};
@@ -411,7 +412,7 @@ async function loadPlaces({refresh=false}={}){
   ? seasonSyncText(references._sync)
   : dataMode === 'demo'
     ? '模擬資料，非實際預測'
-    : '已載入 ' + count + ' 筆正式紀錄，灰色表示尚無資料';;
+    : '已載入 ' + count + ' 筆正式紀錄，灰色表示尚無資料';
     if(!refresh)selected=null;
     render();
   }catch(err){
