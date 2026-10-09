@@ -338,3 +338,65 @@ header{gap:8px}.brand{min-width:0;flex-shrink:0}.header-right{min-width:0;gap:8p
 .legend .color-legend-heading{font-size:12px}.legend .color-phase{font-size:10px}.legend .color-legend-meta,.legend .color-legend-note{font-size:10px}.legend.season-color-legend .terrain-key{font-size:9px}
 }
 @media(max-width:360px){.detail-head h2{font-size:19px}.detail-nav{grid-template-columns:repeat(2,minmax(0,1fr))}.forecast-row{grid-template-columns:28px minmax(0,1fr) 72px}.map-toolbar #map-location{font-size:13px}}
+/* 楓景網站：文字與版面閱讀優化 */
+:root {
+  --ink: #253c32;
+  --muted: #52645a;
+  --accent: #315c49;
+}
+
+body {
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+/* 景點名稱與資訊層次 */
+.place strong,
+.detail-head h2 {
+  color: #243e32;
+  line-height: 1.45;
+}
+
+.detail-body {
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.detail-body h3 {
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+.detail-body p {
+  margin-top: 6px;
+  margin-bottom: 10px;
+}
+
+/* 連結與按鈕 */
+.official-links a {
+  color: #254e3b;
+  background: #f2f5ed;
+  border-color: #d8e2d6;
+}
+
+.official-links a:hover {
+  background: #e4ede1;
+}
+
+/* 手機版閱讀 */
+@media (max-width: 700px) {
+  .detail-body {
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .detail-body h3 {
+    margin-top: 12px;
+    margin-bottom: 6px;
+  }
+
+  .official-links a {
+    min-height: 44px;
+  }
+}
