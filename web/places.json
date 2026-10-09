@@ -1,47 +1,5 @@
 [
   {
-    "id": "aowanda",
-    "name": "奧萬大國家森林遊樂區",
-    "city": "南投縣・仁愛鄉",
-    "lon": 121.17708,
-    "lat": 23.953599,
-    "coordinate_source_url": "https://www.taiwan.net.tw/m1.aspx?id=2146&sno=0001016",
-    "coordinate_scope": "官方景點代表位置",
-    "region": "中部",
-    "category": "賞楓",
-    "intro": "",
-    "x": 430.906,
-    "y": 392.086
-  },
-  {
-    "id": "wuling",
-    "name": "武陵農場",
-    "city": "臺中市・和平區",
-    "lon": 121.3082,
-    "lat": 24.345005,
-    "coordinate_source_url": "https://www.taiwan.net.tw/m1.aspx?id=9547&sno=0001016",
-    "coordinate_scope": "官方景點代表位置",
-    "region": "中部",
-    "category": "賞楓",
-    "intro": "",
-    "x": 453.791,
-    "y": 317.221
-  },
-  {
-    "id": "fushoushan",
-    "name": "福壽山農場",
-    "city": "臺中市・和平區",
-    "lon": 121.24578,
-    "lat": 24.244921,
-    "coordinate_source_url": "https://www.taiwan.net.tw/m1.aspx?id=695&sno=0001016",
-    "coordinate_scope": "官方景點代表位置",
-    "region": "中部",
-    "category": "賞楓",
-    "intro": "",
-    "x": 442.897,
-    "y": 336.386
-  },
-  {
     "id": "taipingshan",
     "name": "太平山國家森林遊樂區",
     "city": "宜蘭縣・大同鄉",
@@ -53,189 +11,84 @@
     "category": "賞楓",
     "intro": "",
     "x": 493.38,
-    "y": 287.947
+    "y": 287.947,
+    "species": [
+      "紫葉槭"
+    ],
+    "species_source_url": "https://tps.forest.gov.tw/TPSWeb/wSite/ct?ctNode=251&mp=1&xItem=6668",
+    "species_note": "中央階梯的紫葉槭，春夏亦可呈紫紅色，不能視為秋季轉紅。",
+    "species_checked_at": "2026-10-07",
+    "historical_photos": [],
+    "live_cameras": [
+      {
+        "label": "景觀平台",
+        "url": "https://www.forest.gov.tw/0010162",
+        "scope": "園區景觀",
+        "link_checked_at": "2026-10-09",
+        "link_check_method": "替代網頁讀取"
+      },
+      {
+        "label": "蹦蹦車站",
+        "url": "https://www.forest.gov.tw/0010160",
+        "scope": "園區景觀",
+        "link_checked_at": "2026-10-09",
+        "link_check_method": "替代網頁讀取"
+      }
+    ],
+    "official_facebook_url": "https://www.facebook.com/tps100.forest/",
+    "official_facebook_name": "太平山國家森林遊樂區",
+    "official_facebook_evidence_url": "https://recreation.forest.gov.tw/News/News?id=20260402002",
+    "blog_photo_links": [
+      {
+        "title": "太平山莊紫葉槭紅葉實拍",
+        "url": "https://bunnyann.tw/taipingshan-villa/",
+        "source": "小兔小安旅遊札記",
+        "published_on": "2026-09-17",
+        "checked_at": "2026-10-08",
+        "route": "太平山莊 → 中央階梯",
+        "summary": "介紹紫葉槭紅葉與園區散步動線；紫葉槭的紅葉不等同一般秋季轉色。"
+      }
+    ],
+    "official_info_url": "https://www.taiwan.net.tw/m1.aspx?id=618&sno=0001016",
+    "official_info_label": "交通部觀光署・景點資訊",
+    "official_info_checked_at": "2026-10-09",
+    "photo_search_checked_at": "2026-10-08",
+    "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
+    "article_checked_at": "2026-10-08",
+    "representative_species": "紫葉槭"
   },
   {
-    "id": "alishan",
-    "name": "阿里山國家森林遊樂區",
-    "city": "嘉義縣・阿里山鄉",
-    "lon": 120.80367,
-    "lat": 23.511294,
-    "coordinate_source_url": "https://www.taiwan.net.tw/m1.aspx?id=10949&sno=0001016",
-    "coordinate_scope": "官方景點代表位置",
-    "region": "南部",
-    "category": "賞楓",
-    "intro": "",
-    "x": 365.734,
-    "y": 476.414
-  },
-  {
-    "id": "manabang",
-    "name": "馬那邦山",
-    "city": "苗栗縣・大湖鄉",
-    "lon": 120.91427,
-    "lat": 24.368722,
-    "coordinate_source_url": "https://www.taiwan.net.tw/m1.aspx?id=6594&sno=0001016",
-    "coordinate_scope": "官方景點代表位置",
-    "region": "中部",
-    "category": "賞楓",
-    "intro": "",
-    "x": 385.037,
-    "y": 312.677
-  },
-  {
-    "id": "xitou",
-    "name": "溪頭自然教育園區",
-    "city": "南投縣・鹿谷鄉",
-    "lon": 120.79725,
-    "lat": 23.674517,
-    "coordinate_source_url": "https://www.taiwan.net.tw/m1.aspx?id=2101&sno=0001016",
-    "coordinate_scope": "官方景點代表位置",
-    "region": "中部",
-    "category": "賞楓",
-    "intro": "",
-    "x": 364.613,
-    "y": 445.328
-  },
-  {
-    "id": "shimen",
-    "name": "石門水庫",
-    "city": "桃園市・大溪區",
-    "lon": 121.2476,
-    "lat": 24.81147,
-    "coordinate_source_url": "https://www.taiwan.net.tw/m1.aspx?id=2540&sno=0001016",
-    "coordinate_scope": "官方景點代表位置",
+    "id": "fengshuhu",
+    "name": "淡水楓樹湖",
+    "city": "新北市・淡水區",
     "region": "北部",
-    "category": "賞楓",
-    "intro": "",
-    "x": 443.214,
-    "y": 227.695
-  },
-  {
-    "id": "yangmingshan",
-    "name": "陽明山國家公園",
-    "city": "臺北市・北投區",
-    "lon": 121.54762,
-    "lat": 25.155744,
-    "coordinate_source_url": "https://www.taiwan.net.tw/m1.aspx?id=738&sno=0001016",
-    "coordinate_scope": "官方景點代表位置",
-    "region": "北部",
-    "category": "賞楓",
-    "intro": "涵蓋廣大山區；圖示為官方代表位置，秋色依步道與樹種而異。",
-    "x": 495.578,
-    "y": 161.405
-  },
-  {
-    "id": "jiaobanshan",
-    "name": "角板山公園",
-    "city": "桃園市・復興區",
-    "lon": 121.35068,
-    "lat": 24.813974,
-    "coordinate_source_url": "https://www.taiwan.net.tw/m1.aspx?id=775&sno=0001016",
-    "coordinate_scope": "官方景點代表位置",
-    "region": "北部",
-    "category": "賞楓",
-    "intro": "",
-    "x": 461.205,
-    "y": 227.214
-  },
-  {
-    "id": "manyueyuan",
-    "name": "滿月圓國家森林遊樂區",
-    "city": "新北市・三峽區",
-    "lon": 121.4447,
-    "lat": 24.830391,
-    "coordinate_source_url": "https://www.taiwan.net.tw/m1.aspx?id=r150&sno=0001016",
-    "coordinate_scope": "官方景點代表位置",
-    "region": "北部",
-    "category": "賞楓",
-    "intro": "園區有規劃賞楓自導式步道；明確月份待確認。",
-    "x": 477.615,
-    "y": 224.057
-  },
-  {
-    "id": "lalashan",
-    "name": "拉拉山國家森林遊樂區",
-    "city": "桃園市・復興區",
-    "lon": 121.42263,
-    "lat": 24.703442,
-    "coordinate_source_url": "https://www.taiwan.net.tw/m1.aspx?id=r147&sno=0001016",
-    "coordinate_scope": "官方景點代表位置",
-    "region": "北部",
-    "category": "賞楓",
-    "intro": "青楓、紅榨槭等變色葉木；不同樹種葉色不同。",
-    "x": 473.763,
-    "y": 248.458
-  },
-  {
-    "id": "huisun",
-    "name": "惠蓀林場",
-    "city": "南投縣・仁愛鄉",
-    "lon": 121.03372,
-    "lat": 24.091197,
-    "coordinate_source_url": "https://www.taiwan.net.tw/m1.aspx?id=2489&sno=0001016",
-    "coordinate_scope": "官方景點代表位置",
-    "region": "中部",
-    "category": "賞楓",
-    "intro": "官方介紹設有賞楓區；未列明確月份。",
-    "x": 405.885,
-    "y": 365.793
-  },
-  {
-    "id": "daxueshan",
-    "name": "大雪山國家森林遊樂區",
-    "city": "臺中市・和平區",
-    "lon": 120.97511,
-    "lat": 24.244563,
-    "coordinate_source_url": "https://www.taiwan.net.tw/m1.aspx?id=r24&sno=0001016",
-    "coordinate_scope": "官方景點代表位置",
-    "region": "中部",
-    "category": "賞楓",
-    "intro": "紅榨槭等紅葉景觀；圖示座標依觀光署景點資料。",
-    "x": 395.656,
-    "y": 336.454
-  },
-  {
-    "id": "xiakelo",
-    "name": "霞喀羅國家步道",
-    "city": "新竹縣・尖石鄉／五峰鄉",
-    "lon": 121.17834,
-    "lat": 24.561412,
-    "coordinate_source_url": "https://www.taiwan.net.tw/m1.aspx?id=9486&sno=0001016",
-    "coordinate_scope": "官方景點代表位置",
-    "region": "北部",
-    "category": "賞楓",
-    "intro": "長距離山區步道；代表點並非整段路線，出發前請確認步道公告。",
-    "x": 431.126,
-    "y": 275.729
-  },
-  {
-    "id": "shanlinxi",
-    "name": "杉林溪森林生態渡假園區",
-    "city": "南投縣・竹山鎮",
-    "lon": 120.79465,
-    "lat": 23.636845,
-    "coordinate_source_url": "https://www.taiwan.net.tw/m1.aspx?id=c100_247&sno=0001016",
-    "coordinate_scope": "官方景點代表位置",
-    "region": "中部",
-    "category": "賞楓",
-    "intro": "",
-    "x": 364.16,
-    "y": 452.506
-  },
-  {
-    "id": "taipei-aowanda",
-    "name": "台北奧萬大",
-    "city": "臺北市・士林區",
-    "lon": 121.569308,
-    "lat": 25.142461,
-    "coordinate_source_url": "https://media.taiwan.net.tw/en-us/portal/travel/details/attraction_379000000a_002180",
-    "coordinate_scope": "官方景點代表位置",
-    "region": "北部",
-    "category": "賞楓",
-    "intro": "嫁接日本品種的新芽呈紅色，與秋季轉紅不同；官府介紹引用園方說明。",
-    "x": 499.363,
-    "y": 163.966
+    "lon": 121.49918,
+    "lat": 25.18721,
+    "coordinate_source_url": "https://newtaipei.travel/zh-tw/attractions/detail/402390",
+    "coordinate_scope": "官方楓樹湖代表位置",
+    "category": "賞楓／秋色",
+    "intro": "官方說明青楓於 11、12 月綠葉變紅；不是木蓮花季的日期。",
+    "species": [
+      "青楓",
+      "楓香"
+    ],
+    "species_source_url": "https://newtaipei.travel/zh-tw/attractions/detail/402390",
+    "species_note": "來源明列的代表樹種；楓樹品種未核實時不自行推測。",
+    "species_checked_at": "2026-10-07",
+    "historical_photos": [],
+    "theme_source_url": "https://www.tamsui.ntpc.gov.tw/home.jsp?act=be4f48068b2b0031&dataserno=bfe263e24af71758b6b84af3cb94bd10&id=4941bfa3d64b3bfd",
+    "theme_checked_at": "2026-10-07",
+    "x": 487.123,
+    "y": 155.337,
+    "live_cameras": [],
+    "blog_photo_links": [],
+    "official_info_url": "https://newtaipei.travel/zh-tw/attractions/detail/402390",
+    "official_info_label": "新北市觀光旅遊網",
+    "official_info_checked_at": "2026-10-09",
+    "photo_search_checked_at": "2026-10-08",
+    "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
+    "article_checked_at": "2026-10-08",
+    "representative_species": "青楓"
   },
   {
     "id": "gongbei",
@@ -249,25 +102,107 @@
     "category": "賞楓",
     "intro": "槭樹賞楓季參考；實際葉色仍依當年氣候。",
     "x": 512.076,
-    "y": 173.219
+    "y": 173.219,
+    "species": [
+      "槭樹"
+    ],
+    "species_source_url": "https://newtaipei.travel/zh-tw/attractions/detail/109859",
+    "species_note": "官方未細分樹種或栽培品種。",
+    "species_checked_at": "2026-10-07",
+    "historical_photos": [
+      {
+        "title": "拱北殿拱橋楓紅",
+        "src": "./photos/gongbei-1.jpg",
+        "source_url": "https://commons.wikimedia.org/wiki/File:%E6%8B%B1%E5%8C%97%E6%AE%BF%E6%8B%B1%E6%A9%8B%E6%A5%93%E7%B4%85%E4%B9%8B%E7%BE%8E.jpg",
+        "date": "2014-12-23",
+        "date_kind": "captured",
+        "author": "林承燁",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "note": "",
+        "original_image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/%E6%8B%B1%E5%8C%97%E6%AE%BF%E6%8B%B1%E6%A9%8B%E6%A5%93%E7%B4%85%E4%B9%8B%E7%BE%8E.jpg/330px-%E6%8B%B1%E5%8C%97%E6%AE%BF%E6%8B%B1%E6%A9%8B%E6%A5%93%E7%B4%85%E4%B9%8B%E7%BE%8E.jpg"
+      }
+    ],
+    "live_cameras": [],
+    "official_facebook_url": "https://www.facebook.com/profile.php?id=100072327039721",
+    "official_facebook_name": "財團法人新北市拱北殿",
+    "official_facebook_evidence_url": "https://newtaipei.travel/zh-tw/attractions/detail/109859",
+    "blog_photo_links": [
+      {
+        "title": "汐止拱北殿楓葉正紅，順訪三秀山三角點",
+        "url": "https://liwen2010.pixnet.net/blog/posts/849520098905336174",
+        "source": "悠遊大台北",
+        "published_on": "2026-01-07",
+        "checked_at": "2026-10-08",
+        "route": "拱北殿 → 雙拱橋周邊 → 三秀山",
+        "summary": "記錄殿旁楓紅、橋景與順遊山徑。"
+      }
+    ],
+    "official_info_url": "https://media.taiwan.net.tw/zh-tw/portal/travel/details/attraction_382000000a_109859",
+    "official_info_label": "交通部觀光署・中文景點資訊",
+    "official_info_checked_at": "2026-10-09",
+    "photo_search_checked_at": "2026-10-08",
+    "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
+    "article_checked_at": "2026-10-08",
+    "representative_species": "槭樹"
   },
   {
-    "id": "fenglin",
-    "name": "楓林步道",
-    "city": "花蓮縣・吉安鄉",
-    "lon": 121.5484,
-    "lat": 23.96944,
-    "coordinate_source_url": "https://media.taiwan.net.tw/en-us/portal/travel/details/attraction_376550000a_000175",
+    "id": "manyueyuan",
+    "name": "滿月圓國家森林遊樂區",
+    "city": "新北市・三峽區",
+    "lon": 121.4447,
+    "lat": 24.830391,
+    "coordinate_source_url": "https://www.taiwan.net.tw/m1.aspx?id=r150&sno=0001016",
     "coordinate_scope": "官方景點代表位置",
-    "region": "東部",
+    "region": "北部",
     "category": "賞楓",
-    "intro": "楓樹步道，可眺望花蓮平原；楓況須另查有日期的公告。",
-    "x": 495.714,
-    "y": 389.061
+    "intro": "園區有規劃賞楓自導式步道；明確月份待確認。",
+    "x": 477.615,
+    "y": 224.057,
+    "species": [
+      "青楓",
+      "楓香",
+      "九芎",
+      "無患子"
+    ],
+    "species_source_url": "https://www.forest.gov.tw/link-topic/news/0066601",
+    "species_note": "九芎與無患子並非楓樹；資料為園區代表秋色樹種。",
+    "species_checked_at": "2026-10-07",
+    "historical_photos": [],
+    "live_cameras": [
+      {
+        "label": "滿月圓園區",
+        "url": "https://www.forest.gov.tw/0010163",
+        "scope": "園區景觀",
+        "link_checked_at": "2026-10-09",
+        "link_check_method": "替代網頁讀取"
+      }
+    ],
+    "official_facebook_url": "https://www.facebook.com/ManyueyuanNationalForest/",
+    "official_facebook_name": "滿月圓國家森林遊樂區",
+    "official_facebook_evidence_url": "https://recreation.forest.gov.tw/Forest/RA?typ_id=0200001",
+    "blog_photo_links": [
+      {
+        "title": "滿月圓森林步道與冬季紅楓",
+        "url": "https://blog.udn.com/yuhyng/184775300",
+        "source": "鳥毛遊記部落格",
+        "published_on": "2025-12-25",
+        "checked_at": "2026-10-08",
+        "route": "園區步道 → 自導式步道 → 瀑布",
+        "summary": "分享森林步道、瀑布與沿路少量紅楓，供安排園區健行參考。"
+      }
+    ],
+    "official_info_url": "https://www.taiwan.net.tw/m1.aspx?id=r150&sno=0001016",
+    "official_info_label": "交通部觀光署・景點資訊",
+    "official_info_checked_at": "2026-10-09",
+    "photo_search_checked_at": "2026-10-08",
+    "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
+    "article_checked_at": "2026-10-08",
+    "representative_species": "青楓"
   },
   {
     "id": "xiuluan",
-    "name": "秀巒・控溪吊橋周邊",
+    "name": "秀巒軍艦岩・控溪吊橋",
     "city": "新竹縣・尖石鄉",
     "lon": 121.287426668743,
     "lat": 24.6210455888683,
@@ -275,23 +210,1289 @@
     "coordinate_scope": "官方景點代表位置",
     "region": "北部",
     "category": "賞楓",
-    "intro": "吊橋周邊楓香林；圖示採官方秀巒景點代表位置。",
+    "intro": "白石溪與泰崗溪匯流處的軍艦岩，搭配控溪吊橋附近楓香林賞秋色；地圖採官方秀巒景點代表位置。",
     "x": 450.165,
-    "y": 264.282
+    "y": 264.282,
+    "species": [
+      "楓香"
+    ],
+    "species_source_url": "https://media.taiwan.net.tw/zh-tw/portal/travel/details/attraction_376440000a_000507",
+    "species_note": "指軍艦岩與控溪吊橋附近的楓香林。",
+    "species_checked_at": "2026-10-07",
+    "historical_photos": [],
+    "live_cameras": [],
+    "aliases": [
+      "新竹軍艦岩",
+      "軍艦岩吊橋",
+      "秀巒軍艦岩步道",
+      "秀巒・控溪吊橋周邊"
+    ],
+    "official_website_url": "https://travel.hsinchu.gov.tw/Attraction/Content/ge6nLRwXlyr7",
+    "official_link_label": "新竹縣旅遊網・軍艦岩景點介紹",
+    "blog_photo_links": [
+      {
+        "title": "秀巒控溪吊橋、軍艦岩楓紅",
+        "url": "https://blog.udn.com/hsuankuang/190615678",
+        "source": "hsuankuang的部落格",
+        "published_on": "2026-06-26",
+        "checked_at": "2026-10-08",
+        "route": "秀巒部落 → 控溪吊橋 → 周邊吊橋",
+        "summary": "記錄吊橋與溪谷周邊楓紅，供規劃部落賞楓參考。"
+      }
+    ],
+    "additional_facebook_links": [
+      {
+        "name": "軍艦岩現場分享貼文",
+        "url": "https://www.facebook.com/share/1FXjUDJyka/?mibextid=wwXIfr",
+        "kind": "使用者提供的貼文連結",
+        "provided_at": "2026-10-08"
+      }
+    ],
+    "official_website_provided_at": "2026-10-08",
+    "official_info_url": "https://media.taiwan.net.tw/zh-tw/portal/travel/details/attraction_376440000a_000444",
+    "official_info_label": "交通部觀光署・軍艦岩（資料由新竹縣政府提供）",
+    "official_info_checked_at": "2026-10-09",
+    "official_alternate_links": [
+      {
+        "label": "新竹縣旅遊網・軍艦岩景點介紹",
+        "url": "https://travel.hsinchu.gov.tw/Attraction/Content/ge6nLRwXlyr7"
+      }
+    ],
+    "photo_search_checked_at": "2026-10-08",
+    "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
+    "article_checked_at": "2026-10-08",
+    "representative_species": "楓香"
   },
   {
-    "id": "hongye-village",
-    "name": "紅葉村",
-    "city": "臺東縣・延平鄉",
-    "lon": 121.06368,
-    "lat": 22.89358,
-    "coordinate_source_url": "https://media.taiwan.net.tw/en-us/portal/travel/details/attraction_376540000a_000233",
+    "id": "smangus",
+    "name": "司馬庫斯",
+    "city": "新竹縣・尖石鄉",
+    "region": "北部",
+    "lon": 121.33424,
+    "lat": 24.57878,
+    "coordinate_source_url": "https://www.tad.gov.tw/m1.aspx?id=A12-00490&sNo=0001016",
+    "coordinate_scope": "官方部落代表位置",
+    "category": "賞楓／秋色",
+    "intro": "季節參考；不是今年已轉紅的紀錄。進出部落需遵守道路時段管制。",
+    "species": [],
+    "species_source_url": null,
+    "species_note": "來源明列的代表樹種；楓樹品種未核實時不自行推測。",
+    "species_checked_at": "2026-10-07",
+    "historical_photos": [],
+    "theme_source_url": "https://smangus.org/news.php?kdid=udnblog",
+    "theme_checked_at": "2026-10-07",
+    "x": 458.336,
+    "y": 272.396,
+    "live_cameras": [],
+    "official_facebook_url": "https://www.facebook.com/TnunanSmagnus/",
+    "official_facebook_name": "Smangus司馬庫斯",
+    "official_facebook_evidence_url": "https://ezgo.ardswc.gov.tw/zh-tw/event/4958/",
+    "blog_photo_links": [
+      {
+        "title": "司馬庫斯賞楓景點與照片攻略",
+        "url": "https://www.kkday.com/zh-tw/blog/72785/asia-taiwan-hsinchu-smangus",
+        "source": "KKday編輯群",
+        "published_on": "2026-01-16",
+        "checked_at": "2026-10-08",
+        "route": "司馬庫斯部落 → 巨木群步道",
+        "summary": "整理賞楓季節、部落景點與住宿交通，供安排山林行程。"
+      }
+    ],
+    "official_info_url": "https://www.tad.gov.tw/m1.aspx?id=A12-00490&sNo=0001016",
+    "official_info_label": "交通部觀光署・景點資訊",
+    "official_info_checked_at": "2026-10-09",
+    "photo_search_checked_at": "2026-10-08",
+    "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
+    "article_checked_at": "2026-10-08",
+    "representative_species": null
+  },
+  {
+    "id": "xiakelo",
+    "name": "霞喀羅國家步道",
+    "city": "新竹縣・尖石鄉／五峰鄉",
+    "lon": 121.17834,
+    "lat": 24.561412,
+    "coordinate_source_url": "https://www.taiwan.net.tw/m1.aspx?id=9486&sno=0001016",
     "coordinate_scope": "官方景點代表位置",
-    "region": "東部",
+    "region": "北部",
     "category": "賞楓",
-    "intro": "村落因秋日楓紅得名；圖示為村內紅葉少棒紀念館代表點。",
-    "x": 411.114,
-    "y": 593.714
+    "intro": "長距離山區步道；代表點並非整段路線，出發前請確認步道公告。",
+    "x": 431.126,
+    "y": 275.729,
+    "notice_url": "https://recreation.forest.gov.tw/Trail/RT?tr_id=026",
+    "species": [
+      "楓香"
+    ],
+    "species_source_url": "https://recreation.forest.gov.tw/Trail/RT?tr_id=026&typ=3",
+    "species_note": "馬鞍附近的楓香林。",
+    "species_checked_at": "2026-10-07",
+    "historical_photos": [],
+    "live_cameras": [],
+    "official_facebook_url": "https://www.facebook.com/syakaroOS/",
+    "official_facebook_name": "霞喀羅生態旅遊（官方公告推薦的在地協作粉專）",
+    "official_facebook_evidence_url": "https://www.forest.gov.tw/news/0078496",
+    "official_facebook_kind": "recommended",
+    "blog_photo_links": [
+      {
+        "title": "霞喀羅養老端｜馬鞍楓林與白石吊橋賞楓行程",
+        "url": "https://hiking.biji.co/index.php?act=info&q=review&review_id=46374",
+        "source": "健行筆記／包毛登山旅遊日記",
+        "published_on": "2026-01-08",
+        "reference_period": "2025-12-27",
+        "route": "養老登山口 → 馬鞍賞楓區 → 武神駐在所 → 白石吊橋 → 原路返回",
+        "summary": "記錄養老端沿路黃金楓、馬鞍楓林與吊橋行程；屬長距離健行，出發前需確認步道開放。",
+        "checked_at": "2026-10-08"
+      },
+      {
+        "title": "霞喀羅古道養老端至馬鞍賞楓遊記",
+        "url": "https://amouter.ghost.io/xia-ke-luo-gu-dao-zui-tou-lan-de-shang-feng-jiao-you/",
+        "source": "AMOUTER",
+        "published_on": "2025-01-12",
+        "checked_at": "2026-10-08",
+        "route": "養老登山口 → 馬鞍駐在所 → 原路折返",
+        "summary": "分享養老端賞楓步行動線與沿路樹冠楓紅。"
+      }
+    ],
+    "official_info_url": "https://www.taiwan.net.tw/m1.aspx?id=9486&sno=0001016",
+    "official_info_label": "交通部觀光署・景點資訊",
+    "official_info_checked_at": "2026-10-09",
+    "photo_search_checked_at": "2026-10-08",
+    "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
+    "article_checked_at": "2026-10-08",
+    "representative_species": "楓香"
+  },
+  {
+    "id": "dongyanshan",
+    "name": "東眼山國家森林遊樂區",
+    "city": "桃園市・復興區",
+    "lon": 121.41761,
+    "lat": 24.82511,
+    "coordinate_source_url": "https://www.taiwan.net.tw/m1.aspx?id=2485&sno=0001016",
+    "coordinate_scope": "官方景點代表位置",
+    "region": "北部",
+    "category": "賞楓",
+    "intro": "官方介紹指出入秋後東眼山林道楓葉呈紅黃色；屬歷年秋季參考，非今年觀測。 步道標記為入口代表點，出發前請查看官方現況。",
+    "x": 472.887,
+    "y": 225.072,
+    "species": [
+      "青楓"
+    ],
+    "species_source_url": "https://recreation.forest.gov.tw/Forest/RA?typ_id=0200003",
+    "species_note": "",
+    "species_checked_at": "2026-10-08",
+    "historical_photos": [],
+    "live_cameras": [
+      {
+        "label": "東眼山園區",
+        "url": "https://www.forest.gov.tw/0010164",
+        "scope": "園區景觀",
+        "link_checked_at": "2026-10-09",
+        "link_check_method": "替代網頁讀取"
+      }
+    ],
+    "official_facebook_url": "https://www.facebook.com/DYSNEC/",
+    "official_facebook_name": "東眼山國家森林遊樂區暨自然教育中心",
+    "official_facebook_evidence_url": "https://www.forest.gov.tw/0000180/0000107",
+    "blog_photo_links": [],
+    "official_info_url": "https://www.taiwan.net.tw/m1.aspx?id=2485&sno=0001016",
+    "official_info_label": "交通部觀光署・景點資訊",
+    "official_info_checked_at": "2026-10-09",
+    "photo_search_checked_at": "2026-10-08",
+    "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
+    "article_checked_at": "2026-10-08",
+    "representative_species": "青楓"
+  },
+  {
+    "id": "jiaobanshan",
+    "name": "角板山公園",
+    "city": "桃園市・復興區",
+    "lon": 121.35068,
+    "lat": 24.813974,
+    "coordinate_source_url": "https://www.taiwan.net.tw/m1.aspx?id=775&sno=0001016",
+    "coordinate_scope": "官方景點代表位置",
+    "region": "北部",
+    "category": "賞楓",
+    "intro": "",
+    "x": 461.205,
+    "y": 227.214,
+    "species": [],
+    "species_source_url": null,
+    "species_note": "",
+    "species_checked_at": null,
+    "historical_photos": [],
+    "live_cameras": [
+      {
+        "label": "角板山生態池",
+        "url": "https://travel.tycg.gov.tw/zh-tw/multimedia/live-camera/15",
+        "scope": "公園景觀",
+        "link_checked_at": "2026-10-09",
+        "link_check_method": "HTTP讀取"
+      },
+      {
+        "label": "角板山思親亭",
+        "url": "https://travel.tycg.gov.tw/zh-tw/multimedia/live-camera/53",
+        "scope": "公園景觀",
+        "link_checked_at": "2026-10-09",
+        "link_check_method": "HTTP讀取"
+      }
+    ],
+    "blog_photo_links": [
+      {
+        "title": "角板山環湖步道紅楓與梅花",
+        "url": "https://blog.udn.com/yuhyng/185530490",
+        "source": "鳥毛遊記部落格",
+        "published_on": "2026-01-17",
+        "checked_at": "2026-10-08",
+        "route": "角板山行館周邊 → 環湖步道",
+        "summary": "記錄環湖步道紅楓；文內梅花為同次造訪的其他景觀。"
+      }
+    ],
+    "official_info_url": "https://www.taiwan.net.tw/m1.aspx?id=775&sno=0001016",
+    "official_info_label": "交通部觀光署・景點資訊",
+    "official_info_checked_at": "2026-10-09",
+    "photo_search_checked_at": "2026-10-08",
+    "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
+    "article_checked_at": "2026-10-08",
+    "representative_species": null
+  },
+  {
+    "id": "shimen",
+    "name": "石門水庫",
+    "city": "桃園市・大溪區",
+    "lon": 121.2476,
+    "lat": 24.81147,
+    "coordinate_source_url": "https://www.taiwan.net.tw/m1.aspx?id=2540&sno=0001016",
+    "coordinate_scope": "官方景點代表位置",
+    "region": "北部",
+    "category": "賞楓",
+    "intro": "",
+    "x": 443.214,
+    "y": 227.695,
+    "species": [
+      "青楓"
+    ],
+    "species_source_url": "https://web.wra.gov.tw/shihmen/cp.aspx?n=7641",
+    "species_note": "",
+    "species_checked_at": "2026-10-08",
+    "historical_photos": [],
+    "live_cameras": [
+      {
+        "label": "石門水庫",
+        "url": "https://travel.tycg.gov.tw/zh-tw/multimedia/live-camera/3",
+        "scope": "水庫景觀",
+        "link_checked_at": "2026-10-09",
+        "link_check_method": "HTTP讀取"
+      }
+    ],
+    "blog_photo_links": [
+      {
+        "title": "石門水庫｜楓林步道與周邊一日遊",
+        "url": "https://albertblog.tw/78711/shimen-maple22",
+        "source": "愛伯特",
+        "published_on": "2025-12-28",
+        "route": "楓林步道 → 槭林公園 → 石門壩頂 → 楓林大道",
+        "summary": "整理賞楓位置、園區動線與周邊順遊；含歷年楓紅照片。",
+        "checked_at": "2026-10-08"
+      }
+    ],
+    "official_info_url": "https://www.taiwan.net.tw/m1.aspx?id=2540&sno=0001016",
+    "official_info_label": "交通部觀光署・景點資訊",
+    "official_info_checked_at": "2026-10-09",
+    "photo_search_checked_at": "2026-10-08",
+    "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
+    "article_checked_at": "2026-10-08",
+    "representative_species": "青楓"
+  },
+  {
+    "id": "lalashan",
+    "name": "拉拉山國家森林遊樂區",
+    "city": "桃園市・復興區",
+    "lon": 121.42263,
+    "lat": 24.703442,
+    "coordinate_source_url": "https://www.taiwan.net.tw/m1.aspx?id=r147&sno=0001016",
+    "coordinate_scope": "官方景點代表位置",
+    "region": "北部",
+    "category": "賞楓",
+    "intro": "青楓、紅榨槭等變色葉木；不同樹種葉色不同。",
+    "x": 473.763,
+    "y": 248.458,
+    "species": [
+      "青楓",
+      "台灣紅榨槭"
+    ],
+    "species_source_url": "https://www.forest.gov.tw/File.aspx?fno=62290",
+    "species_note": "較早期下巴陵至拉拉山沿線調查，並非神木區完整名錄。",
+    "species_checked_at": "2026-10-07",
+    "historical_photos": [],
+    "live_cameras": [
+      {
+        "label": "拉拉山遊客中心",
+        "url": "https://travel.tycg.gov.tw/zh-tw/multimedia/live-camera/2",
+        "scope": "周邊遊客中心，非神木步道",
+        "link_checked_at": "2026-10-09",
+        "link_check_method": "HTTP讀取"
+      }
+    ],
+    "official_facebook_url": "https://www.facebook.com/LalashanNationalForest/",
+    "official_facebook_name": "拉拉山國家森林遊樂區",
+    "official_facebook_evidence_url": "https://recreation.forest.gov.tw/News/News?id=20260611002",
+    "blog_photo_links": [
+      {
+        "title": "拉拉山｜賞楓月份與一日行程攻略",
+        "url": "https://blog.easytravel.com.tw/when-do-the-maple-leaves-in-lala-mountain-turn-red/",
+        "source": "四方通行旅遊網 EasyTravel",
+        "published_on": "2026-08-05",
+        "route": "拉拉山國家森林遊樂區巨木群步道 → 巴陵周邊",
+        "summary": "整理原生變色植物、觀賞位置、北橫交通與一日動線；屬行程攻略，非當年楓況實拍。",
+        "checked_at": "2026-10-08"
+      },
+      {
+        "title": "拉拉山追楓去・巴陵楓情",
+        "url": "https://www.walkerland.com.tw/amp/article/view/299473",
+        "source": "黃連芳製香廠／WalkerLand",
+        "published_on": "2021-05-13",
+        "route": "巴陵沿線 → 拉拉山周邊",
+        "summary": "介紹巴陵與拉拉山周邊楓紅、沿線交通及賞楓景觀。",
+        "checked_at": "2026-10-08"
+      }
+    ],
+    "official_info_url": "https://www.taiwan.net.tw/m1.aspx?id=r147&sno=0001016",
+    "official_info_label": "交通部觀光署・景點資訊",
+    "official_info_checked_at": "2026-10-09",
+    "photo_search_checked_at": "2026-10-08",
+    "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
+    "article_checked_at": "2026-10-08",
+    "representative_species": "青楓"
+  },
+  {
+    "id": "taipei-aowanda",
+    "name": "台北奧萬大",
+    "city": "臺北市・士林區",
+    "lon": 121.569308,
+    "lat": 25.142461,
+    "coordinate_source_url": "https://media.taiwan.net.tw/en-us/portal/travel/details/attraction_379000000a_002180",
+    "coordinate_scope": "官方景點代表位置",
+    "region": "北部",
+    "category": "賞楓",
+    "intro": "嫁接日本品種的新芽呈紅色，與秋季轉紅不同；官府介紹引用園方說明。",
+    "x": 499.363,
+    "y": 163.966,
+    "species": [
+      "日本槭樹嫁接品種"
+    ],
+    "species_source_url": "https://www.travel.taipei/en/attraction/details/2418",
+    "species_note": "官方介紹未細分栽培品種；春季也有紅葉可賞。",
+    "species_checked_at": "2026-10-07",
+    "historical_photos": [
+      {
+        "title": "台北奧萬大春季葉色",
+        "src": "./photos/taipei-aowanda-1.jpg",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Taipei%20Aowanda%20%E5%8F%B0%E5%8C%97%E5%A5%A7%E8%90%AC%E5%A4%A7%20-%20panoramio%20%281%29.jpg",
+        "date": "2014-04-16",
+        "date_kind": "captured",
+        "author": "lienyuan lee",
+        "license": "CC BY 3.0",
+        "license_url": "https://creativecommons.org/licenses/by/3.0/",
+        "note": "春季葉色，不是秋季轉紅樣本。",
+        "original_image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/28/Taipei_Aowanda_%E5%8F%B0%E5%8C%97%E5%A5%A7%E8%90%AC%E5%A4%A7_-_panoramio_%281%29.jpg/330px-Taipei_Aowanda_%E5%8F%B0%E5%8C%97%E5%A5%A7%E8%90%AC%E5%A4%A7_-_panoramio_%281%29.jpg"
+      }
+    ],
+    "live_cameras": [],
+    "official_facebook_url": "https://www.facebook.com/TaipeiMapleResort/",
+    "official_website_url": "",
+    "blog_photo_links": [
+      {
+        "title": "台北奧萬大春楓實拍",
+        "url": "https://www.mobile01.com/topicdetail.php?f=189&t=7109500",
+        "source": "Mobile01／ber925",
+        "published_on": "2025-04-17",
+        "checked_at": "2026-10-08",
+        "route": "台北奧萬大周邊散步",
+        "summary": "分享春季紅色新葉與園區外圍動線，屬春楓而非秋季轉紅。"
+      }
+    ],
+    "official_info_url": "https://media.taiwan.net.tw/zh-tw/portal/travel/details/attraction_379000000a_002180",
+    "official_info_label": "交通部觀光署・中文景點資訊",
+    "official_info_checked_at": "2026-10-09",
+    "photo_search_checked_at": "2026-10-08",
+    "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
+    "article_checked_at": "2026-10-08",
+    "representative_species": "日本槭樹嫁接品種"
+  },
+  {
+    "id": "huisun",
+    "name": "惠蓀林場",
+    "city": "南投縣・仁愛鄉",
+    "lon": 121.03372,
+    "lat": 24.091197,
+    "coordinate_source_url": "https://www.taiwan.net.tw/m1.aspx?id=2489&sno=0001016",
+    "coordinate_scope": "官方景點代表位置",
+    "region": "中部",
+    "category": "賞楓",
+    "intro": "官方介紹設有賞楓區；未列明確月份。",
+    "x": 405.885,
+    "y": 365.793,
+    "species": [
+      "楓香"
+    ],
+    "species_source_url": "https://www.forest.gov.tw/File.aspx?fno=62290",
+    "species_note": "依較早期林業調查，非現況完整名錄。",
+    "species_checked_at": "2026-10-07",
+    "historical_photos": [],
+    "live_cameras": [],
+    "official_facebook_url": "https://www.facebook.com/expforest.nchu/",
+    "official_facebook_name": "中興大學實驗林管理處（惠蓀林場管理單位）",
+    "official_facebook_evidence_url": "https://exp-forest.nchu.edu.tw/Front/LatestNews/ManagementOfficeAnnouncement/News.aspx?Sn=169&id=nczTcFIYBNg%3D",
+    "blog_photo_links": [],
+    "official_info_url": "https://www.taiwan.net.tw/m1.aspx?id=2489&sno=0001016",
+    "official_info_label": "交通部觀光署・景點資訊",
+    "official_info_checked_at": "2026-10-09",
+    "photo_search_checked_at": "2026-10-08",
+    "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
+    "article_checked_at": "2026-10-08",
+    "representative_species": "楓香"
+  },
+  {
+    "id": "qingjing",
+    "name": "清境農場",
+    "city": "南投縣・仁愛鄉",
+    "region": "中部",
+    "lon": 121.16282,
+    "lat": 24.05851,
+    "coordinate_source_url": "https://www.tad.gov.tw/m1.aspx?id=R128&sNo=0001016",
+    "coordinate_scope": "官方青青草原代表位置，非完整農場範圍",
+    "category": "賞楓／秋色",
+    "intro": "官方秋冬賞葉推薦包括楓紅與落羽松；落羽松並非楓樹。各區轉色不一致。",
+    "species": [
+      "落羽松"
+    ],
+    "species_source_url": "https://travel.nantou.gov.tw/article/flowering-season/",
+    "species_note": "來源明列的代表樹種；楓樹品種未核實時不自行推測。",
+    "species_checked_at": "2026-10-07",
+    "historical_photos": [],
+    "theme_source_url": "https://travel.nantou.gov.tw/article/flowering-season/",
+    "theme_checked_at": "2026-10-07",
+    "x": 428.417,
+    "y": 372.042,
+    "live_cameras": [],
+    "official_facebook_url": "https://www.facebook.com/CingjingFarm/",
+    "official_facebook_name": "清境農場",
+    "official_facebook_evidence_url": "https://www.qingjing-farm.com.tw/",
+    "blog_photo_links": [],
+    "official_info_url": "https://www.tad.gov.tw/m1.aspx?id=R128&sNo=0001016",
+    "official_info_label": "交通部觀光署・景點資訊",
+    "official_info_checked_at": "2026-10-09",
+    "photo_search_checked_at": "2026-10-08",
+    "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
+    "article_checked_at": "2026-10-08",
+    "representative_species": "落羽松"
+  },
+  {
+    "id": "aowanda",
+    "name": "奧萬大國家森林遊樂區",
+    "city": "南投縣・仁愛鄉",
+    "lon": 121.17708,
+    "lat": 23.953599,
+    "coordinate_source_url": "https://www.taiwan.net.tw/m1.aspx?id=2146&sno=0001016",
+    "coordinate_scope": "官方景點代表位置",
+    "region": "中部",
+    "category": "賞楓",
+    "intro": "",
+    "x": 430.906,
+    "y": 392.086,
+    "species": [
+      "楓香",
+      "青楓",
+      "落羽松"
+    ],
+    "species_source_url": "https://recreation.forest.gov.tw/forest/RA?typ_id=0400001",
+    "species_note": "落羽松也是秋色樹種，並非楓樹。",
+    "species_checked_at": "2026-10-07",
+    "historical_photos": [
+      {
+        "title": "奧萬大秋季青楓",
+        "src": "./photos/aowanda-1.jpg",
+        "source_url": "https://recreation.forest.gov.tw/Forest/RA?typ_id=0400001",
+        "date": "",
+        "date_kind": "unknown",
+        "author": "林業及自然保育署／南投分署（原站未列個別攝影者）",
+        "license": "政府網站資料開放宣告",
+        "license_url": "https://www.forest.gov.tw/opendata",
+        "note": "歷年秋季葉色；原站未標示拍攝日期。",
+        "original_image_url": "https://recreation.forest.gov.tw/Files/Forest/RA/photo/album/0400001/%E5%A5%A7%E8%90%AC%E5%A4%A7-%E7%A7%8B-%E9%9D%92%E6%A5%93.jpg"
+      },
+      {
+        "title": "奧萬大秋季楓香",
+        "src": "./photos/aowanda-2.jpg",
+        "source_url": "https://recreation.forest.gov.tw/Forest/RA?typ_id=0400001",
+        "date": "",
+        "date_kind": "unknown",
+        "author": "林業及自然保育署／南投分署（原站未列個別攝影者）",
+        "license": "政府網站資料開放宣告",
+        "license_url": "https://www.forest.gov.tw/opendata",
+        "note": "歷年秋季葉色；原站未標示拍攝日期。",
+        "original_image_url": "https://recreation.forest.gov.tw/Files/Forest/RA/photo/album/0400001/%E5%A5%A7%E8%90%AC%E5%A4%A7-%E7%A7%8B-%E6%A5%93%E9%A6%99.jpg"
+      }
+    ],
+    "live_cameras": [],
+    "official_facebook_url": "https://www.facebook.com/awdonline2014/",
+    "official_facebook_name": "奧萬大情報站",
+    "official_facebook_evidence_url": "https://recreation.forest.gov.tw/News/News?id=20241108003",
+    "blog_photo_links": [
+      {
+        "title": "奧萬大賞楓步道與森林景觀攻略",
+        "url": "https://www.bring-you.info/zh-tw/aowanda-forest-recreation-area",
+        "source": "BringYou／飄兒",
+        "published_on": "2026-08-01",
+        "checked_at": "2026-10-08",
+        "date_kind": "updated",
+        "route": "園區賞楓步道 → 奧萬大吊橋周邊",
+        "summary": "整理園區交通、賞楓步道與森林健行動線。"
+      }
+    ],
+    "official_info_url": "https://www.taiwan.net.tw/m1.aspx?id=2146&sno=0001016",
+    "official_info_label": "交通部觀光署・景點資訊",
+    "official_info_checked_at": "2026-10-09",
+    "photo_search_checked_at": "2026-10-08",
+    "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
+    "article_checked_at": "2026-10-08",
+    "representative_species": "楓香"
+  },
+  {
+    "id": "shanlinxi",
+    "name": "杉林溪森林生態渡假園區",
+    "city": "南投縣・竹山鎮",
+    "lon": 120.79465,
+    "lat": 23.636845,
+    "coordinate_source_url": "https://www.taiwan.net.tw/m1.aspx?id=c100_247&sno=0001016",
+    "coordinate_scope": "官方景點代表位置",
+    "region": "中部",
+    "category": "賞楓",
+    "intro": "",
+    "x": 364.16,
+    "y": 452.506,
+    "species": [
+      "青楓",
+      "紫葉槭",
+      "楓香",
+      "銀杏"
+    ],
+    "species_source_url": "https://travel.nantou.gov.tw/news-press/杉林溪提前換季/",
+    "species_note": "依 2024 年園方資料；銀杏並非楓樹。",
+    "species_checked_at": "2026-10-07",
+    "historical_photos": [],
+    "live_cameras": [],
+    "official_facebook_url": "https://www.facebook.com/goto307/",
+    "official_facebook_name": "杉林溪森林生態渡假園區",
+    "official_facebook_evidence_url": "https://www.goto307.com.tw/",
+    "blog_photo_links": [
+      {
+        "title": "杉林溪楓紅與水杉林照片攻略",
+        "url": "https://vivianexplore.tw/sun-link-sea-forest-maple/",
+        "source": "V妞的旅行",
+        "published_on": "2026-05-07",
+        "checked_at": "2026-10-08",
+        "updated_on": "2026-05-21",
+        "route": "園區楓林 → 水杉林周邊",
+        "summary": "整理賞楓位置、交通與住宿；水杉為其他變葉植物。"
+      }
+    ],
+    "official_info_url": "https://www.taiwan.net.tw/m1.aspx?id=c100_247&sno=0001016",
+    "official_info_label": "交通部觀光署・景點資訊",
+    "official_info_checked_at": "2026-10-09",
+    "photo_search_checked_at": "2026-10-08",
+    "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
+    "article_checked_at": "2026-10-08",
+    "representative_species": "青楓"
+  },
+  {
+    "id": "wuling",
+    "name": "武陵農場",
+    "city": "臺中市・和平區",
+    "lon": 121.3082,
+    "lat": 24.345005,
+    "coordinate_source_url": "https://www.taiwan.net.tw/m1.aspx?id=9547&sno=0001016",
+    "coordinate_scope": "官方景點代表位置",
+    "region": "中部",
+    "category": "賞楓",
+    "intro": "",
+    "x": 453.791,
+    "y": 317.221,
+    "species": [
+      "台灣紅榨槭",
+      "楓香",
+      "青楓"
+    ],
+    "species_source_url": "https://www.wuling-farm.com.tw/tw/",
+    "species_note": "",
+    "species_checked_at": "2026-10-07",
+    "historical_photos": [
+      {
+        "title": "武陵農場歷年楓色",
+        "src": "./photos/wuling-1.jpg",
+        "source_url": "https://commons.wikimedia.org/wiki/File:2020%20Maple%20Foliage%20at%20Wuling%20Farm%20Taiwan.jpg",
+        "date": "2020-11-26",
+        "date_kind": "captured",
+        "author": "Taiwankengo",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "note": "",
+        "original_image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9a/2020_Maple_Foliage_at_Wuling_Farm_Taiwan.jpg/960px-2020_Maple_Foliage_at_Wuling_Farm_Taiwan.jpg"
+      }
+    ],
+    "aliases": [
+      "桃山瀑布步道",
+      "武陵吊橋・桃山瀑布步道",
+      "武陵國家森林遊樂區"
+    ],
+    "related_routes": [
+      {
+        "id": "taoshan",
+        "name": "武陵吊橋・桃山瀑布步道",
+        "period": "一般約 10～12 月",
+        "source_url": "https://recreation.forest.gov.tw/Trail/RT?tr_id=063&typ=1"
+      }
+    ],
+    "live_cameras": [
+      {
+        "label": "武陵農場官方直播",
+        "url": "https://www.wuling-farm.com.tw/tw/album/video.php?kind=11",
+        "scope": "茶莊、收費站等官方鏡頭入口",
+        "link_checked_at": "2026-10-09",
+        "link_check_method": "HTTP讀取"
+      }
+    ],
+    "official_facebook_url": "https://www.facebook.com/WulingFarm0510/",
+    "official_facebook_name": "武陵農場 Wuling Farm",
+    "official_facebook_evidence_url": "https://epaper.vac.gov.tw/zh-tw/C/2790%7C21/30974/1/Publish.htm",
+    "blog_photo_links": [
+      {
+        "title": "武陵農場2026迎賓楓與四季秋色",
+        "url": "https://egoldenyears.com/50849/",
+        "source": "銀髮一起玩",
+        "published_on": "2026-09-24",
+        "checked_at": "2026-10-08",
+        "route": "迎賓楓 → 園區賞葉景點",
+        "summary": "整理迎賓楓、園區四季景觀與交通行程；請參考秋色章節。"
+      }
+    ],
+    "official_info_url": "https://www.taiwan.net.tw/m1.aspx?id=9547&sno=0001016",
+    "official_info_label": "交通部觀光署・景點資訊",
+    "official_info_checked_at": "2026-10-09",
+    "photo_search_checked_at": "2026-10-08",
+    "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
+    "article_checked_at": "2026-10-08",
+    "representative_species": "台灣紅榨槭"
+  },
+  {
+    "id": "dongshi-forest",
+    "name": "東勢林場遊樂區",
+    "city": "臺中市・東勢區",
+    "region": "中部",
+    "lon": 120.86774,
+    "lat": 24.285313,
+    "coordinate_source_url": "https://www.tad.gov.tw/m1.aspx?id=694&sNo=0001016",
+    "coordinate_scope": "官方林場代表位置",
+    "category": "賞楓／秋色",
+    "intro": "指東勢區勢林街的遊樂區，非中興大學同名實驗林。園內設有十二甲賞楓林區。",
+    "species": [
+      "楓香"
+    ],
+    "species_source_url": "https://www.tsfa.com.tw/page/about/index.aspx?kind=57",
+    "species_note": "來源明列的代表樹種；楓樹品種未核實時不自行推測。",
+    "species_checked_at": "2026-10-08",
+    "historical_photos": [],
+    "theme_source_url": "https://travel.taichung.gov.tw/zh-tw/tag/list?categories=%E8%B3%9E%E8%8A%B1%E5%B0%88%E5%8D%80",
+    "theme_checked_at": "2026-10-07",
+    "x": 376.916,
+    "y": 328.653,
+    "live_cameras": [],
+    "official_facebook_url": "https://www.facebook.com/tsfa.firefly/",
+    "official_facebook_name": "東勢林場遊樂區",
+    "official_facebook_evidence_url": "https://ezgo.ardswc.gov.tw/zh-tw/spot/653/",
+    "blog_photo_links": [
+      {
+        "title": "東勢林場｜楓香林賞楓路線",
+        "url": "https://www.tsfa.com.tw/page/about/index.aspx?kind=57",
+        "source": "東勢林場遊樂區／官方賞楓路線",
+        "route": "園區賞楓路線與楓香林",
+        "summary": "園方專頁介紹秋季楓香紅葉，供安排園內賞楓行程；頁面未標發布日期。",
+        "checked_at": "2026-10-08",
+        "date_label": "發布日期未標示",
+        "date_kind": "undated",
+        "official_guide": true
+      }
+    ],
+    "official_info_url": "https://www.tad.gov.tw/m1.aspx?id=694&sNo=0001016",
+    "official_info_label": "交通部觀光署・景點資訊",
+    "official_info_checked_at": "2026-10-09",
+    "photo_search_checked_at": "2026-10-08",
+    "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
+    "article_checked_at": "2026-10-08",
+    "representative_species": "楓香"
+  },
+  {
+    "id": "maple-valley",
+    "name": "楓之谷－1956秘密花園",
+    "city": "臺中市・和平區",
+    "region": "中部",
+    "lon": 121.2527471,
+    "lat": 24.2544472,
+    "coordinate_source_url": "https://www.trimt-nsa.gov.tw/zh-tw/attraction/83/",
+    "coordinate_scope": "官方園區代表位置",
+    "category": "賞楓／秋色",
+    "intro": "梨山賓館旁；紫葉楓等品種其他季節也有紅葉，不能當作秋季轉紅或全年盛期。",
+    "species": [
+      "青楓",
+      "三角楓",
+      "紫葉楓"
+    ],
+    "species_source_url": "https://www.trimt-nsa.gov.tw/zh-tw/attraction/83/",
+    "species_note": "來源明列的代表樹種；楓樹品種未核實時不自行推測。",
+    "species_checked_at": "2026-10-07",
+    "historical_photos": [
+      {
+        "title": "楓之谷橘紅楓葉",
+        "src": "./photos/maple-valley-verified.jpg",
+        "source_url": "https://www.trimt-nsa.gov.tw/zh-tw/attraction/83/",
+        "date": "2026-07-02",
+        "date_kind": "source-updated",
+        "author": "參山國家風景區管理處",
+        "license": "政府網站資料開放宣告",
+        "license_url": "https://www.trimt-nsa.gov.tw/zh-tw/copyright/",
+        "note": "拍攝日期未標示；來源日期不代表拍攝年份。",
+        "original_image_url": "https://www.trimt-nsa.gov.tw/_api/Image/150800/"
+      }
+    ],
+    "theme_source_url": "https://www.trimt-nsa.gov.tw/zh-tw/attraction/83/",
+    "theme_checked_at": "2026-10-07",
+    "x": 444.113,
+    "y": 334.562,
+    "live_cameras": [],
+    "blog_photo_links": [
+      {
+        "title": "楓之谷｜多品種楓樹與園區散步攻略",
+        "url": "https://www.trimt-nsa.gov.tw/zh-tw/attraction/83/",
+        "source": "參山國家風景區管理處／官方玩賞攻略",
+        "published_on": "2026-07-02",
+        "date_kind": "updated",
+        "route": "梨山賓館旁入口 → 楓之谷步道 → 五福祈福鐘與觀星椅",
+        "summary": "介紹各品種葉色與園區散步設施；紫葉楓其他季節也呈暗紅，不代表秋季盛期。",
+        "checked_at": "2026-10-08"
+      }
+    ],
+    "official_info_url": "https://www.trimt-nsa.gov.tw/zh-tw/attraction/83/",
+    "official_info_label": "參山國家風景區管理處",
+    "official_info_checked_at": "2026-10-09",
+    "photo_search_checked_at": "2026-10-08",
+    "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
+    "article_checked_at": "2026-10-08",
+    "representative_species": "青楓"
+  },
+  {
+    "id": "fushoushan",
+    "name": "福壽山農場",
+    "city": "臺中市・和平區",
+    "lon": 121.24578,
+    "lat": 24.244921,
+    "coordinate_source_url": "https://www.taiwan.net.tw/m1.aspx?id=695&sno=0001016",
+    "coordinate_scope": "官方景點代表位置",
+    "region": "中部",
+    "category": "賞楓",
+    "intro": "",
+    "x": 442.897,
+    "y": 336.386,
+    "species": [
+      "青楓"
+    ],
+    "species_source_url": "https://www.fushoushan.com.tw/",
+    "species_note": "園方季節介紹列出松盧附近青楓；不是農場完整樹種名錄。",
+    "species_checked_at": "2026-10-07",
+    "historical_photos": [
+      {
+        "title": "福壽山楓葉",
+        "src": "./photos/fushoushan-1.jpg",
+        "source_url": "https://commons.wikimedia.org/wiki/File:%E7%A6%8F%E5%A3%BD%E5%B1%B1%E6%A5%93%E8%91%89.jpg",
+        "date": "2015-11-15",
+        "date_kind": "captured",
+        "author": "Joe111xx",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "note": "",
+        "original_image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/53/%E7%A6%8F%E5%A3%BD%E5%B1%B1%E6%A5%93%E8%91%89.jpg/960px-%E7%A6%8F%E5%A3%BD%E5%B1%B1%E6%A5%93%E8%91%89.jpg"
+      }
+    ],
+    "live_cameras": [
+      {
+        "label": "福壽山官方直播",
+        "url": "https://fushoushan.com.tw/Outer/LiveStream",
+        "scope": "官方多鏡頭入口",
+        "link_checked_at": "2026-10-09",
+        "link_check_method": "HTTP讀取"
+      }
+    ],
+    "official_facebook_url": "https://www.facebook.com/fssfarm/",
+    "official_facebook_name": "福壽山農場",
+    "official_facebook_evidence_url": "https://epaper.vac.gov.tw/zh-tw/C/2790%7C21/30974/1/Publish.htm",
+    "blog_photo_links": [
+      {
+        "title": "福壽山農場｜松廬賞楓一日遊",
+        "url": "https://fullfenblog.tw/fushoushan-day-trip/",
+        "source": "滿分的旅遊札記",
+        "published_on": "2026-09-23",
+        "route": "松廬 → 農場露營區 → 天池",
+        "summary": "賞楓請看松廬章節；其餘賞櫻內容為不同季節的順遊介紹。",
+        "checked_at": "2026-10-08",
+        "date_kind": "updated"
+      }
+    ],
+    "official_info_url": "https://www.taiwan.net.tw/m1.aspx?id=695&sno=0001016",
+    "official_info_label": "交通部觀光署・景點資訊",
+    "official_info_checked_at": "2026-10-09",
+    "photo_search_checked_at": "2026-10-08",
+    "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
+    "article_checked_at": "2026-10-08",
+    "representative_species": "青楓"
+  },
+  {
+    "id": "daxueshan",
+    "name": "大雪山國家森林遊樂區",
+    "city": "臺中市・和平區",
+    "lon": 120.97511,
+    "lat": 24.244563,
+    "coordinate_source_url": "https://www.taiwan.net.tw/m1.aspx?id=r24&sno=0001016",
+    "coordinate_scope": "官方景點代表位置",
+    "region": "中部",
+    "category": "賞楓",
+    "intro": "紅榨槭等紅葉景觀；圖示座標依觀光署景點資料。",
+    "x": 395.656,
+    "y": 336.454,
+    "species": [
+      "台灣紅榨槭",
+      "青楓",
+      "楓香",
+      "尖葉槭"
+    ],
+    "species_source_url": "https://recreation.forest.gov.tw/News/News?id=20221231003",
+    "species_note": "依 2022 年園方賞楓公告。",
+    "species_checked_at": "2026-10-07",
+    "historical_photos": [
+      {
+        "title": "大雪山收費站楓紅",
+        "src": "./photos/daxueshan-verified.jpg",
+        "source_url": "https://recreation.forest.gov.tw/News/News?id=20251219004",
+        "date": "2025-12-19",
+        "date_kind": "source-published",
+        "author": "林業保育署臺中分署",
+        "license": "政府網站資料開放宣告",
+        "license_url": "https://www.forest.gov.tw/opendata",
+        "note": "拍攝日期未標示；來源日期不代表拍攝年份。",
+        "original_image_url": "https://recreation.forest.gov.tw/Files/News/Photo/20251219004_content_1.jpg"
+      },
+      {
+        "title": "大雪山歷年楓紅",
+        "src": "./photos/daxueshan-1.jpg",
+        "source_url": "https://recreation.forest.gov.tw/News/News?id=20221231003",
+        "date": "2022-12-31",
+        "date_kind": "source-published",
+        "author": "林業保育署臺中分署（原東勢林管處）",
+        "license": "政府網站資料開放宣告",
+        "license_url": "https://www.forest.gov.tw/opendata",
+        "note": "拍攝日期未標示。",
+        "original_image_url": "https://recreation.forest.gov.tw/Files/News/Photo/20221231003_content_1.jpeg"
+      }
+    ],
+    "aliases": [
+      "大雪山國家森林遊樂區步道群",
+      "大雪山木馬道"
+    ],
+    "related_routes": [
+      {
+        "id": "daxue-trails",
+        "name": "大雪山木馬道",
+        "period": "一般約 11 月至翌年 1 月（木馬道）",
+        "source_url": "https://www.forest.gov.tw/0000293"
+      }
+    ],
+    "live_cameras": [],
+    "official_facebook_url": "https://www.facebook.com/Dasyueshan/",
+    "official_facebook_name": "大雪山國家森林遊樂區",
+    "official_facebook_evidence_url": "https://www.forest.gov.tw/0001992",
+    "blog_photo_links": [
+      {
+        "title": "大雪山森林步道與賞楓遊記",
+        "url": "https://vocus.cc/article/67a4af62fd89780001b856cb",
+        "source": "貝蒂的跳躍日記／方格子",
+        "published_on": "2025-02-08",
+        "checked_at": "2026-10-08",
+        "updated_on": "2025-04-02",
+        "route": "園區森林步道 → 神木周邊",
+        "summary": "分享園區楓紅、神木與住宿，供安排森林賞楓行程。"
+      }
+    ],
+    "official_info_url": "https://www.taiwan.net.tw/m1.aspx?id=r24&sno=0001016",
+    "official_info_label": "交通部觀光署・景點資訊",
+    "official_info_checked_at": "2026-10-09",
+    "photo_search_checked_at": "2026-10-08",
+    "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
+    "article_checked_at": "2026-10-08",
+    "representative_species": "台灣紅榨槭"
+  },
+  {
+    "id": "yuanzui",
+    "name": "鳶嘴稍來小雪山國家步道",
+    "city": "臺中市・和平區",
+    "lon": 120.954468550758,
+    "lat": 24.2347755529336,
+    "coordinate_source_url": "https://recreation.forest.gov.tw/Trail/RT?tr_id=060",
+    "coordinate_scope": "大雪山林道27.5k",
+    "region": "中部",
+    "category": "賞楓／秋色",
+    "intro": "官方賞楓主題推薦。地圖標示入口代表點，非完整路線；請先查閱官方步道現況。 步道標記為入口代表點，出發前請查看官方現況。",
+    "x": 392.053,
+    "y": 338.328,
+    "species": [
+      "台灣紅榨槭"
+    ],
+    "species_source_url": "https://recreation.forest.gov.tw/trail/RT?tr_id=060&typ=3",
+    "species_note": "指鳶嘴稍來步道中後段約 2.5 公里處。",
+    "species_checked_at": "2026-10-07",
+    "historical_photos": [],
+    "live_cameras": [],
+    "blog_photo_links": [
+      {
+        "title": "鳶嘴稍來｜攀岩登山與滿樹楓紅遊記",
+        "url": "https://www.walkerland.com.tw/article/view/357510",
+        "source": "相片中的菲莉絲／WalkerLand創作者遊記",
+        "published_on": "2023-04-27",
+        "route": "鳶嘴山登山口 → 鳶嘴山 → 稍來山觀景平台",
+        "summary": "記錄12月鳶嘴稍來登山、樹冠楓紅及觀景平台；含需攀岩的鳶嘴山段，依體能規劃。",
+        "checked_at": "2026-10-08",
+        "reference_period": "12月（年份未標示）"
+      }
+    ],
+    "official_info_url": "https://recreation.forest.gov.tw/Trail/RT?tr_id=060",
+    "official_info_label": "林業保育署・台灣山林悠遊網",
+    "official_info_checked_at": "2026-10-09",
+    "photo_search_checked_at": "2026-10-08",
+    "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
+    "article_checked_at": "2026-10-08",
+    "representative_species": "台灣紅榨槭"
+  },
+  {
+    "id": "guguan",
+    "name": "谷關風景區",
+    "city": "臺中市・和平區",
+    "region": "中部",
+    "lon": 121.0027886,
+    "lat": 24.2024711,
+    "coordinate_source_url": "https://www.trimt-nsa.gov.tw/zh-tw/attraction/831/",
+    "coordinate_scope": "官方谷關街區代表位置，非單一楓樹位置",
+    "category": "賞楓／秋色",
+    "intro": "官方介紹秋季楓紅，街區與周邊各路段轉色不同；不是八仙山園區的重複標記。",
+    "species": [],
+    "species_source_url": null,
+    "species_note": "來源明列的代表樹種；楓樹品種未核實時不自行推測。",
+    "species_checked_at": "2026-10-07",
+    "historical_photos": [],
+    "theme_source_url": "https://www.trimt-nsa.gov.tw/zh-tw/attraction/831/",
+    "theme_checked_at": "2026-10-07",
+    "x": 400.487,
+    "y": 344.51,
+    "live_cameras": [],
+    "blog_photo_links": [
+      {
+        "title": "谷關｜捎來步道秋季楓紅與吊橋散步攻略",
+        "url": "https://www.trimt-nsa.gov.tw/zh-tw/attraction/6/",
+        "source": "參山國家風景區管理處／官方玩賞攻略",
+        "published_on": "2026-05-20",
+        "date_kind": "updated",
+        "route": "谷關遊客中心周邊 → 捎來吊橋 → 捎來步道 → 谷關吊橋 → 溫泉公園",
+        "summary": "官方明確介紹捎來步道秋季楓紅、兩處登山口與吊橋動線，可順遊溫泉公園；屬賞楓路線介紹，非2026年現場楓況。",
+        "checked_at": "2026-10-08"
+      }
+    ],
+    "official_info_url": "https://www.trimt-nsa.gov.tw/zh-tw/attraction/831/",
+    "official_info_label": "參山國家風景區管理處",
+    "official_info_checked_at": "2026-10-09",
+    "photo_search_checked_at": "2026-10-08",
+    "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
+    "article_checked_at": "2026-10-08",
+    "representative_species": null
+  },
+  {
+    "id": "basianshan",
+    "name": "八仙山國家森林遊樂區",
+    "city": "臺中市・和平區",
+    "region": "中部",
+    "lon": 121.01461,
+    "lat": 24.192249,
+    "coordinate_source_url": "https://www.tad.gov.tw/m1.aspx?id=R5&sNo=0001016",
+    "coordinate_scope": "官方園區代表位置",
+    "category": "賞楓／秋色",
+    "intro": "賞楓位置為森林遊樂區，不代表需要攀登八仙山主峰。",
+    "species": [
+      "楓香"
+    ],
+    "species_source_url": "https://recreation.forest.gov.tw/Forest/RA?typ_id=0300002",
+    "species_note": "來源明列的代表樹種；楓樹品種未核實時不自行推測。",
+    "species_checked_at": "2026-10-08",
+    "historical_photos": [
+      {
+        "title": "八仙山園區秋色",
+        "src": "./photos/basianshan-verified.jpg",
+        "source_url": "https://recreation.forest.gov.tw/News/News?id=20191126001",
+        "date": "2019-11-26",
+        "date_kind": "source-published",
+        "author": "林務局東勢林區管理處",
+        "license": "政府網站資料開放宣告",
+        "license_url": "https://www.forest.gov.tw/opendata",
+        "note": "拍攝日期未標示；來源日期不代表拍攝年份。",
+        "original_image_url": "https://recreation.forest.gov.tw/Files/News/Photo/20191126001_content_1.jpg"
+      }
+    ],
+    "theme_source_url": "https://travel.taichung.gov.tw/zh-tw/tag/list?categories=%E8%B3%9E%E8%8A%B1%E5%B0%88%E5%8D%80",
+    "theme_checked_at": "2026-10-07",
+    "x": 402.55,
+    "y": 346.466,
+    "live_cameras": [
+      {
+        "label": "八仙山園區",
+        "url": "https://www.forest.gov.tw/0010158",
+        "scope": "園區景觀",
+        "link_checked_at": "2026-10-09",
+        "link_check_method": "替代網頁讀取"
+      }
+    ],
+    "official_facebook_url": "https://www.facebook.com/BSSNC.tw/",
+    "official_facebook_name": "八仙山國家森林遊樂區暨自然教育中心",
+    "official_facebook_evidence_url": "https://www.forest.gov.tw/news/0074458",
+    "blog_photo_links": [
+      {
+        "title": "八仙山｜天籟步道、山莊楓紅與園區散步遊記",
+        "url": "https://w0973320589.pixnet.net/blog/posts/9556487729",
+        "source": "快樂a吃喝玩耍過生活",
+        "published_on": "2020-12-23",
+        "reference_period": "2020-12-11",
+        "route": "遊客中心 → 天籟步道 → 八仙山莊周邊 → 清風亭與望月亭 → 竹林與親水區",
+        "summary": "文內記錄八仙山莊周邊的火紅楓葉照片，並串聯園區散步路線；公車、票價與優惠為2020年資料，出發前請查官方最新資訊。",
+        "checked_at": "2026-10-08"
+      }
+    ],
+    "official_info_url": "https://www.tad.gov.tw/m1.aspx?id=R5&sNo=0001016",
+    "official_info_label": "交通部觀光署・景點資訊",
+    "official_info_checked_at": "2026-10-09",
+    "photo_search_checked_at": "2026-10-08",
+    "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
+    "article_checked_at": "2026-10-08",
+    "representative_species": "楓香"
+  },
+  {
+    "id": "manabang",
+    "name": "馬那邦山",
+    "city": "苗栗縣・大湖鄉",
+    "lon": 120.91427,
+    "lat": 24.368722,
+    "coordinate_source_url": "https://recreation.forest.gov.tw/Trail/RT?tr_id=047",
+    "coordinate_scope": "官方景點代表位置",
+    "region": "中部",
+    "category": "賞楓",
+    "intro": "",
+    "x": 385.037,
+    "y": 312.677,
+    "species": [
+      "青楓",
+      "楓香",
+      "台灣櫸"
+    ],
+    "species_source_url": "https://recreation.forest.gov.tw/trail/RT?tr_id=047&typ=3",
+    "species_note": "青楓、楓香分布於古戰場附近路段；台灣櫸為其他秋色樹種。",
+    "species_checked_at": "2026-10-07",
+    "historical_photos": [],
+    "live_cameras": [],
+    "blog_photo_links": [
+      {
+        "title": "馬那邦山｜登山與楓紅路線遊記",
+        "url": "https://cmtcmt99.pixnet.net/blog/posts/13366857635",
+        "source": "堂葫蘆的山野部落",
+        "published_on": "2025-01-29",
+        "route": "錦雲山莊 → 天然湖步道 → 馬那邦山 → 細道邦山",
+        "summary": "記錄山路、古戰場及產業道路的樹冠楓紅；含登山行程與照片。",
+        "checked_at": "2026-10-08",
+        "reference_period": "2024-12-28"
+      }
+    ],
+    "official_info_url": "https://recreation.forest.gov.tw/Trail/RT?tr_id=047",
+    "official_info_label": "林業保育署・台灣山林悠遊網",
+    "official_info_checked_at": "2026-10-09",
+    "photo_search_checked_at": "2026-10-08",
+    "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
+    "article_checked_at": "2026-10-08",
+    "representative_species": "青楓"
+  },
+  {
+    "id": "alishan",
+    "name": "阿里山國家森林遊樂區",
+    "city": "嘉義縣・阿里山鄉",
+    "lon": 120.80367,
+    "lat": 23.511294,
+    "coordinate_source_url": "https://www.taiwan.net.tw/m1.aspx?id=10949&sno=0001016",
+    "coordinate_scope": "官方景點代表位置",
+    "region": "南部",
+    "category": "賞楓",
+    "intro": "賞楓分為森林遊樂區內與園區外台18線阿里山公路；地圖標記為園區代表位置，賞楓地點與公路里程請看「旅遊文章」的分區補充。",
+    "x": 365.734,
+    "y": 476.414,
+    "species": [
+      "台灣紅榨槭",
+      "青楓"
+    ],
+    "species_source_url": "https://recreation.forest.gov.tw/Forest/RA?typ=0&typ_id=0500001",
+    "species_note": "",
+    "species_checked_at": "2026-10-07",
+    "historical_photos": [],
+    "live_cameras": [
+      {
+        "label": "林業鐵路",
+        "url": "https://www.forest.gov.tw/0010155",
+        "scope": "園區景觀",
+        "link_checked_at": "2026-10-09",
+        "link_check_method": "替代網頁讀取"
+      },
+      {
+        "label": "小笠原平台",
+        "url": "https://www.forest.gov.tw/0010156",
+        "scope": "園區景觀",
+        "link_checked_at": "2026-10-09",
+        "link_check_method": "替代網頁讀取"
+      }
+    ],
+    "official_facebook_url": "https://www.facebook.com/AlishanForest/",
+    "official_facebook_name": "阿里山國家森林遊樂區",
+    "official_facebook_evidence_url": "https://www.forest.gov.tw/0001992",
+    "additional_facebook_links": [
+      {
+        "name": "漫步在雲端的阿里山",
+        "url": "https://www.facebook.com/alishan.fans/",
+        "kind": "攝影與在地分享",
+        "evidence_url": "https://alishan.cyc.edu.tw/modules/tad_player/play.php?psn=98"
+      }
+    ],
+    "blog_photo_links": [
+      {
+        "title": "森林遊樂區｜阿里山賞楓景點與行程攻略",
+        "url": "https://travel.yam.com/article/138851",
+        "source": "輕旅行／SASA",
+        "published_on": "2025-11-14",
+        "route": "沼平車站周邊、慈雲寺、對高岳與祝山",
+        "summary": "整理園區賞楓地點、列車與步行行程；2025年主題列車日期為歷年資料。",
+        "checked_at": "2026-10-08",
+        "date_kind": "updated",
+        "viewing_area_group": "park"
+      },
+      {
+        "title": "阿里山公路｜89.5K賞楓與日落觀景攻略",
+        "url": "https://golovetraveling.com/sadmountain/",
+        "source": "Go愛。旅行",
+        "published_on": "2026-06-20",
+        "reference_period": "2025-01-19、2022-11-21",
+        "route": "台18線89.5K合法停車空間 → 傷心山日落雲海觀景台",
+        "summary": "記錄觀景台三角楓綠黃紅漸層樹冠、停車位置與日落雲海；非全紅盛期或今年現場葉況。",
+        "checked_at": "2026-10-08",
+        "viewing_area_group": "road"
+      }
+    ],
+    "official_info_url": "https://www.taiwan.net.tw/m1.aspx?id=10949&sno=0001016",
+    "official_info_label": "交通部觀光署・景點資訊",
+    "official_info_checked_at": "2026-10-09",
+    "viewing_areas": [
+      {
+        "name": "森林遊樂區內",
+        "description": "沼平車站周邊、對高岳車站、慈雲寺等，可依園區步道安排步行賞楓。",
+        "source_url": "https://travel.yam.com/article/138851",
+        "source_label": "園區賞楓景點與照片",
+        "group": "park"
+      },
+      {
+        "name": "阿里山公路｜79～83.5K",
+        "description": "十字路以上路段；79K明隧道起至83.5K沿線可觀賞青楓。",
+        "group": "road"
+      },
+      {
+        "name": "阿里山公路｜88～90.8K",
+        "description": "三角楓賞葉路段；89.5K傷心山日落雲海觀景台可作為明確目的地，90.8K周邊亦有青楓與三角楓。",
+        "source_url": "https://www.drivetaiwan.tw/tw/cp-2-84-2da76-1.html",
+        "source_label": "85～95K官方公路路線介紹",
+        "group": "road"
+      },
+      {
+        "name": "阿里山公路｜92～96K自忠路段",
+        "description": "沿線青楓；94K蓄水池附近另有楓香。楓香為變葉植物，並非楓樹。",
+        "group": "road"
+      },
+      {
+        "name": "自忠往塔塔加方向",
+        "description": "台18線高海拔沿線可見台灣紅榨槭。各段轉色時間不同，可配合當季有日期的楓況分享安排。",
+        "group": "road"
+      }
+    ],
+    "viewing_areas_note": "以上為歷年賞楓位置參考，不代表目前葉色；公路景點位於園區外。請使用合法停車空間與觀景台，勿在彎道、隧道口或車道停車拍照。",
+    "photo_search_checked_at": "2026-10-08",
+    "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
+    "article_checked_at": "2026-10-08",
+    "representative_species": "台灣紅榨槭"
+  },
+  {
+    "id": "lijia-maple",
+    "name": "里佳賞楓步道",
+    "city": "嘉義縣・阿里山鄉",
+    "region": "南部",
+    "lon": 120.7211,
+    "lat": 23.40673,
+    "coordinate_source_url": "https://www.ali-nsa.net/zh-tw/attractions/detail/194",
+    "coordinate_scope": "官方賞楓步道代表位置",
+    "category": "賞楓／秋色",
+    "intro": "賞楓步道位於里佳部落旁，169 縣道約 49.3K 至 50.1K；與阿里山森林遊樂區不同地點。",
+    "species": [
+      "青楓",
+      "楓香"
+    ],
+    "species_source_url": "https://www.ali-nsa.net/zh-tw/attractions/detail/194",
+    "species_note": "來源明列的代表樹種；楓樹品種未核實時不自行推測。",
+    "species_checked_at": "2026-10-07",
+    "historical_photos": [],
+    "theme_source_url": "https://www.ali-nsa.net/zh-tw/attractions/detail/194",
+    "theme_checked_at": "2026-10-07",
+    "x": 351.323,
+    "y": 496.309,
+    "live_cameras": [
+      {
+        "label": "里佳資訊站",
+        "url": "https://www.ali-nsa.net/zh-tw/live-camera/3",
+        "scope": "部落周邊，非賞楓步道內",
+        "link_checked_at": "2026-10-09",
+        "link_check_method": "HTTP讀取"
+      }
+    ],
+    "blog_photo_links": [
+      {
+        "title": "里佳｜賞楓步道與部落散步攻略",
+        "url": "https://www.ali-nsa.net/zh-tw/attractions/detail/194",
+        "source": "阿里山國家風景區管理處／官方玩賞攻略",
+        "published_on": "2026-09-18",
+        "date_kind": "updated",
+        "route": "169縣道50.1K南口 → 賞楓木棧階梯 → 49.3K北口",
+        "summary": "介紹青楓、楓香與木棧步道位置、交通；位於里佳部落，非阿里山森林遊樂區。",
+        "checked_at": "2026-10-08"
+      }
+    ],
+    "official_info_url": "https://www.ali-nsa.net/zh-tw/attractions/detail/194",
+    "official_info_label": "阿里山國家風景區管理處",
+    "official_info_checked_at": "2026-10-09",
+    "photo_search_checked_at": "2026-10-08",
+    "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
+    "article_checked_at": "2026-10-08",
+    "representative_species": "青楓"
   },
   {
     "id": "hongye-park",
@@ -305,231 +1506,196 @@
     "category": "賞楓",
     "intro": "來源提到 12 月中下旬轉紅；未據此推估後續月份或今年楓況。",
     "x": 313.732,
-    "y": 508.588
+    "y": 508.588,
+    "species": [
+      "楓香",
+      "槭樹"
+    ],
+    "species_source_url": "https://www.siraya-nsa.gov.tw/zh-tw/event/news/13012",
+    "species_note": "槭樹的細分品種未列。",
+    "species_checked_at": "2026-10-07",
+    "historical_photos": [],
+    "live_cameras": [],
+    "blog_photo_links": [
+      {
+        "title": "紅葉公園｜楓香賞葉與關子嶺散步遊記",
+        "url": "https://as660707.com/%E7%B4%85%E8%91%89%E5%85%AC%E5%9C%922025/",
+        "source": "小玉兒趴趴走",
+        "published_on": "2025-03-18",
+        "route": "停車場 → 木棧道景觀台 → 蝴蝶涼亭 → 園區步道 → 紅蜥蜴牌樓與關子嶺老街",
+        "summary": "介紹楓香與槭樹、園區入口及步行動線；作者記錄部分楓香葉片轉黃、泛紅，非整片楓紅盛期紀錄。",
+        "checked_at": "2026-10-08"
+      }
+    ],
+    "official_info_url": "https://www.siraya-nsa.gov.tw/zh-tw/attractions/detail/157",
+    "official_info_label": "西拉雅國家風景區管理處",
+    "official_info_checked_at": "2026-10-09",
+    "photo_search_checked_at": "2026-10-08",
+    "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
+    "article_checked_at": "2026-10-08",
+    "representative_species": "楓香"
   },
   {
-    "id": "puli-maple",
-    "name": "楓香巨木群公園",
-    "city": "南投縣・埔里鎮",
-    "lon": 120.99167,
-    "lat": 23.97596,
-    "coordinate_source_url": "https://media.taiwan.net.tw/zh-tw/portal/travel/details/attraction_376480000a_000020",
-    "coordinate_scope": "官方景點代表位置",
-    "region": "中部",
-    "category": "賞楓",
-    "intro": "楓香巨木景點；未取得固定紅葉月份。",
-    "x": 398.546,
-    "y": 387.815
+    "id": "danongdafu",
+    "name": "大農大富・南環自行車道",
+    "city": "花蓮縣・光復鄉",
+    "region": "東部",
+    "lon": 121.41772,
+    "lat": 23.614854,
+    "coordinate_source_url": "https://www.taiwan.net.tw/m1.aspx?id=A12-00297&sNo=0001016",
+    "coordinate_scope": "官方園區代表位置；賞楓路段位於南環自行車道",
+    "category": "賞楓／秋色",
+    "intro": "從服務中心往南，經七彩釣竿橋轉彎至南環自行車道。杜英也是變葉植物，並非楓樹。",
+    "species": [
+      "青楓",
+      "楓香",
+      "杜英"
+    ],
+    "species_source_url": "https://www.taiwan.net.tw/m1.aspx?id=A12-00297&sNo=0001016",
+    "species_note": "來源明列的代表樹種；楓樹品種未核實時不自行推測。",
+    "species_checked_at": "2026-10-07",
+    "historical_photos": [],
+    "theme_source_url": "https://www.erv-nsa.gov.tw/zh-tw/travel/check-in",
+    "theme_checked_at": "2026-10-07",
+    "x": 472.906,
+    "y": 456.696,
+    "live_cameras": [],
+    "official_facebook_url": "https://www.facebook.com/MASADIFOREST/",
+    "official_facebook_name": "大農大富平地森林園區",
+    "official_facebook_evidence_url": "https://www.forest.gov.tw/news/0065198",
+    "blog_photo_links": [
+      {
+        "title": "大農大富｜秋冬賞楓自行車行程",
+        "url": "https://www.erv-nsa.gov.tw/zh-tw/travel/tour/92",
+        "source": "花東縱谷國家風景區管理處／官方遊程",
+        "route": "大農大富森林園區 → 南環自行車道",
+        "summary": "安排森林秋冬賞葉遊程；頁面未標發布日期，並非目前葉況。",
+        "checked_at": "2026-10-08",
+        "date_label": "發布日期未標示",
+        "date_kind": "undated",
+        "official_guide": true
+      }
+    ],
+    "official_info_url": "https://www.taiwan.net.tw/m1.aspx?id=A12-00297&sNo=0001016",
+    "official_info_label": "交通部觀光署・景點資訊",
+    "official_info_checked_at": "2026-10-09",
+    "photo_search_checked_at": "2026-10-08",
+    "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
+    "article_checked_at": "2026-10-08",
+    "representative_species": "青楓"
   },
   {
-    "id": "neidong",
-    "name": "內洞國家森林遊樂區",
-    "city": "新北市・烏來區",
-    "lon": 121.52632,
-    "lat": 24.827958,
-    "coordinate_source_url": "https://www.taiwan.net.tw/m1.aspx?id=9658&sno=0001016",
-    "coordinate_scope": "官方景點代表位置",
-    "region": "北部",
-    "category": "賞楓",
-    "intro": "列入林業保育署全台賞楓主題推薦；未列明確月份。",
-    "x": 491.86,
-    "y": 224.525
-  },
-  {
-    "id": "dongyanshan",
-    "name": "東眼山國家森林遊樂區",
-    "city": "桃園市・復興區",
-    "lon": 121.41761,
-    "lat": 24.82511,
-    "coordinate_source_url": "https://www.taiwan.net.tw/m1.aspx?id=2485&sno=0001016",
-    "coordinate_scope": "官方景點代表位置",
-    "region": "北部",
-    "category": "賞楓",
-    "intro": "列入林業保育署全台賞楓主題推薦；未列明確月份。",
-    "x": 472.887,
-    "y": 225.072
-  },
-  {
-    "id": "wuling-forest",
-    "name": "武陵國家森林遊樂區",
-    "city": "臺中市・和平區",
-    "lon": 121.306978747679,
-    "lat": 24.3971956138173,
-    "coordinate_source_url": "https://media.taiwan.net.tw/en-us/portal/travel/details/attraction_345040000g_000007",
-    "coordinate_scope": "官方森林遊樂區代表位置",
-    "region": "中部",
-    "category": "賞楓",
-    "intro": "列入林業保育署全台賞楓主題推薦；未列明確月份。",
-    "x": 453.578,
-    "y": 307.221
-  },
-  {
-    "id": "tengzhi",
-    "name": "藤枝國家森林遊樂區",
-    "city": "高雄市・桃源區",
-    "lon": 120.75466,
-    "lat": 23.067729,
-    "coordinate_source_url": "https://www.taiwan.net.tw/m1.aspx?id=2550&sno=0001016",
-    "coordinate_scope": "官方景點代表位置",
-    "region": "南部",
-    "category": "賞楓",
-    "intro": "查核時官方列為休園；請先查看園區與藤枝林道路況公告。",
-    "notice_url": "https://www.forest.gov.tw/area",
-    "x": 357.18,
-    "y": 560.699
-  },
-  {
-    "id": "taiwan-beech",
-    "name": "台灣山毛櫸步道",
+    "id": "taipingshan-beech",
+    "name": "太平山・台灣山毛櫸步道",
     "city": "宜蘭縣・南澳鄉",
+    "region": "北部",
     "lon": 121.60986729488,
     "lat": 24.5093091950423,
     "coordinate_source_url": "https://recreation.forest.gov.tw/Trail/RT?tr_id=013",
-    "coordinate_scope": "翠峰山莊旁",
-    "region": "北部",
-    "category": "秋色（山毛櫸）",
-    "intro": "秋色以山毛櫸金黃葉為主，並非紅色楓葉。入口代表點與變葉林區有距離。",
+    "coordinate_scope": "官方步道入口（翠峰山屋旁）",
+    "official_website_url": "https://recreation.forest.gov.tw/Trail/RT?tr_id=013",
+    "category": "山毛櫸／秋季黃葉",
+    "intro": "台灣山毛櫸秋季呈金黃色。單程 3.8 公里，原路折返；末段才可觀賞黃金林，往返需預留約 3～4 小時。",
+    "species": [
+      "台灣山毛櫸"
+    ],
+    "species_source_url": "https://recreation.forest.gov.tw/Trail/RT?tr_id=013",
+    "species_note": "又稱台灣水青岡；秋季黃葉景觀，不是紅楓。",
+    "species_checked_at": "2026-10-08",
+    "theme_source_url": "https://recreation.forest.gov.tw/Trail/RT?tr_id=013",
+    "theme_checked_at": "2026-10-08",
+    "historical_photos": [
+      {
+        "title": "台灣山毛櫸深秋金黃變葉",
+        "src": "./photos/taipingshan-beech-verified.jpg",
+        "original_image_url": "https://recreation.forest.gov.tw/Files/RT/Photo/013/05/%E5%8F%B0%E7%81%A3%E5%B1%B1%E6%AF%9B%E6%AB%B8%20%E6%B7%B1%E7%A7%8B%E9%87%91%E9%BB%83%E8%AE%8A%E8%91%89%2815%29.JPG",
+        "source_url": "https://recreation.forest.gov.tw/Trail/RT?tr_id=013",
+        "date": "",
+        "date_kind": "unknown",
+        "author": "林業及自然保育署／台灣山林悠遊網（原站未列個別攝影者）",
+        "license": "政府網站資料開放宣告",
+        "license_url": "https://www.forest.gov.tw/opendata",
+        "note": "歷年秋季金黃枝葉；原站未標拍攝日期，山毛櫸並非楓樹。"
+      }
+    ],
+    "live_cameras": [],
+    "aliases": [
+      "山毛櫸",
+      "台灣水青岡"
+    ],
     "x": 506.442,
-    "y": 285.725
+    "y": 285.725,
+    "official_facebook_url": "https://www.facebook.com/tps100.forest/",
+    "official_facebook_name": "太平山國家森林遊樂區",
+    "official_facebook_evidence_url": "https://recreation.forest.gov.tw/News/News?id=20260402002",
+    "notice_url": "https://www.forest.gov.tw/trail/news/0079343",
+    "blog_photo_links": [
+      {
+        "title": "台灣山毛櫸步道｜黃金林與步道攻略",
+        "url": "https://recreation.forest.gov.tw/Trail/RT?tr_id=013",
+        "source": "林業保育署／台灣山林悠遊網",
+        "route": "翠峰山屋旁步道入口 → 3.4～3.8K山毛櫸林 → 原路折返",
+        "summary": "官方介紹單程3.8公里步道、黃金林與路線；山毛櫸為秋季黃葉，非楓樹。",
+        "checked_at": "2026-10-08",
+        "date_label": "攻略日期未標示",
+        "date_kind": "undated",
+        "official_guide": true
+      }
+    ],
+    "official_info_url": "https://recreation.forest.gov.tw/Trail/RT?tr_id=013",
+    "official_info_label": "林業保育署・台灣山林悠遊網",
+    "official_info_checked_at": "2026-10-09",
+    "photo_search_checked_at": "2026-10-08",
+    "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
+    "article_checked_at": "2026-10-08",
+    "representative_species": "台灣山毛櫸"
   },
   {
-    "id": "cuifeng",
-    "name": "翠峰湖環山步道",
-    "city": "宜蘭縣・南澳鄉",
-    "lon": 121.600598587911,
-    "lat": 24.5128404445506,
-    "coordinate_source_url": "https://recreation.forest.gov.tw/Trail/RT?tr_id=014",
-    "coordinate_scope": "翠峰景觀道路15.5公里",
-    "region": "北部",
-    "category": "賞楓／秋色",
-    "intro": "官方賞楓主題推薦。地圖標示入口代表點，非完整路線；請先查閱官方步道現況。",
-    "x": 504.824,
-    "y": 285.048
-  },
-  {
-    "id": "wangyang",
-    "name": "望洋山步道",
-    "city": "宜蘭縣・南澳鄉",
-    "lon": 121.608993309051,
-    "lat": 24.5101885014622,
-    "coordinate_source_url": "https://recreation.forest.gov.tw/Trail/RT?tr_id=021",
-    "coordinate_scope": "官方標示步道入口",
-    "region": "北部",
-    "category": "賞楓／秋色",
-    "intro": "官方賞楓主題推薦。地圖標示入口代表點，非完整路線；請先查閱官方步道現況。",
-    "x": 506.289,
-    "y": 285.556
-  },
-  {
-    "id": "dongman",
-    "name": "東滿步道",
-    "city": "桃園市・復興區／新北市・三峽區",
-    "lon": 121.411449592623,
-    "lat": 24.8147692036094,
-    "coordinate_source_url": "https://recreation.forest.gov.tw/Trail/RT?tr_id=023",
-    "coordinate_scope": "東眼山端",
-    "region": "北部",
-    "category": "賞楓／秋色",
-    "intro": "官方賞楓主題推薦。地圖標示入口代表點，非完整路線；請先查閱官方步道現況。",
-    "x": 471.812,
-    "y": 227.061
-  },
-  {
-    "id": "beichatian",
+    "id": "beichatianshan",
     "name": "北插天山登山步道",
     "city": "桃園市・復興區",
+    "region": "北部",
     "lon": 121.44089068418,
     "lat": 24.7903717113065,
     "coordinate_source_url": "https://recreation.forest.gov.tw/Trail/RT?tr_id=025",
-    "coordinate_scope": "東滿步道東眼山與滿月圓遊樂區交界處",
-    "region": "北部",
-    "category": "賞楓／秋色",
-    "intro": "官方賞楓主題推薦。地圖標示入口代表點，非完整路線；請先查閱官方步道現況。",
+    "coordinate_scope": "官方步道路線代表點，非停車場",
+    "official_website_url": "https://recreation.forest.gov.tw/Trail/RT?tr_id=025",
+    "category": "山毛櫸／秋季黃葉",
+    "intro": "台灣山毛櫸秋季呈金黃色。原始山徑、體力需求高；進入插天山自然保留區須事先申請。部分舊路線暫停開放，請依官方公告規劃。",
+    "species": [
+      "台灣山毛櫸"
+    ],
+    "species_source_url": "https://recreation.forest.gov.tw/Trail/RT?tr_id=025",
+    "species_note": "又稱台灣水青岡；秋季黃葉景觀，不是紅楓。",
+    "species_checked_at": "2026-10-08",
+    "theme_source_url": "https://recreation.forest.gov.tw/Trail/RT?tr_id=025",
+    "theme_checked_at": "2026-10-08",
+    "historical_photos": [],
+    "live_cameras": [],
+    "aliases": [
+      "山毛櫸",
+      "台灣水青岡"
+    ],
     "x": 476.95,
-    "y": 231.752
-  },
-  {
-    "id": "dabajian",
-    "name": "大霸尖山登山步道",
-    "city": "新竹縣・尖石鄉／苗栗縣・泰安鄉",
-    "lon": 121.193038119893,
-    "lat": 24.4832225840492,
-    "coordinate_source_url": "https://recreation.forest.gov.tw/Trail/RT?tr_id=027",
-    "coordinate_scope": "馬達拉溪登山口",
-    "region": "北部",
-    "category": "賞楓／秋色",
-    "intro": "官方賞楓主題推薦。地圖標示入口代表點，非完整路線；請先查閱官方步道現況。",
-    "x": 433.692,
-    "y": 290.728
-  },
-  {
-    "id": "beidelaman",
-    "name": "北得拉曼巨木步道",
-    "city": "新竹縣・尖石鄉",
-    "lon": 121.279834648918,
-    "lat": 24.7388179388316,
-    "coordinate_source_url": "https://recreation.forest.gov.tw/Trail/RT?tr_id=035",
-    "coordinate_scope": "尖石水田",
-    "region": "北部",
-    "category": "賞楓／秋色",
-    "intro": "官方賞楓主題推薦。地圖標示入口代表點，非完整路線；請先查閱官方步道現況。",
-    "x": 448.84,
-    "y": 241.661
-  },
-  {
-    "id": "daxue-trails",
-    "name": "大雪山國家森林遊樂區步道群",
-    "city": "臺中市・和平區",
-    "lon": 121.009001565819,
-    "lat": 24.2578067785006,
-    "coordinate_source_url": "https://recreation.forest.gov.tw/Trail/RT?tr_id=049",
-    "coordinate_scope": "派出所旁出入口",
-    "region": "中部",
-    "category": "賞楓／秋色",
-    "intro": "官方賞楓主題推薦。地圖標示入口代表點，非完整路線；請先查閱官方步道現況。",
-    "x": 401.571,
-    "y": 333.919
-  },
-  {
-    "id": "yuanzui",
-    "name": "鳶嘴稍來小雪山國家步道",
-    "city": "臺中市・和平區",
-    "lon": 120.954468550758,
-    "lat": 24.2347755529336,
-    "coordinate_source_url": "https://recreation.forest.gov.tw/Trail/RT?tr_id=060",
-    "coordinate_scope": "大雪山林道27.5k",
-    "region": "中部",
-    "category": "賞楓／秋色",
-    "intro": "官方賞楓主題推薦。地圖標示入口代表點，非完整路線；請先查閱官方步道現況。",
-    "x": 392.053,
-    "y": 338.328
-  },
-  {
-    "id": "taoshan",
-    "name": "桃山瀑布步道",
-    "city": "臺中市・和平區",
-    "lon": 121.30782843774,
-    "lat": 24.3979342506876,
-    "coordinate_source_url": "https://recreation.forest.gov.tw/Trail/RT?tr_id=063",
-    "coordinate_scope": "武陵山莊",
-    "region": "中部",
-    "category": "賞楓／秋色",
-    "intro": "官方賞楓主題推薦。地圖標示入口代表點，非完整路線；請先查閱官方步道現況。",
-    "x": 453.726,
-    "y": 307.079
-  },
-  {
-    "id": "tefuye",
-    "name": "特富野古道",
-    "city": "嘉義縣・阿里山鄉／南投縣・信義鄉",
-    "lon": 120.793613985079,
-    "lat": 23.4710901297287,
-    "coordinate_source_url": "https://recreation.forest.gov.tw/Trail/RT?tr_id=081",
-    "coordinate_scope": "位於特富野",
-    "region": "中部",
-    "category": "賞楓／秋色",
-    "intro": "官方賞楓主題推薦。地圖標示入口代表點，非完整路線；請先查閱官方步道現況。",
-    "x": 363.979,
-    "y": 484.065
+    "y": 231.752,
+    "notice_url": "https://pa.forest.gov.tw/",
+    "blog_photo_links": [
+      {
+        "title": "北插天山｜山毛櫸賞葉與健行攻略",
+        "url": "https://hikinginfo5790.pixnet.net/blog/posts/16183249988",
+        "source": "休閒旅遊分享／Hiking.info",
+        "published_on": "2025-05-08",
+        "route": "登山口 → 神木區 → 山毛櫸林 → 北插天山",
+        "summary": "介紹秋季金黃山毛櫸與登山路線；山毛櫸並非楓樹，非當季葉況。",
+        "checked_at": "2026-10-08"
+      }
+    ],
+    "official_info_url": "https://recreation.forest.gov.tw/Trail/RT?tr_id=025",
+    "official_info_label": "林業保育署・台灣山林悠遊網",
+    "official_info_checked_at": "2026-10-09",
+    "photo_search_checked_at": "2026-10-08",
+    "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
+    "article_checked_at": "2026-10-08",
+    "representative_species": "台灣山毛櫸"
   }
 ]
