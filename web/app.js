@@ -354,12 +354,19 @@ function choose(id){
 $('#list').onclick=e=>{let el=e.target.closest('[data-id]');if(el)choose(el.dataset.id);};$('#markers').onclick=markerAction;$('#markers').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();markerAction(e);}};
 $('#region').onchange=e=>{region=e.target.value;county='all';populateCounties();selected=null;render();};$('#county').onchange=e=>{county=e.target.value;selected=null;render();};
 $('#search').oninput=e=>{query=e.target.value.trim();render();};$('#month').onchange=e=>{month=e.target.value;loadPlaces();};$('.filters').onclick=e=>{let b=e.target.closest('[data-filter]');if(!b)return;filter=b.dataset.filter;document.querySelectorAll('[data-filter]').forEach(el=>el.classList.toggle('active',el===b));render();};$('#mobile-list').onclick=()=>{const open=$('#sidebar').classList.toggle('open');if(open){selected=null;renderDetail();}$('#mobile-list').textContent=open?'× 關閉清單':'☰ 景點清單';$('#mobile-list').setAttribute('aria-expanded',String(open));};
-const world=$('#map-world'),svg=$('#map-svg');function transform(){
+const world=$('#map-world'),svg=$('#map-svg');function transform() {
+  const movement = 'translate(' + panX + ' ' + panY + ')';
+  const center = 'translate(400 450)';
+  const sizing = 'scale(' + scale + ')';
+  const restore = 'translate(-400 -450)';
+
   world.setAttribute(
     'transform',
-    `translate(${panX} ${panY}) translate(400 450) scale(${scale}) translate(-400 -450)`
+    movement + ' ' + center + ' ' + sizing + ' ' + restore
   );
+
   renderMarkers();
+};
 };}function zoom(f){fittedView=false;const before=scale;scale=Math.max(.4,Math.min(10,scale*f));panX*=scale/before;panY*=scale/before;transform();}$('#zoom-in').onclick=()=>zoom(1.2);$('#zoom-out').onclick=()=>zoom(1/1.2);$('#reset').onclick=()=>{fitIsland();transform();};$('#map').onwheel=e=>{e.preventDefault();zoom(e.deltaY>0?1/1.08:1.08);};
 let pointers=new Map(),lastDistance=null,drag=null,moved=false;
 function point(e){const p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;return p.matrixTransform(svg.getScreenCTM().inverse());}
