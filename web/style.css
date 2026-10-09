@@ -400,3 +400,41 @@ body {
     min-height: 44px;
   }
 }
+
+/* 景點詳細資訊：閱讀與間距優化 */
+.detail-body {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #253c32;
+}
+
+.detail-body h3 {
+  margin-top: 16px;
+  margin-bottom: 8px;
+  font-size: 16px;
+  line-height: 1.45;
+  font-weight: 700;
+  color: #234a39;
+}
+
+.detail-body p {
+  margin-top: 6px;
+  margin-bottom: 10px;
+}
+
+.detail-body a {
+  line-height: 1.5;
+}
+
+@media (max-width: 700px) {
+  .detail-body {
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .detail-body h3 {
+    margin-top: 14px;
+    margin-bottom: 6px;
+    font-size: 15px;
+  }
+}
