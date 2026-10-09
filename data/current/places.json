@@ -43,6 +43,7 @@
     "photo_search_checked_at": "2026-10-08",
     "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
     "region": "北部",
+    "representative_species": "紫葉槭",
     "species": [
       "紫葉槭"
     ],
@@ -72,6 +73,7 @@
     "photo_search_checked_at": "2026-10-08",
     "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
     "region": "北部",
+    "representative_species": "青楓",
     "species": [
       "青楓",
       "楓香"
@@ -130,6 +132,7 @@
     "photo_search_checked_at": "2026-10-08",
     "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
     "region": "北部",
+    "representative_species": "槭樹",
     "species": [
       "槭樹"
     ],
@@ -178,6 +181,7 @@
     "photo_search_checked_at": "2026-10-08",
     "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
     "region": "北部",
+    "representative_species": "青楓",
     "species": [
       "青楓",
       "楓香",
@@ -243,6 +247,7 @@
     "photo_search_checked_at": "2026-10-08",
     "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
     "region": "北部",
+    "representative_species": "楓香",
     "species": [
       "楓香"
     ],
@@ -285,6 +290,7 @@
     "photo_search_checked_at": "2026-10-08",
     "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
     "region": "北部",
+    "representative_species": null,
     "species": [],
     "species_checked_at": "2026-10-07",
     "species_note": "來源明列的代表樹種；楓樹品種未核實時不自行推測。",
@@ -339,6 +345,7 @@
     "photo_search_checked_at": "2026-10-08",
     "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
     "region": "北部",
+    "representative_species": "楓香",
     "species": [
       "楓香"
     ],
@@ -377,10 +384,13 @@
     "photo_search_checked_at": "2026-10-08",
     "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
     "region": "北部",
-    "species": [],
-    "species_checked_at": null,
+    "representative_species": "青楓",
+    "species": [
+      "青楓"
+    ],
+    "species_checked_at": "2026-10-08",
     "species_note": "",
-    "species_source_url": null,
+    "species_source_url": "https://recreation.forest.gov.tw/Forest/RA?typ_id=0200003",
     "x": 472.887,
     "y": 225.072
   },
@@ -425,6 +435,7 @@
     "photo_search_checked_at": "2026-10-08",
     "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
     "region": "北部",
+    "representative_species": null,
     "species": [],
     "species_checked_at": null,
     "species_note": "",
@@ -468,10 +479,13 @@
     "photo_search_checked_at": "2026-10-08",
     "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
     "region": "北部",
-    "species": [],
-    "species_checked_at": null,
+    "representative_species": "青楓",
+    "species": [
+      "青楓"
+    ],
+    "species_checked_at": "2026-10-08",
     "species_note": "",
-    "species_source_url": null,
+    "species_source_url": "https://web.wra.gov.tw/shihmen/cp.aspx?n=7641",
     "x": 443.214,
     "y": 227.695
   },
@@ -523,6 +537,7 @@
     "photo_search_checked_at": "2026-10-08",
     "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
     "region": "北部",
+    "representative_species": "青楓",
     "species": [
       "青楓",
       "台灣紅榨槭"
@@ -578,6 +593,7 @@
     "photo_search_checked_at": "2026-10-08",
     "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
     "region": "北部",
+    "representative_species": "日本槭樹嫁接品種",
     "species": [
       "日本槭樹嫁接品種"
     ],
@@ -610,6 +626,7 @@
     "photo_search_checked_at": "2026-10-08",
     "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
     "region": "中部",
+    "representative_species": "楓香",
     "species": [
       "楓香"
     ],
@@ -642,6 +659,7 @@
     "photo_search_checked_at": "2026-10-08",
     "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
     "region": "中部",
+    "representative_species": "落羽松",
     "species": [
       "落羽松"
     ],
@@ -712,6 +730,7 @@
     "photo_search_checked_at": "2026-10-08",
     "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
     "region": "中部",
+    "representative_species": "楓香",
     "species": [
       "楓香",
       "青楓",
@@ -757,6 +776,7 @@
     "photo_search_checked_at": "2026-10-08",
     "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
     "region": "中部",
+    "representative_species": "青楓",
     "species": [
       "青楓",
       "紫葉槭",
@@ -834,6 +854,7 @@
         "source_url": "https://recreation.forest.gov.tw/Trail/RT?tr_id=063&typ=1"
       }
     ],
+    "representative_species": "台灣紅榨槭",
     "species": [
       "台灣紅榨槭",
       "楓香",
@@ -880,10 +901,13 @@
     "photo_search_checked_at": "2026-10-08",
     "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
     "region": "中部",
-    "species": [],
-    "species_checked_at": "2026-10-07",
+    "representative_species": "楓香",
+    "species": [
+      "楓香"
+    ],
+    "species_checked_at": "2026-10-08",
     "species_note": "來源明列的代表樹種；楓樹品種未核實時不自行推測。",
-    "species_source_url": null,
+    "species_source_url": "https://www.tsfa.com.tw/page/about/index.aspx?kind=57",
     "theme_checked_at": "2026-10-07",
     "theme_source_url": "https://travel.taichung.gov.tw/zh-tw/tag/list?categories=%E8%B3%9E%E8%8A%B1%E5%B0%88%E5%8D%80",
     "x": 376.916,
@@ -933,6 +957,7 @@
     "photo_search_checked_at": "2026-10-08",
     "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
     "region": "中部",
+    "representative_species": "青楓",
     "species": [
       "青楓",
       "三角楓",
@@ -999,6 +1024,7 @@
     "photo_search_checked_at": "2026-10-08",
     "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
     "region": "中部",
+    "representative_species": "青楓",
     "species": [
       "青楓"
     ],
@@ -1079,6 +1105,7 @@
         "source_url": "https://www.forest.gov.tw/0000293"
       }
     ],
+    "representative_species": "台灣紅榨槭",
     "species": [
       "台灣紅榨槭",
       "青楓",
@@ -1122,6 +1149,7 @@
     "photo_search_checked_at": "2026-10-08",
     "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
     "region": "中部",
+    "representative_species": "台灣紅榨槭",
     "species": [
       "台灣紅榨槭"
     ],
@@ -1162,6 +1190,7 @@
     "photo_search_checked_at": "2026-10-08",
     "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
     "region": "中部",
+    "representative_species": null,
     "species": [],
     "species_checked_at": "2026-10-07",
     "species_note": "來源明列的代表樹種；楓樹品種未核實時不自行推測。",
@@ -1224,10 +1253,13 @@
     "photo_search_checked_at": "2026-10-08",
     "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
     "region": "中部",
-    "species": [],
-    "species_checked_at": "2026-10-07",
+    "representative_species": "楓香",
+    "species": [
+      "楓香"
+    ],
+    "species_checked_at": "2026-10-08",
     "species_note": "來源明列的代表樹種；楓樹品種未核實時不自行推測。",
-    "species_source_url": null,
+    "species_source_url": "https://recreation.forest.gov.tw/Forest/RA?typ_id=0300002",
     "theme_checked_at": "2026-10-07",
     "theme_source_url": "https://travel.taichung.gov.tw/zh-tw/tag/list?categories=%E8%B3%9E%E8%8A%B1%E5%B0%88%E5%8D%80",
     "x": 402.55,
@@ -1264,6 +1296,7 @@
     "photo_search_checked_at": "2026-10-08",
     "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
     "region": "中部",
+    "representative_species": "青楓",
     "species": [
       "青楓",
       "楓香",
@@ -1340,6 +1373,7 @@
     "photo_search_checked_at": "2026-10-08",
     "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
     "region": "南部",
+    "representative_species": "台灣紅榨槭",
     "species": [
       "台灣紅榨槭",
       "青楓"
@@ -1419,6 +1453,7 @@
     "photo_search_checked_at": "2026-10-08",
     "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
     "region": "南部",
+    "representative_species": "青楓",
     "species": [
       "青楓",
       "楓香"
@@ -1461,6 +1496,7 @@
     "photo_search_checked_at": "2026-10-08",
     "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
     "region": "南部",
+    "representative_species": "楓香",
     "species": [
       "楓香",
       "槭樹"
@@ -1506,6 +1542,7 @@
     "photo_search_checked_at": "2026-10-08",
     "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
     "region": "東部",
+    "representative_species": "青楓",
     "species": [
       "青楓",
       "楓香",
@@ -1573,6 +1610,7 @@
     "photo_search_checked_at": "2026-10-08",
     "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
     "region": "北部",
+    "representative_species": "台灣山毛櫸",
     "species": [
       "台灣山毛櫸"
     ],
@@ -1620,6 +1658,7 @@
     "photo_search_checked_at": "2026-10-08",
     "photo_search_note": "優先收錄較新的賞楓／賞葉行程、路線或遊記；排除新聞、無關內容及以落葉後景觀為主的文章。",
     "region": "北部",
+    "representative_species": "台灣山毛櫸",
     "species": [
       "台灣山毛櫸"
     ],
