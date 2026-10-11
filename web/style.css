@@ -797,3 +797,19 @@ body {
    -webkit-touch-callout:none;
  }
 }
+
+/* Mobile selected-place sheet: anchor below the map, leaving a clear pin viewport. */
+@media (max-width:700px){
+ .map-area #detail:not([hidden]):has(> .detail-head){
+  top:auto!important;
+  bottom:calc(10px + env(safe-area-inset-bottom))!important;
+  height:min(36dvh,290px)!important;
+  max-height:36dvh!important;
+  left:10px!important;
+  right:10px!important;
+ }
+ .map-area #detail.sheet-expanded:not([hidden]):has(> .detail-head){
+  height:min(76dvh,650px)!important;
+  max-height:76dvh!important;
+ }
+}
