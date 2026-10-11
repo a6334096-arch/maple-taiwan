@@ -112,7 +112,7 @@ $('#travel-date').onchange=e=>{if(!e.target.value)return;month=e.target.value.sl
 $('.forecast-tabs').onclick=e=>{const b=e.target.closest('[data-list-mode]');if(!b)return;listMode=b.dataset.listMode;if(listMode==='recent'&&filter==='peak'){filter='all';document.querySelectorAll('[data-filter]').forEach(el=>el.classList.toggle('active',el.dataset.filter==='all'));}sortOrder=listMode==='recent'?'recent':'season';document.querySelectorAll('[data-list-mode]').forEach(el=>el.setAttribute('aria-pressed',String(el===b)));fitIsland();transform();render();};
 $('#close-list').onclick=()=>{if($('#sidebar').classList.contains('open'))$('#mobile-list').click();};
 let markerGroups=[];
-function groupNearbyPlaces(data,pixelsPerUnit){
+function groupNearbyPlaces(data,pixelsPerUnit,minimumGap){
  const groups=[];const remaining=new Set(data);
  for(const seed of data){
   if(!remaining.delete(seed))continue;
@@ -120,7 +120,7 @@ function groupNearbyPlaces(data,pixelsPerUnit){
   // Bound the whole group, rather than chaining neighbours across Taiwan.
   // Every pair must be close, and broad regions remain separately selectable.
   for(const p of remaining){
-   if(p.region===seed.region&&items.every(item=>Math.hypot(item.x-p.x,item.y-p.y)*pixelsPerUnit<56)){remaining.delete(p);items.push(p);}
+   if(items.every(item=>Math.hypot(item.x-p.x,item.y-p.y)*pixelsPerUnit<minimumGap)){remaining.delete(p);items.push(p);}
   }
   groups.push({items,x:items.reduce((sum,p)=>sum+p.x,0)/items.length,y:items.reduce((sum,p)=>sum+p.y,0)/items.length});
  }
@@ -137,7 +137,7 @@ function renderMarkers(){
  const unit=matrix?Math.hypot(matrix.a,matrix.b):1;
  const markerScale=1/(scale*unit);
  const phone=window.matchMedia('(max-width:700px)').matches;
- markerGroups=groupNearbyPlaces(data,scale*unit);
+ markerGroups=groupNearbyPlaces(data,scale*unit,phone?48:64);
  $('#markers').innerHTML=markerGroups.map((g,i)=>{
   const p=g.items[0],cluster=g.items.length>1,s=cluster?clusterStage(g.items):leafStage(p),sel=g.items.some(p=>p.id===selected);
   return `<g class="marker ${sel?'selected':''}" ${cluster?`data-cluster="${i}"`:`data-id="${escapeHTML(p.id)}"`} transform="translate(${g.x},${g.y})" tabindex="0" role="button" aria-label="${cluster?`${g.items.length} 處鄰近景點，${s.name}，點選展開`:escapeHTML(p.name)+'，地圖代表：'+escapeHTML(representativeSpecies(p)||'品種待確認')+'，'+s.name}"><title>${g.items.map(p=>escapeHTML(p.name)+'（'+escapeHTML(p.city)+'）｜代表：'+escapeHTML(representativeSpecies(p)||'品種待確認')+'｜'+leafStage(p).name).join('、')}</title><g transform="scale(${markerScale})"><circle class="marker-hit" r="22" fill="transparent" stroke="none"/><circle class="marker-disc" r="${phone?(cluster?16:14):(cluster?24:22)}" fill="${cluster?'#fffef8':s.bg}" ${s.stale?'stroke="#7b8175" stroke-width="1.5" stroke-dasharray="3 2"':''}/>${cluster?clusterLeaves(g.items):markerLeaf(p,s.color)}${cluster?`<g class="cluster-badge"><circle cx="11" cy="11" r="9"/><text class="cluster-count" x="11" y="14" text-anchor="middle">${g.items.length}</text></g>`:''}</g></g>`;
