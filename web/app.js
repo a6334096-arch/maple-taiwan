@@ -175,9 +175,27 @@ function renderPlaceLabels(data){
 }
 function openCluster(index){
  const g=markerGroups[index];if(!g)return;const items=[...g.items];selected=null;scale=Math.min(10,scale*2);panX=-(g.x-400)*scale;panY=-(g.y-450)*scale;transform();
- $('#detail').hidden=false;$('#detail').innerHTML='<div class="cluster-list"><button class="detail-close" aria-label="關閉鄰近景點">×</button><h2>鄰近景點 '+items.length+' 處</h2><p class="cluster-hint">點選下方景點查看楓況</p>'+items.map(p=>`<button class="cluster-place" data-place="${escapeHTML(p.id)}">${escapeHTML(p.name)}<br><small>${escapeHTML(p.city)}</small></button>`).join('')+'</div>';
+ $('#detail').hidden=false;$('#detail').classList.remove('sheet-expanded');$('#detail').innerHTML='<div class="cluster-list"><button class="detail-close" aria-label="關閉鄰近景點">×</button><h2>鄰近景點 '+items.length+' 處</h2><p class="cluster-hint">點選下方景點查看楓況</p>'+items.map(p=>`<button class="cluster-place" data-place="${escapeHTML(p.id)}">${escapeHTML(p.name)}<br><small>${escapeHTML(p.city)}</small></button>`).join('')+'</div>';
  $('.detail-close').onclick=()=>{$('#detail').hidden=true;};
 }
+// Dedicated sheet grip: dragging the handle never steals scroll gestures from the content.
+(function setupMobileSheet(){
+ const panel=$('#detail');let startY=0,lastY=0,active=false;
+ panel.addEventListener('pointerdown',e=>{
+  if(innerWidth>700||!e.target.closest('.sheet-grip'))return;
+  active=true;startY=lastY=e.clientY;
+  try{e.target.closest('.sheet-grip').setPointerCapture(e.pointerId);}catch{}
+ });
+ panel.addEventListener('pointermove',e=>{if(active)lastY=e.clientY;});
+ panel.addEventListener('pointerup',e=>{
+  if(!active)return;active=false;
+  const delta=e.clientY-startY;
+  if(delta < -35)panel.classList.add('sheet-expanded');
+  else if(delta > 35){panel.classList.remove('sheet-expanded');panel.scrollTop=0;}
+  else panel.classList.toggle('sheet-expanded');
+ });
+ panel.addEventListener('pointercancel',()=>{active=false;});
+})();
 function markerAction(e){const el=e.target.closest('[data-cluster],[data-id]');if(!el)return;if(el.hasAttribute('data-cluster'))openCluster(Number(el.dataset.cluster));else choose(el.dataset.id);}
 $('#detail').addEventListener('click',e=>{const p=e.target.closest('[data-place]');if(p)choose(p.dataset.place);});
 function foliageBlock(p){
@@ -343,8 +361,9 @@ function deduplicateDetailLinks(root){
 function renderDetail(){
  let p=places.find(p=>p.id===selected);
  if(!p){$('#detail').innerHTML='';$('#detail').hidden=true;return;}
- $('#detail').hidden=false;$('#detail').scrollTop=0;const s=stage(p);
+ $('#detail').hidden=false;$('#detail').classList.remove('sheet-expanded');$('#detail').scrollTop=0;const s=stage(p);
  $('#detail').innerHTML=`<div class="detail-head"><button class="detail-close" aria-label="關閉景點資訊">×</button><h2>${escapeHTML(p.name)}</h2><p>${escapeHTML(p.city)}</p><nav class="detail-nav" aria-label="景點資訊區塊"><button data-section="latest-panel">楓況與分享</button><button data-section="season-panel">歷年時間</button><button data-section="species-panel">品種</button><button data-section="location-disclosure">官方資訊</button></nav></div><div class="detail-body">${latestBlock(p)}<section class="season-panel"><h3>歷年賞楓時間</h3><p class="reference-note">${escapeHTML(p.dates||'尚無資料')}</p>${historicalPhotosBlock(p)}</section>${relatedRoutesBlock(p)}${speciesBlock(p)}<section class="location-disclosure"><h3>位置與交通</h3><div class="location-info">${officialInfoLink(p)}${navigationLink(p)}${liveCamerasBlock(p)}</div></section><button class="save" type="button">${saved.has(p.id)?'★ 已收藏':'☆ 加入收藏'}</button></div>`;
+ if(innerWidth<=700){$('#detail').querySelector('.detail-head')?.insertAdjacentHTML('afterbegin','<button type="button" class="sheet-grip" aria-label="向上拖曳展開景點資訊，向下拖曳收合"><span></span></button>');}
  $('#detail').scrollTop=0;
  deduplicateDetailLinks($('#detail'));
  $('#detail').querySelectorAll('[data-section]').forEach(button=>{button.onclick=()=>{const target=$('#detail').querySelector('.'+button.dataset.section);if(target){if(target.tagName==='DETAILS')target.open=true;const head=$('#detail').querySelector('.detail-head');const container=$('#detail');container.scrollTop=Math.max(0,target.getBoundingClientRect().top-container.getBoundingClientRect().top+container.scrollTop-head.offsetHeight-10);}};});
