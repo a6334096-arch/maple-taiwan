@@ -62,8 +62,8 @@ function orderPlaces(data){
 }
 const visible=()=>orderPlaces(places.filter(matchesFilters));
 function syncFilterUI(){
- $('[data-filter=best]').textContent=listMode==='seasonal'?'季節內':'近期盛期';
- $('#mode-note').textContent=listMode==='seasonal'?'依歷年月份找景點；葉色依官方紀錄，虛線表示舊紀錄。':'葉色依最後官方紀錄；超過 14 天標示舊紀錄，不列入近期盛期。';
+ $('[data-filter=best]').textContent=listMode==='seasonal'?'季節內':'適宜月份';
+ $('#mode-note').textContent=listMode==='seasonal'?'依歷年月份找景點；葉色依官方紀錄，虛線表示舊紀錄。':'葉色依最後官方紀錄；超過 14 天標示舊紀錄，不列入適宜月份。';
  $('#clear-filters').hidden=!(query||region!=='all'||county!=='all'||leafType!=='all'||filter!=='all');
  $('#data-label').textContent=listMode==='seasonal'?'歷年月份':'近期紀錄';
  $('#sort-order').value=sortOrder;
