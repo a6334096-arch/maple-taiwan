@@ -196,7 +196,7 @@ function openCluster(index){
  });
  panel.addEventListener('pointercancel',()=>{active=false;});
 })();
-function markerAction(e){const el=e.target.closest('[data-cluster],[data-id]');if(!el)return;if(el.hasAttribute('data-cluster'))openCluster(Number(el.dataset.cluster));else choose(el.dataset.id);}
+function markerAction(e){if(e.type==='click'&&Date.now()<suppressMapTapUntil)return;const el=e.target.closest('[data-cluster],[data-id]');if(!el)return;if(el.hasAttribute('data-cluster'))openCluster(Number(el.dataset.cluster));else choose(el.dataset.id);}
 $('#detail').addEventListener('click',e=>{const p=e.target.closest('[data-place]');if(p)choose(p.dataset.place);});
 function foliageBlock(p){
  const o=p.foliage;
@@ -389,7 +389,7 @@ function choose(id){
 $('#list').onclick=e=>{let el=e.target.closest('[data-id]');if(el)choose(el.dataset.id);};$('#markers').onclick=markerAction;$('#markers').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();markerAction(e);}};
 $('#region').onchange=e=>{region=e.target.value;county='all';populateCounties();selected=null;render();};$('#county').onchange=e=>{county=e.target.value;selected=null;render();};
 $('#search').oninput=e=>{query=e.target.value.trim();render();};$('#month').onchange=e=>{month=e.target.value;loadPlaces();};$('.filters').onclick=e=>{let b=e.target.closest('[data-filter]');if(!b)return;filter=b.dataset.filter;document.querySelectorAll('[data-filter]').forEach(el=>el.classList.toggle('active',el===b));render();};$('#mobile-list').onclick=()=>{const open=$('#sidebar').classList.toggle('open');if(open){selected=null;renderDetail();}$('#mobile-list').textContent=open?'× 關閉清單':'☰ 景點清單';$('#mobile-list').setAttribute('aria-expanded',String(open));};
-const world=$('#map-world'),svg=$('#map-svg');function transform() {
+const world=$('#map-world'),svg=$('#map-svg');function transform(updateMarkers=true) {
   const movement = 'translate(' + panX + ' ' + panY + ')';
   const center = 'translate(400 450)';
   const sizing = 'scale(' + scale + ')';
@@ -400,12 +400,12 @@ const world=$('#map-world'),svg=$('#map-svg');function transform() {
     movement + ' ' + center + ' ' + sizing + ' ' + restore
   );
 
-  renderMarkers();
+  if(updateMarkers)renderMarkers();
 };
 function zoom(f){fittedView=false;const before=scale;scale=Math.max(.4,Math.min(10,scale*f));panX*=scale/before;panY*=scale/before;transform();}$('#zoom-in').onclick=()=>zoom(1.2);$('#zoom-out').onclick=()=>zoom(1/1.2);$('#reset').onclick=()=>{fitIsland();transform();};$('#map').onwheel=e=>{e.preventDefault();zoom(e.deltaY>0?1/1.08:1.08);};
-let pointers=new Map(),lastDistance=null,drag=null,moved=false;
+let pointers=new Map(),lastDistance=null,drag=null,moved=false,suppressMapTapUntil=0;
 function point(e){const p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;return p.matrixTransform(svg.getScreenCTM().inverse());}
-$('#map').onpointerdown=e=>{if(e.target.closest('.marker'))return;fittedView=false;const p=point(e);pointers.set(e.pointerId,p);e.currentTarget.setPointerCapture(e.pointerId);drag=p;moved=false;};$('#map').onpointermove=e=>{if(!pointers.has(e.pointerId))return;const p=point(e);pointers.set(e.pointerId,p);if(pointers.size===2){const [a,b]=[...pointers.values()];const d=Math.hypot(a.x-b.x,a.y-b.y);if(lastDistance)zoom(d/lastDistance);lastDistance=d;drag=null;}else if(drag){panX=Math.max(-5000,Math.min(5000,panX+p.x-drag.x));panY=Math.max(-5000,Math.min(5000,panY+p.y-drag.y));drag=p;transform();moved=true;}};function end(e){pointers.delete(e.pointerId);lastDistance=null;drag=pointers.size===1?[...pointers.values()][0]:null;}$('#map').onpointerup=end;$('#map').onpointercancel=end;$('#map').onkeydown=e=>{if(e.target!==$('#map'))return;if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','+','-','0'].includes(e.key)){e.preventDefault();if(e.key==='+')zoom(1.2);else if(e.key==='-')zoom(1/1.2);else if(e.key==='0')$('#reset').click();else{panX+=e.key==='ArrowLeft'?25:e.key==='ArrowRight'?-25:0;panY+=e.key==='ArrowUp'?25:e.key==='ArrowDown'?-25:0;transform();}}};
+$('#map').onpointerdown=e=>{if(e.button!==0&&e.pointerType==='mouse')return;fittedView=false;const p=point(e);pointers.set(e.pointerId,p);e.currentTarget.setPointerCapture(e.pointerId);drag=p;moved=false;};$('#map').onpointermove=e=>{if(!pointers.has(e.pointerId))return;const p=point(e);pointers.set(e.pointerId,p);if(pointers.size===2){const [a,b]=[...pointers.values()];const d=Math.hypot(a.x-b.x,a.y-b.y);if(lastDistance)zoom(d/lastDistance);lastDistance=d;drag=null;}else if(drag){panX=Math.max(-5000,Math.min(5000,panX+p.x-drag.x));panY=Math.max(-5000,Math.min(5000,panY+p.y-drag.y));drag=p;transform(false);moved=true;}};function end(e){pointers.delete(e.pointerId);lastDistance=null;drag=pointers.size===1?[...pointers.values()][0]:null;if(!pointers.size){if(moved){suppressMapTapUntil=Date.now()+350;renderMarkers();}moved=false;}}$('#map').onpointerup=end;$('#map').onpointercancel=end;$('#map').onkeydown=e=>{if(e.target!==$('#map'))return;if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','+','-','0'].includes(e.key)){e.preventDefault();if(e.key==='+')zoom(1.2);else if(e.key==='-')zoom(1/1.2);else if(e.key==='0')$('#reset').click();else{panX+=e.key==='ArrowLeft'?25:e.key==='ArrowRight'?-25:0;panY+=e.key==='ArrowUp'?25:e.key==='ArrowDown'?-25:0;transform();}}};
 
 let fittedView=false;
 function fitIsland(){
