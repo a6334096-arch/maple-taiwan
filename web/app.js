@@ -137,9 +137,9 @@ function renderMarkers(){
  const unit=matrix?Math.hypot(matrix.a,matrix.b):1;
  const markerScale=1/(scale*unit);
  const phone=window.matchMedia('(max-width:700px)').matches;
- markerGroups=scale>1.15?data.map(p=>({items:[p],x:p.x,y:p.y})):groupNearbyPlaces(data,scale*unit,phone?48:64);
+ markerGroups=phone?data.map(p=>({items:[p],x:p.x,y:p.y})):scale>1.15?data.map(p=>({items:[p],x:p.x,y:p.y})):groupNearbyPlaces(data,scale*unit,64);
  // At high zoom, spread coincident pins instead of permanently clustering them.
- if(scale>1.15){
+ if(phone||scale>1.15){
   const placed=[];
   for(const g of markerGroups){
    const originalX=g.x,originalY=g.y;
@@ -165,6 +165,48 @@ function renderMarkers(){
  $('#map-location').textContent=chosen?chosen.city:(county!=='all'?county:region!=='all'?region+'景點':'台灣賞楓地圖');
 }
 function renderPlaceLabels(data){
+ // Mobile map labels use CSS-pixel geometry and prioritize place names over administrative labels.
+ if(window.matchMedia('(max-width:700px)').matches){
+  const counties=$('#county-labels'),towns=$('#town-labels'),markers=$('#markers');
+  counties.replaceChildren();towns.replaceChildren();
+  const m=svg.getScreenCTM(),unit=m?Math.hypot(m.a,m.b):1;
+  const rect=svg.getBoundingClientRect();
+  const obstacles=[...document.querySelectorAll('.map-controls,.legend,.map-toolbar')].filter(e=>e.getClientRects().length).map(e=>e.getBoundingClientRect());
+  const occupied=[];
+  const pos=(x,y)=>({x:m.a*((x-400)*scale+panX+400)+m.e,y:m.d*((y-450)*scale+panY+450)+m.f});
+  const centers=markerGroups.map(g=>pos(g.x,g.y));
+  const overlaps=(a,b,gap=4)=>a.left<b.right+gap&&a.right>b.left-gap&&a.top<b.bottom+gap&&a.bottom>b.top-gap;
+  const clear=b=>b.left>rect.left+5&&b.right<rect.right-5&&b.top>rect.top+5&&b.bottom<rect.bottom-5&&!obstacles.some(o=>overlaps(b,o))&&!occupied.some(o=>overlaps(b,o,7))&&!centers.some(c=>overlaps(b,{left:c.x-21,right:c.x+21,top:c.y-21,bottom:c.y+21},3));
+  const add=(layer,name,x,y,kind,options)=>{
+   const p=pos(x,y),width=Math.min(208,Math.max(34,name.length*(kind==='place'?13:12)+12)),height=22;
+   for(const [dx,dy] of options){
+    const box={left:p.x+dx-width/2,right:p.x+dx+width/2,top:p.y+dy-height/2,bottom:p.y+dy+height/2};
+    if(!clear(box))continue;
+    occupied.push(box);
+    const el=document.createElementNS('http://www.w3.org/2000/svg','g');
+    el.setAttribute('class',kind==='place'?'place-map-label':kind==='county'?'county-label':'town-label');
+    el.setAttribute('transform',`translate(${x} ${y}) scale(${1/(scale*unit)}) translate(${dx} ${dy})`);
+    el.setAttribute('aria-hidden','true');
+    const t=document.createElementNS('http://www.w3.org/2000/svg','text');
+    t.setAttribute('text-anchor','middle');t.setAttribute('dominant-baseline','middle');
+    t.textContent=name;el.appendChild(t);layer.appendChild(el);return true;
+   }
+   return false;
+  };
+  // Place names are primary: do not allow administrative labels to cover them.
+  for(const g of markerGroups){
+   if(g.items.length!==1)continue;
+   const p=g.items[0];if(p.id===selected)continue;
+   add(markers,p.name.length>18?p.name.slice(0,17)+'…':p.name,g.x,g.y,'place',[[0,41],[0,-41],[110,0],[-110,0]]);
+  }
+  if(scale>=2){
+   const groups=new Map();
+   for(const p of data){const town=p.city.split(/[・／]/).map(x=>x.trim()).find(x=>/[鄉鎮區]$/.test(x));if(!town)continue;const arr=groups.get(town)||[];arr.push(p);groups.set(town,arr);}
+   for(const [name,items] of groups){const x=items.reduce((a,p)=>a+p.x,0)/items.length,y=items.reduce((a,p)=>a+p.y,0)/items.length;add(towns,name,x,y,'town',[[0,-70],[0,70]]);}
+  }
+  return;
+ }
+
  const matrix=svg.getScreenCTM(),unit=matrix?Math.hypot(matrix.a,matrix.b):1;
  const labelUnit=innerWidth<=700?Math.max(unit,.01):1;
  const screen=(x,y)=>({x:matrix.a*((x-400)*scale+panX+400)+matrix.e,y:matrix.d*((y-450)*scale+panY+450)+matrix.f});
