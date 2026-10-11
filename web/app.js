@@ -155,7 +155,7 @@ function renderPlaceLabels(data){
  const countyLayer=$('#county-labels'),townLayer=$('#town-labels'),markerLayer=$('#markers');
  countyLayer.replaceChildren();townLayer.replaceChildren();
  // Use the actual rendered SVG matrix; it already includes the pan and zoom transform.
- const mapGroup=$('#map-content')||$('#map-transform')||$('#map-svg');
+ const mapGroup=world;
  const matrix=mapGroup.getScreenCTM(),unit=matrix?Math.hypot(matrix.a,matrix.b):1;
  const rect=svg.getBoundingClientRect();
  const overlayRects=[...document.querySelectorAll('.map-controls,.legend,.map-toolbar')].filter(el=>el.getClientRects().length).map(el=>el.getBoundingClientRect());
