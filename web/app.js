@@ -43,7 +43,7 @@ const todayTaipei=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Taipei',year:'
 document.querySelector('#travel-date').value=todayTaipei.slice(0,7);
 const normalize=v=>String(v).replace(/台/g,'臺').replace(/\s+/g,'');
 let month=document.querySelector('#month').value,filter='all',query='',selected=null,scale=1.1,panX=20,panY=-24;
-const $=s=>document.querySelector(s),stage=p=>dataMode==='seasonal'?(p.season_in===true?{name:'參考季節內',color:'#d39b31',bg:'#faf0d6'}:p.season_in===false?{name:'非參考月份',color:'#9ca29d',bg:'#edf0eb'}:{name:'月份待確認',color:'#9ca29d',bg:'#edf0eb'}):stages[p.status]||unknownStage;
+const $=s=>document.querySelector(s),stage=p=>leafStage(p);
 function matchesLeaf(p){
  const names=p.species||[];
  return leafType==='all'||(leafType==='beech'&&isBeech(p))||(leafType==='maple'&&names.some(n=>/楓|槭/.test(n)))||(leafType==='conifer'&&names.some(n=>/落羽松|水杉/.test(n)));
