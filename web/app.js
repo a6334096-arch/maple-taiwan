@@ -482,19 +482,26 @@ function renderDetail(){
 
 function positionMobilePlaceCard(){
  if(innerWidth>700||!selected)return;
- const card=document.querySelector('#detail');
- const marker=[...document.querySelectorAll('#markers [data-id]')].find(el=>el.dataset.id===selected);
- const map=document.querySelector('#map');
- if(!card||card.hidden||!marker||!map)return;
- const m=marker.getBoundingClientRect(),bounds=map.getBoundingClientRect();
- const midX=m.left+m.width/2,midY=m.top+m.height/2;
- const topLimit=Math.max(bounds.top+12,95),bottomLimit=Math.min(bounds.bottom-10,innerHeight-12);
- const availableBelow=bottomLimit-(midY+28),availableAbove=(midY-28)-topLimit;
- const below=availableBelow>=180||availableBelow>=availableAbove;
- const space=Math.max(110,below?availableBelow:availableAbove);
- const height=Math.min(card.classList.contains('sheet-expanded')?410:250,space);
- const top=below?midY+28:midY-28-height;
- const left=Math.max(8,Math.min(innerWidth-card.offsetWidth-8,midX-card.offsetWidth/2));
+ const card=document.querySelector('#detail'),map=document.querySelector('#map');
+ if(!card||card.hidden||!map)return;
+ // Use the actual selected geographical point, even when markers are clustered.
+ const p=places.find(item=>item.id===selected);
+ const svgPoint=svg.createSVGPoint();
+ svgPoint.x=p.x;svgPoint.y=p.y;
+ const screen=svgPoint.matrixTransform(svg.getScreenCTM());
+ const bounds=map.getBoundingClientRect();
+ const markerX=screen.x,markerY=screen.y;
+ const margin=12,gap=16;
+ const cardWidth=Math.min(340,innerWidth-24);
+ const topLimit=Math.max(bounds.top+8,85);
+ const bottomLimit=Math.min(bounds.bottom-8,innerHeight-8);
+ const above=markerY-gap-topLimit,below=bottomLimit-markerY-gap;
+ const desired=card.classList.contains('sheet-expanded')?Math.min(410,innerHeight*.60):Math.min(245,innerHeight*.38);
+ const showBelow=below>=desired || below>=above;
+ const room=Math.max(90,showBelow?below:above);
+ const height=Math.min(desired,room);
+ const top=showBelow?markerY+gap:markerY-gap-height;
+ const left=Math.max(12,Math.min(innerWidth-cardWidth-12,markerX-cardWidth/2));
  card.style.setProperty('--mobile-card-top',Math.round(top)+'px');
  card.style.setProperty('--mobile-card-left',Math.round(left)+'px');
  card.style.setProperty('--mobile-card-height',Math.round(height)+'px');
@@ -528,6 +535,7 @@ const world=$('#map-world'),svg=$('#map-svg');function transform(updateMarkers=t
   );
 
   if(updateMarkers)renderMarkers();
+ if(innerWidth<=700&&selected)requestAnimationFrame(positionMobilePlaceCard);
 };
 function zoom(f){
  fittedView=false;
