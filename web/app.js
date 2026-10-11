@@ -186,7 +186,7 @@ function blogPhotosBlock(p){
 }
 function latestBlock(p){
  const observation=p.foliage?foliageBlock(p).replace(/<h3>.*?<\/h3>/,''):'';
- const shares=photosBlock(p).replace(/<div class="panel-title">.*?<\/div>/,'').replace(/<strong>最近的楓況<\/strong>/g,'<strong>楓況資料</strong>');
+ const shares=photosBlock(p).replace(/<div class="panel-title">.*?<\/div>/,'').replace(/<strong>最近的楓況<\/strong>/g,'').replace(/<strong>楓況資料<\/strong>/g,'').replace(/<p class="share-note">請查看原始貼文日期；Facebook 可能需要登入。<\/p>/g,'<p class="share-note">請以官方貼文日期與現場公告為準。</p>');
  return `<section class="latest-panel"><h3>近期楓況與分享</h3>${observation}${shares}${blogPhotosBlock(p)}</section>`;
 }
 function viewingAreasBlock(p,group){
