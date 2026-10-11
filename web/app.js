@@ -50,9 +50,10 @@ function matchesLeaf(p){
 }
 function matchesFilters(p){
  const text=p.name+p.city+p.category+(p.species||[]).join(' ')+(p.aliases||[]).join(' ');
- const peak=listMode==='seasonal'?p.season_in===true:foliageStage(p).name==='最佳觀賞';
- return normalize(text).includes(normalize(query))&&(region==='all'||p.region===region)&&(county==='all'||p.city.includes(county))&&matchesLeaf(p)&&(filter==='all'||filter==='best'&&peak||filter==='saved'&&saved.has(p.id));
-}
+ 
+const peak = listMode === 'seasonal'
+  ? p.season_in === true
+  : recencyRank(p) === 0 && p.foliage?.status === 2;
 function reportDate(p){return p.foliage?.observed_on||p.foliage?.reported_at||'';}
 function recencyRank(p){const o=p.foliage;if(!o||!Number.isInteger(o.status)||!stages[o.status])return 2;const date=reportDate(p);if(!/^\d{4}-\d{2}-\d{2}$/.test(date))return 2;const age=Math.floor((Date.now()-Date.parse(date+'T00:00:00+08:00'))/86400000);return !Number.isFinite(age)||age<0?2:age<=14?0:1;}
 function recencyLabel(p){return ['近期楓況','歷史楓況','尚無資料'][recencyRank(p)];}
