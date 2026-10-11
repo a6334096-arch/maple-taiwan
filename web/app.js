@@ -499,7 +499,7 @@ function positionPlaceCard(){
   const width=Math.min(320,innerWidth-24);
   const topLimit=Math.max(bounds.top+8,80),bottomLimit=Math.min(bounds.bottom-8,innerHeight-8);
   const above=point.y-gap-topLimit,below=bottomLimit-point.y-gap;
-  const desired=card.classList.contains('sheet-expanded')?Math.min(400,innerHeight*.55):225;
+  const desired=card.classList.contains('sheet-expanded')?Math.min(400,innerHeight*.55):Math.min(265,innerHeight*.40);
   const useBelow=below>=desired||(below>=above&&below>=150);
   const height=Math.max(100,Math.min(desired,useBelow?below:above));
   const top=Math.max(topLimit,Math.min(bottomLimit-height,useBelow?point.y+gap:point.y-gap-height));
@@ -508,9 +508,27 @@ function positionPlaceCard(){
   set('width',width+'px');set('height',Math.round(height)+'px');set('max-height',Math.round(height)+'px');
  }else{
   const width=Math.min(340,Math.max(280,bounds.width*.34));
-  const toRight=bounds.right-point.x>=width+gap||bounds.right-point.x>=point.x-bounds.left;
-  const left=Math.max(bounds.left+12,Math.min(bounds.right-width-12,toRight?point.x+gap:point.x-gap-width));
-  const top=Math.max(bounds.top+12,Math.min(bounds.bottom-180,point.y-40));
+  // The selected marker has a floating name label extending about 70px sideways.
+  // Keep the detail card clear of both that label and the map legend.
+  const labelWidth=Math.max(140,p.name.length*12+24,p.city.length*10+24);
+  const safeGap=Math.max(32,labelWidth/2+14);
+  const rightRoom=bounds.right-point.x-safeGap;
+  const leftRoom=point.x-bounds.left-safeGap;
+  const toRight=rightRoom>=width||(rightRoom>=leftRoom&&rightRoom>width*.65);
+  const candidate=toRight?point.x+safeGap:point.x-safeGap-width;
+  let left=Math.max(bounds.left+12,Math.min(bounds.right-width-12,candidate));
+  let top=Math.max(bounds.top+12,Math.min(bounds.bottom-180,point.y-40));
+  const legend=map.querySelector('.legend');
+  if(legend){
+   const box=legend.getBoundingClientRect();
+   const intersects=(x,y)=>x<box.right+12&&x+width>box.left-12&&y<box.bottom+12&&y+Math.min(card.scrollHeight||330,500)>box.top-12;
+   if(intersects(left,top)){
+    const alternate=toRight?point.x-safeGap-width:point.x+safeGap;
+    const altLeft=Math.max(bounds.left+12,Math.min(bounds.right-width-12,alternate));
+    if(!intersects(altLeft,top))left=altLeft;
+    else top=Math.max(bounds.top+12,Math.min(top,box.top-Math.min(card.scrollHeight||330,500)-16));
+   }
+  }
   set('position','absolute');set('left',Math.round(left-bounds.left)+'px');
   set('top',Math.round(top-bounds.top)+'px');set('width',Math.round(width)+'px');
   set('height','auto');set('max-height','min(500px, calc(100% - 24px))');
