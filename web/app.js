@@ -117,7 +117,7 @@ function groupNearbyPlaces(data,pixelsPerUnit,minimumGap){
  const groups=[];
  for(const p of data){
   const nearby=groups.find(g=>g.items.every(q=>Math.hypot(q.x-p.x,q.y-p.y)*pixelsPerUnit<minimumGap));
-  if(nearby){nearby.items.push(p);nearby.x=nearby.items.reduce((sum,q)=>sum+q.x,0)/nearby.items.length;nearby.y=nearby.items.reduce((sum,q)=>sum+q.y,0)/nearby.items.length;}
+  if(nearby){nearby.items.push(p);/* Anchor cluster to its first real destination, never an averaged off-site position. */}
   else groups.push({items:[p],x:p.x,y:p.y});
  }
  return groups;
@@ -137,11 +137,8 @@ function renderMarkers(){
  // The selected destination must never remain hidden inside a nearby-place cluster.
  const selectedPlace=data.find(p=>p.id===selected);
  markerGroups=groupNearbyPlaces(data.filter(p=>p.id!==selected),scale*unit,phone?48:58);
- // While details are open, reserve a clear 66px focus area around the selected pin.
- // Nearby destinations stay in the list and return to the map when selection closes.
+ // Keep nearby destinations visible when selecting another place; selected pin renders last.
  if(selectedPlace){
-  const clearRadius=phone?54:66;
-  markerGroups=markerGroups.filter(g=>Math.hypot(g.x-selectedPlace.x,g.y-selectedPlace.y)*scale*unit>=clearRadius);
   markerGroups.push({items:[selectedPlace],x:selectedPlace.x,y:selectedPlace.y});
  }
  $('#markers').innerHTML=markerGroups.map((g,i)=>{
