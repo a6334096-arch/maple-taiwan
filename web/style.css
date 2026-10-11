@@ -450,3 +450,52 @@ body {
     border-radius: 16px;
   }
 }
+
+/* Mobile detail panel and marker legibility refinements */
+@media (max-width: 700px) {
+  .detail {
+    top: 68px;
+    bottom: 8px;
+    max-height: calc(100dvh - 76px);
+    overscroll-behavior: contain;
+  }
+  .detail-head {
+    padding: 13px 14px 10px;
+  }
+  .detail h2 {
+    font-size: 19px;
+    margin: 3px 0 3px;
+  }
+  .detail-nav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 5px;
+    margin-top: 9px;
+    overflow: visible;
+  }
+  .detail-nav button {
+    min-width: 0;
+    padding: 6px 5px;
+    font-size: 12px;
+    line-height: 1.3;
+    border-radius: 9px;
+  }
+  .detail-body {
+    padding: 12px 14px 18px;
+  }
+}
+.marker .cluster-badge circle {
+  fill: #fffdf7;
+  stroke: #637d67;
+  stroke-width: 1.2;
+}
+.marker.selected .cluster-badge circle {
+  stroke: #304f40;
+  stroke-width: 1.5;
+}
+.marker .cluster-count {
+  font-size: 11px;
+  font-weight: 700;
+  fill: #253c32;
+  stroke: none;
+}
