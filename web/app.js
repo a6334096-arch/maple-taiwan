@@ -489,7 +489,7 @@ function positionMobilePlaceCard(){
  const p=places.find(item=>item.id===selected);
  const svgPoint=svg.createSVGPoint();
  svgPoint.x=p.x;svgPoint.y=p.y;
- const screen=svgPoint.matrixTransform(svg.getScreenCTM());
+ const screen=svgPoint.matrixTransform(world.getScreenCTM());
  const bounds=map.getBoundingClientRect();
  const markerX=screen.x,markerY=screen.y;
  const margin=12,gap=16;
@@ -513,12 +513,12 @@ function positionDesktopPlaceCard(){
  const p=places.find(item=>item.id===selected);
  if(!card||card.hidden||!map||!p)return;
  const pt=svg.createSVGPoint();pt.x=p.x;pt.y=p.y;
- const screen=pt.matrixTransform(svg.getScreenCTM()),bounds=map.getBoundingClientRect();
+ const screen=pt.matrixTransform(world.getScreenCTM()),bounds=map.getBoundingClientRect();
  const width=Math.min(360,Math.max(260,bounds.width*.37));
  const leftSpace=screen.x-bounds.left,rightSpace=bounds.right-screen.x;
  const onRight=rightSpace>=width+34||rightSpace>=leftSpace;
  const left=Math.max(bounds.left+12,Math.min(bounds.right-width-12,onRight?screen.x+28:screen.x-width-28));
- const top=Math.max(bounds.top+12,Math.min(bounds.bottom-220,screen.y-45));
+ const top=Math.max(bounds.top+12,Math.min(bounds.bottom-170,screen.y-45));
  card.style.setProperty('--desktop-card-left',Math.round(left-bounds.left)+'px');
  card.style.setProperty('--desktop-card-top',Math.round(top-bounds.top)+'px');
  card.style.setProperty('--desktop-card-width',Math.round(width)+'px');
@@ -531,9 +531,9 @@ function choose(id){
  const mapRect=svg.getBoundingClientRect(),card=$('#detail').getBoundingClientRect();
  const target=svg.createSVGPoint();
  // Center within the visible map area to the left of the desktop detail panel.
- const freeRight=innerWidth>=1051&&card.left>mapRect.left?Math.min(card.left,mapRect.right):mapRect.right;
+ const freeRight=mapRect.right;
  target.x=mapRect.left+(freeRight-mapRect.left)/2;
- target.y=innerWidth<=1050&&card.top>mapRect.top?mapRect.top+(card.top-mapRect.top)/2:mapRect.top+mapRect.height/2;
+ target.y=mapRect.top+mapRect.height/2;
  const q=target.matrixTransform(svg.getScreenCTM().inverse());
  panX=q.x-400-(p.x-400)*scale;panY=q.y-450-(p.y-450)*scale;transform();requestAnimationFrame(()=>{positionMobilePlaceCard();positionDesktopPlaceCard();});
 }
