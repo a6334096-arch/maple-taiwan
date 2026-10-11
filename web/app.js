@@ -169,50 +169,65 @@ function renderPlaceLabels(data){
  const point=(x,y)=>{const p=svg.createSVGPoint();p.x=x;p.y=y;return p.matrixTransform(matrix);};
  const pins=markerGroups.map(g=>point(g.x,g.y));
  const hit=(a,b,p=5)=>a.left<b.right+p&&a.right>b.left-p&&a.top<b.bottom+p&&a.bottom>b.top-p;
- // County/town labels are anchored to the locations represented in our dataset.
- // Keep text at a stable on-screen size and avoid map controls, pins and details.
- const placeGroups=new Map();
- for(const p of data){
-  const parts=String(p.city||'').split('・').map(x=>x.trim());
-  const county=parts[0],town=(parts[1]||'').split('／')[0].trim();
-  if(!county)continue;
-  for(const [key,label,kind] of [[county,county,'county'],[county+'|'+town,town,'town']]){
-   if(!label)continue;
-   if(!placeGroups.has(key))placeGroups.set(key,{label,kind,items:[]});
-   placeGroups.get(key).items.push(p);
-  }
- }
+ // Fixed county anchors use geographic coordinates, not averages of sightseeing spots.
+ // Averaging attractions pushed 臺南市 north into 嘉義縣; that is not a valid county centroid.
+ // Projection calibrated to the same lon/lat-to-SVG coordinates used by places.json.
+ const countyCenters={
+  '臺北市':[121.54,25.04],'新北市':[121.39,24.99],
+  '桃園市':[121.22,24.96],'新竹縣':[121.08,24.69],
+  '苗栗縣':[120.85,24.52],'臺中市':[120.79,24.19],
+  '南投縣':[120.94,23.94],'嘉義縣':[120.46,23.49],
+  '臺南市':[120.30,23.11],'宜蘭縣':[121.57,24.69],
+  '花蓮縣':[121.41,23.77]
+ };
+ const countyKeys=new Set(data.map(p=>String(p.city||'').split('・')[0].trim()));
  const mapDetail=$('#detail');
  if(mapDetail&&!mapDetail.hidden)overlays.push(mapDetail.getBoundingClientRect());
- const addAreaLabel=(g)=>{
-  const x=g.items.reduce((a,p)=>a+p.x,0)/g.items.length;
-  const y=g.items.reduce((a,p)=>a+p.y,0)/g.items.length;
-  const pos=point(x,y),font=g.kind==='county'?14:12;
-  const w=g.label.length*(font+1)+18,h=font+12;
-  for(const [dx,dy] of [[0,-32],[0,35],[-42,0],[42,0],[0,-55],[0,58]]){
+ const addAreaLabel=(label,kind,x,y)=>{
+  const pos=point(x,y),font=kind==='county'?14:12;
+  const w=[...label].length*(font+1)+18,h=font+12;
+  // Never relocate a geographic name by dozens of pixels into a neighboring county.
+  for(const [dx,dy] of [[0,0],[0,-9],[0,9],[-9,0],[9,0]]){
    const box={left:pos.x+dx-w/2,right:pos.x+dx+w/2,top:pos.y+dy-h/2,bottom:pos.y+dy+h/2};
    if(box.left<bounds.left+8||box.right>bounds.right-8||box.top<bounds.top+8||box.bottom>bounds.bottom-8)continue;
    if(overlays.some(o=>hit(box,o,4))||occupied.some(o=>hit(box,o,7)))continue;
    if(pins.some(q=>hit(box,{left:q.x-23,right:q.x+23,top:q.y-23,bottom:q.y+23},3)))continue;
    occupied.push(box);
    const group=document.createElementNS('http://www.w3.org/2000/svg','g');
-   group.setAttribute('class','area-map-label '+(g.kind==='county'?'area-county':'area-town'));
+   group.setAttribute('class','area-map-label '+(kind==='county'?'area-county':'area-town'));
    group.setAttribute('transform',`translate(${x} ${y}) scale(${1/px}) translate(${dx} ${dy})`);
    group.setAttribute('pointer-events','none');
-   const label=document.createElementNS('http://www.w3.org/2000/svg','text');
-   label.setAttribute('text-anchor','middle');
-   label.setAttribute('dominant-baseline','middle');
-   label.textContent=g.label;
-   group.appendChild(label);
-   (g.kind==='county'?counties:towns).appendChild(group);
+   const text=document.createElementNS('http://www.w3.org/2000/svg','text');
+   text.setAttribute('text-anchor','middle');
+   text.setAttribute('dominant-baseline','middle');
+   text.textContent=label;
+   group.appendChild(text);
+   (kind==='county'?counties:towns).appendChild(group);
    return;
   }
  };
  if(px>=.55){
-  [...placeGroups.values()].filter(g=>g.kind==='county').sort((a,b)=>b.items.length-a.items.length).forEach(addAreaLabel);
+  for(const [county,[lon,lat]] of Object.entries(countyCenters)){
+   if(!countyKeys.has(county))continue;
+   addAreaLabel(county,'county',(lon-118.703)*174.6,(26.013-lat)*190.8);
+  }
  }
  if(px>=1.05){
-  [...placeGroups.values()].filter(g=>g.kind==='town').sort((a,b)=>b.items.length-a.items.length).forEach(addAreaLabel);
+  const townGroups=new Map();
+  for(const p of data){
+   const [county,townRaw]=String(p.city||'').split('・').map(x=>x.trim());
+   const town=(townRaw||'').split('／')[0].trim();
+   if(!town)continue;
+   const key=county+'|'+town;
+   if(!townGroups.has(key))townGroups.set(key,[]);
+   townGroups.get(key).push(p);
+  }
+  for(const [key,items] of townGroups){
+   // A verified spot coordinate is within its town; unlike county centroids,
+   // town names should never be moved to the mean of remote attractions.
+   const p=items[0];
+   addAreaLabel(key.split('|')[1],'town',p.x,p.y);
+  }
  }
  // On overview show symbols only; names progressively appear as the user zooms.
  if(px<.75)return;
