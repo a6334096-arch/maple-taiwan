@@ -499,7 +499,10 @@ function positionPlaceCard(){
   const width=Math.min(320,innerWidth-24);
   const topLimit=Math.max(bounds.top+8,80),bottomLimit=Math.min(bounds.bottom-8,innerHeight-8);
   const above=point.y-gap-topLimit,below=bottomLimit-point.y-gap;
-  const desired=card.classList.contains('sheet-expanded')?Math.min(440,innerHeight*.62):Math.min(365,Math.max(285,card.scrollHeight+12));
+  const expanded=card.classList.contains('sheet-expanded');
+  // Let the collapsed card hug its real content instead of reserving 285px.
+  // Expanded content remains capped and scrolls inside the popover.
+  const desired=expanded?Math.min(440,innerHeight*.62):Math.min(365,Math.max(170,card.scrollHeight));
   const useBelow=below>=desired||(below>=above&&below>=180);
   const height=Math.max(100,Math.min(desired,useBelow?below:above));
   const top=Math.max(topLimit,Math.min(bottomLimit-height,useBelow?point.y+gap:point.y-gap-height));
