@@ -616,3 +616,38 @@ body {
     text-align:left;
   }
 }
+
+/* Mobile reading polish: consistent, centered close controls and tighter sections. */
+@media (max-width:700px) {
+  .forecast-heading { align-items:center; }
+  .forecast-heading #close-list,
+  .detail .detail-close {
+    box-sizing:border-box;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex:0 0 36px;
+    width:36px;
+    height:36px;
+    min-width:36px;
+    min-height:36px;
+    padding:0;
+    margin:0;
+    border:1px solid var(--line);
+    border-radius:50%;
+    background:#fffdf7;
+    color:var(--ink);
+    font-family:Arial,sans-serif;
+    font-size:23px;
+    font-weight:400;
+    line-height:1;
+    text-align:center;
+    cursor:pointer;
+  }
+  .detail .detail-close { top:12px;right:12px; }
+  .detail .season-panel { margin-top:14px;padding-top:14px; }
+  .detail .historical-photos { margin-top:14px;padding-top:14px; }
+  .detail .season-panel .historical-photos { margin-top:12px;padding-top:0; }
+  .detail .foliage-panel { margin-top:14px; }
+  .detail .latest-panel { margin-bottom:12px; }
+}
