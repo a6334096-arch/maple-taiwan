@@ -813,3 +813,22 @@ body {
   max-height:76dvh!important;
  }
 }
+
+/* Mobile: pin detail to the lower viewport, independent of map SVG zoom. */
+@media screen and (max-width:700px){
+ section.map-area > #detail.detail:not([hidden]):has(> .detail-head){
+   position:fixed!important;
+   inset:auto 10px calc(78px + env(safe-area-inset-bottom)) 10px!important;
+   width:auto!important;
+   height:min(32dvh,260px)!important;
+   max-height:min(32dvh,260px)!important;
+   min-height:0!important;
+   transform:none!important;
+   z-index:1000!important;
+   overflow-y:auto!important;
+ }
+ section.map-area > #detail.detail.sheet-expanded:not([hidden]):has(> .detail-head){
+   height:min(70dvh,600px)!important;
+   max-height:min(70dvh,600px)!important;
+ }
+}
