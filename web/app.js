@@ -113,16 +113,12 @@ $('.forecast-tabs').onclick=e=>{const b=e.target.closest('[data-list-mode]');if(
 $('#close-list').onclick=()=>{if($('#sidebar').classList.contains('open'))$('#mobile-list').click();};
 let markerGroups=[];
 function groupNearbyPlaces(data,pixelsPerUnit,minimumGap){
- const groups=[];const remaining=new Set(data);
- for(const seed of data){
-  if(!remaining.delete(seed))continue;
-  const items=[seed];
-  // Bound the whole group, rather than chaining neighbours across Taiwan.
-  // Every pair must be close, and broad regions remain separately selectable.
-  for(const p of remaining){
-   if(items.every(item=>Math.hypot(item.x-p.x,item.y-p.y)*pixelsPerUnit<minimumGap)){remaining.delete(p);items.push(p);}
-  }
-  groups.push({items,x:items.reduce((sum,p)=>sum+p.x,0)/items.length,y:items.reduce((sum,p)=>sum+p.y,0)/items.length});
+ // Stable screen-space grouping. Every place retains its original coordinates.
+ const groups=[];
+ for(const p of data){
+  const nearby=groups.find(g=>g.items.every(q=>Math.hypot(q.x-p.x,q.y-p.y)*pixelsPerUnit<minimumGap));
+  if(nearby){nearby.items.push(p);nearby.x=nearby.items.reduce((sum,q)=>sum+q.x,0)/nearby.items.length;nearby.y=nearby.items.reduce((sum,q)=>sum+q.y,0)/nearby.items.length;}
+  else groups.push({items:[p],x:p.x,y:p.y});
  }
  return groups;
 }
@@ -138,7 +134,7 @@ function renderMarkers(){
  const markerScale=1/(scale*unit);
  const phone=window.matchMedia('(max-width:700px)').matches;
  // Keep geographic positions exact. Cluster only at overview zoom; never push pins into the sea.
- markerGroups=groupNearbyPlaces(data,scale*unit,phone?42:54);
+ markerGroups=groupNearbyPlaces(data,scale*unit,phone?48:58);
  $('#markers').innerHTML=markerGroups.map((g,i)=>{
   const p=g.items[0],cluster=g.items.length>1,s=cluster?clusterStage(g.items):leafStage(p),sel=g.items.some(p=>p.id===selected);
   return `<g class="marker ${sel?'selected':''}" ${cluster?`data-cluster="${i}"`:`data-id="${escapeHTML(p.id)}"`} transform="translate(${g.x},${g.y})" tabindex="0" role="button" aria-label="${cluster?`${g.items.length} 處鄰近景點，${s.name}，點選展開`:escapeHTML(p.name)+'，地圖代表：'+escapeHTML(representativeSpecies(p)||'品種待確認')+'，'+s.name}"><title>${g.items.map(p=>escapeHTML(p.name)+'（'+escapeHTML(p.city)+'）｜代表：'+escapeHTML(representativeSpecies(p)||'品種待確認')+'｜'+leafStage(p).name).join('、')}</title><g transform="scale(${markerScale})"><circle class="marker-hit" r="22" fill="transparent" stroke="none"/><circle class="marker-disc" r="${phone?(cluster?16:14):(cluster?24:22)}" fill="${cluster?'#fffef8':s.bg}" ${s.stale?'stroke="#7b8175" stroke-width="1.5" stroke-dasharray="3 2"':''}/>${cluster?clusterLeaves(g.items):markerLeaf(p,s.color)}${cluster?`<g class="cluster-badge"><circle cx="11" cy="11" r="9"/><text class="cluster-count" x="11" y="14" text-anchor="middle">${g.items.length}</text></g>`:''}</g></g>`;
@@ -152,41 +148,43 @@ function renderMarkers(){
  $('#map-location').textContent=chosen?chosen.city:(county!=='all'?county:region!=='all'?region+'景點':'台灣賞楓地圖');
 }
 function renderPlaceLabels(data){
- const countyLayer=$('#county-labels'),townLayer=$('#town-labels'),markerLayer=$('#markers');
- countyLayer.replaceChildren();townLayer.replaceChildren();
- // Use the actual rendered SVG matrix; it already includes the pan and zoom transform.
- const mapGroup=world;
- const matrix=mapGroup.getScreenCTM(),unit=matrix?Math.hypot(matrix.a,matrix.b):1;
- const rect=svg.getBoundingClientRect();
- const overlayRects=[...document.querySelectorAll('.map-controls,.legend,.map-toolbar')].filter(el=>el.getClientRects().length).map(el=>el.getBoundingClientRect());
+ const counties=$('#county-labels'),towns=$('#town-labels'),markers=$('#markers');
+ counties.replaceChildren();towns.replaceChildren();
+ // Display labels only where there is room. SVG coordinates follow the map, not the viewport.
+ const matrix=world.getScreenCTM();
+ if(!matrix)return;
+ const px=Math.max(.001,Math.hypot(matrix.a,matrix.b));
+ const bounds=svg.getBoundingClientRect();
  const occupied=[];
- const centers=markerGroups.map(g=>{const pt=svg.createSVGPoint();pt.x=g.x;pt.y=g.y;const q=pt.matrixTransform(matrix);return {x:q.x,y:q.y};});
- const overlaps=(a,b,pad=5)=>a.left<b.right+pad&&a.right>b.left-pad&&a.top<b.bottom+pad&&a.bottom>b.top-pad;
- // At overview zoom labels are intentionally sparse; detailed labels appear as users zoom in.
- if(scale<1.35)return;
- const layerMatrix=$('#markers').getScreenCTM();
- const pixelUnit=layerMatrix?Math.hypot(layerMatrix.a,layerMatrix.b):unit;
+ const overlays=[...document.querySelectorAll('.map-controls,.legend,.map-toolbar')].filter(e=>e.getClientRects().length).map(e=>e.getBoundingClientRect());
+ const point=(x,y)=>{const p=svg.createSVGPoint();p.x=x;p.y=y;return p.matrixTransform(matrix);};
+ const pins=markerGroups.map(g=>point(g.x,g.y));
+ const hit=(a,b,p=5)=>a.left<b.right+p&&a.right>b.left-p&&a.top<b.bottom+p&&a.bottom>b.top-p;
+ // On overview show symbols only; names progressively appear as the user zooms.
+ if(px<.75)return;
  for(let i=0;i<markerGroups.length;i++){
-  const g=markerGroups[i];if(g.items.length!==1||g.items[0].id===selected)continue;
-  const name=g.items[0].name;
-  const p=centers[i],width=Math.min(240,Math.max(50,[...name].length*13+14)),height=21;
-  let choice=null;
-  for(const [dx,dy] of [[0,39],[0,-39],[95,0],[-95,0]]){
+  const g=markerGroups[i];
+  if(g.items.length!==1||g.items[0].id===selected)continue;
+  const name=g.items[0].name,p=pins[i];
+  const width=Math.min(240,Math.max(50,[...name].length*13+16)),height=24;
+  let offset=null;
+  for(const [dx,dy] of [[0,39],[0,-39],[105,0],[-105,0]]){
    const box={left:p.x+dx-width/2,right:p.x+dx+width/2,top:p.y+dy-height/2,bottom:p.y+dy+height/2};
-   if(box.left<rect.left+6||box.right>rect.right-6||box.top<rect.top+6||box.bottom>rect.bottom-6)continue;
-   if(overlayRects.some(o=>overlaps(box,o))||occupied.some(o=>overlaps(box,o,8)))continue;
-   if(centers.some((c,j)=>j!==i&&overlaps(box,{left:c.x-22,right:c.x+22,top:c.y-22,bottom:c.y+22},3)))continue;
-   choice={dx,dy,box};break;
+   if(box.left<bounds.left+6||box.right>bounds.right-6||box.top<bounds.top+6||box.bottom>bounds.bottom-6)continue;
+   if(overlays.some(o=>hit(box,o))||occupied.some(o=>hit(box,o,8)))continue;
+   if(pins.some((q,j)=>j!==i&&hit(box,{left:q.x-24,right:q.x+24,top:q.y-24,bottom:q.y+24})))continue;
+   offset=[dx,dy,box];break;
   }
-  if(!choice)continue;
-  occupied.push(choice.box);
-  const node=document.createElementNS('http://www.w3.org/2000/svg','g');
-  node.setAttribute('class','place-map-label');
-  node.setAttribute('transform',`translate(${g.x} ${g.y}) scale(${1/pixelUnit}) translate(${choice.dx} ${choice.dy})`);
-  node.setAttribute('aria-hidden','true');
-  const t=document.createElementNS('http://www.w3.org/2000/svg','text');
-  t.setAttribute('text-anchor','middle');t.setAttribute('dominant-baseline','middle');t.textContent=name;
-  node.appendChild(t);markerLayer.appendChild(node);
+  if(!offset)continue;
+  occupied.push(offset[2]);
+  const gLabel=document.createElementNS('http://www.w3.org/2000/svg','g');
+  gLabel.setAttribute('class','place-map-label');
+  gLabel.setAttribute('transform',`translate(${g.x} ${g.y}) scale(${1/px}) translate(${offset[0]} ${offset[1]})`);
+  gLabel.setAttribute('pointer-events','none');
+  gLabel.setAttribute('aria-hidden','true');
+  const text=document.createElementNS('http://www.w3.org/2000/svg','text');
+  text.setAttribute('text-anchor','middle');text.setAttribute('dominant-baseline','middle');text.textContent=name;
+  gLabel.appendChild(text);markers.appendChild(gLabel);
  }
 }
 
@@ -422,7 +420,7 @@ const world=$('#map-world'),svg=$('#map-svg');function transform(updateMarkers=t
 function zoom(f){fittedView=false;const before=scale;scale=Math.max(.4,Math.min(10,scale*f));panX*=scale/before;panY*=scale/before;transform();}$('#zoom-in').onclick=()=>zoom(1.2);$('#zoom-out').onclick=()=>zoom(1/1.2);$('#reset').onclick=()=>{fitIsland();transform();};$('#map').onwheel=e=>{e.preventDefault();zoom(e.deltaY>0?1/1.08:1.08);};
 let pointers=new Map(),lastDistance=null,drag=null,moved=false,suppressMapTapUntil=0;
 function point(e){const p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;return p.matrixTransform(svg.getScreenCTM().inverse());}
-$('#map').onpointerdown=e=>{if(e.pointerType==='touch'||(e.button!==0&&e.pointerType==='mouse')||e.target.closest?.('.map-controls,.legend,.map-toolbar,button'))return;fittedView=false;const p=point(e);pointers.set(e.pointerId,p);try{e.currentTarget.setPointerCapture(e.pointerId);}catch{}drag=p;moved=false;};$('#map').onpointermove=e=>{if(e.pointerType==='touch'||!pointers.has(e.pointerId))return;e.preventDefault();const p=point(e);pointers.set(e.pointerId,p);if(pointers.size===2){const [a,b]=[...pointers.values()];const d=Math.hypot(a.x-b.x,a.y-b.y);if(lastDistance)zoom(d/lastDistance);lastDistance=d;drag=null;}else if(drag){panX=Math.max(-5000,Math.min(5000,panX+p.x-drag.x));panY=Math.max(-5000,Math.min(5000,panY+p.y-drag.y));drag=p;transform(false);moved=true;}};function end(e){if(e.pointerType==='touch')return;pointers.delete(e.pointerId);lastDistance=null;drag=pointers.size===1?[...pointers.values()][0]:null;if(!pointers.size){if(moved){suppressMapTapUntil=Date.now()+350;renderMarkers();}moved=false;}}$('#map').onpointerup=end;$('#map').onpointercancel=end;// Native touch gesture handling for iOS Safari: avoid SVG pointer capture conflicts.
+$('#map').onpointerdown=e=>{if(e.pointerType==='touch'||(e.button!==0&&e.pointerType==='mouse')||e.target.closest?.('.map-controls,.legend,.map-toolbar,button'))return;fittedView=false;e.preventDefault();const p=point(e);pointers.set(e.pointerId,p);try{e.currentTarget.setPointerCapture(e.pointerId);}catch{}drag=p;moved=false;};$('#map').onpointermove=e=>{if(e.pointerType==='touch'||!pointers.has(e.pointerId))return;e.preventDefault();const p=point(e);pointers.set(e.pointerId,p);if(pointers.size===2){const [a,b]=[...pointers.values()];const d=Math.hypot(a.x-b.x,a.y-b.y);if(lastDistance)zoom(d/lastDistance);lastDistance=d;drag=null;}else if(drag){panX=Math.max(-5000,Math.min(5000,panX+p.x-drag.x));panY=Math.max(-5000,Math.min(5000,panY+p.y-drag.y));drag=p;transform(false);moved=true;}};function end(e){if(e.pointerType==='touch')return;pointers.delete(e.pointerId);lastDistance=null;drag=pointers.size===1?[...pointers.values()][0]:null;if(!pointers.size){if(moved){suppressMapTapUntil=Date.now()+350;renderMarkers();}moved=false;}}$('#map').onpointerup=end;$('#map').onpointercancel=end;// Native touch gesture handling for iOS Safari: avoid SVG pointer capture conflicts.
 // Use one animation-frame update per display frame, regardless of finger event frequency.
 (function setupMapTouch(){
  const el=$('#map');
