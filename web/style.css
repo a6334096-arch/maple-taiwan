@@ -787,3 +787,13 @@ body {
 @media (prefers-reduced-motion:reduce) {
  #detail {transition:none!important}
 }
+
+/* iOS map gestures: never let the SVG island intercept native finger dragging. */
+@media (pointer:coarse) {
+ #map, #map-svg, #map-svg #map-world, #map-svg .marker, #map-svg .marker * {
+   touch-action:none;
+   -webkit-user-select:none;
+   user-select:none;
+   -webkit-touch-callout:none;
+ }
+}
