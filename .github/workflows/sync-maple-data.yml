@@ -30,11 +30,32 @@ jobs:
           python-version: '3.13'
       - name: 下載並驗證網站公開資料
         run: python scripts/sync-github-data.py
+      - name: 將驗證後的楓況同步到正式網站
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          source = Path('data/current/foliage.json')
+          destination = Path('web/foliage.json')
+          places = json.loads(Path('web/places.json').read_text(encoding='utf-8'))
+          foliage = json.loads(source.read_text(encoding='utf-8'))
+          expected = {p['id'] for p in places}
+          observations = foliage.get('foliage')
+          if not isinstance(observations, dict) or set(observations) != expected:
+              raise SystemExit('楓況景點 ID 與正式網站不一致，停止更新')
+          if not any(isinstance(v, dict) for v in observations.values()):
+              print('沒有有效的楓況觀測，保留正式網站原資料')
+          else:
+              content = json.dumps(foliage, ensure_ascii=False, indent=2, sort_keys=True) + chr(10)
+              destination.write_text(content, encoding='utf-8')
+              print('已同步有效楓況資料至 web/foliage.json')
+          PY
       - name: 只提交有變更的資料
         shell: bash
         run: |
           set -euo pipefail
-          git add -- data/current/places.json data/current/seasons.json data/current/foliage.json
+          git add -- data/current/places.json data/current/seasons.json data/current/foliage.json web/foliage.json
           if git diff --cached --quiet; then
             echo "資料沒有變更，不新增提交。"
             exit 0
