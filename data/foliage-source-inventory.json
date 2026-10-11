@@ -1,0 +1,223 @@
+{
+  "description": "Official-source inventory for future foliage observation checks. Links are existing directory metadata, not verified live observations.",
+  "schema_version": 1,
+  "places": [
+    {
+      "id": "taipingshan",
+      "name": "太平山國家森林遊樂區",
+      "official_info_url": "https://www.taiwan.net.tw/m1.aspx?id=618&sno=0001016",
+      "official_facebook_url": "https://www.facebook.com/tps100.forest/",
+      "source_status": "pending_review"
+    },
+    {
+      "id": "fengshuhu",
+      "name": "淡水楓樹湖",
+      "official_info_url": "https://newtaipei.travel/zh-tw/attractions/detail/402390",
+      "official_facebook_url": null,
+      "source_status": "pending_review"
+    },
+    {
+      "id": "gongbei",
+      "name": "拱北殿",
+      "official_info_url": "https://media.taiwan.net.tw/zh-tw/portal/travel/details/attraction_382000000a_109859",
+      "official_facebook_url": "https://www.facebook.com/profile.php?id=100072327039721",
+      "source_status": "pending_review"
+    },
+    {
+      "id": "manyueyuan",
+      "name": "滿月圓國家森林遊樂區",
+      "official_info_url": "https://www.taiwan.net.tw/m1.aspx?id=r150&sno=0001016",
+      "official_facebook_url": "https://www.facebook.com/ManyueyuanNationalForest/",
+      "source_status": "pending_review"
+    },
+    {
+      "id": "xiuluan",
+      "name": "秀巒軍艦岩・控溪吊橋",
+      "official_info_url": "https://media.taiwan.net.tw/zh-tw/portal/travel/details/attraction_376440000a_000444",
+      "official_facebook_url": null,
+      "source_status": "pending_review"
+    },
+    {
+      "id": "smangus",
+      "name": "司馬庫斯",
+      "official_info_url": "https://www.tad.gov.tw/m1.aspx?id=A12-00490&sNo=0001016",
+      "official_facebook_url": "https://www.facebook.com/TnunanSmagnus/",
+      "source_status": "pending_review"
+    },
+    {
+      "id": "xiakelo",
+      "name": "霞喀羅國家步道",
+      "official_info_url": "https://www.taiwan.net.tw/m1.aspx?id=9486&sno=0001016",
+      "official_facebook_url": "https://www.facebook.com/syakaroOS/",
+      "source_status": "pending_review"
+    },
+    {
+      "id": "dongyanshan",
+      "name": "東眼山國家森林遊樂區",
+      "official_info_url": "https://www.taiwan.net.tw/m1.aspx?id=2485&sno=0001016",
+      "official_facebook_url": "https://www.facebook.com/DYSNEC/",
+      "source_status": "pending_review"
+    },
+    {
+      "id": "jiaobanshan",
+      "name": "角板山公園",
+      "official_info_url": "https://www.taiwan.net.tw/m1.aspx?id=775&sno=0001016",
+      "official_facebook_url": null,
+      "source_status": "pending_review"
+    },
+    {
+      "id": "shimen",
+      "name": "石門水庫",
+      "official_info_url": "https://www.taiwan.net.tw/m1.aspx?id=2540&sno=0001016",
+      "official_facebook_url": null,
+      "source_status": "pending_review"
+    },
+    {
+      "id": "lalashan",
+      "name": "拉拉山國家森林遊樂區",
+      "official_info_url": "https://www.taiwan.net.tw/m1.aspx?id=r147&sno=0001016",
+      "official_facebook_url": "https://www.facebook.com/LalashanNationalForest/",
+      "source_status": "pending_review"
+    },
+    {
+      "id": "taipei-aowanda",
+      "name": "台北奧萬大",
+      "official_info_url": "https://media.taiwan.net.tw/zh-tw/portal/travel/details/attraction_379000000a_002180",
+      "official_facebook_url": "https://www.facebook.com/TaipeiMapleResort/",
+      "source_status": "pending_review"
+    },
+    {
+      "id": "huisun",
+      "name": "惠蓀林場",
+      "official_info_url": "https://www.taiwan.net.tw/m1.aspx?id=2489&sno=0001016",
+      "official_facebook_url": "https://www.facebook.com/expforest.nchu/",
+      "source_status": "pending_review"
+    },
+    {
+      "id": "qingjing",
+      "name": "清境農場",
+      "official_info_url": "https://www.tad.gov.tw/m1.aspx?id=R128&sNo=0001016",
+      "official_facebook_url": "https://www.facebook.com/CingjingFarm/",
+      "source_status": "pending_review"
+    },
+    {
+      "id": "aowanda",
+      "name": "奧萬大國家森林遊樂區",
+      "official_info_url": "https://www.taiwan.net.tw/m1.aspx?id=2146&sno=0001016",
+      "official_facebook_url": "https://www.facebook.com/awdonline2014/",
+      "source_status": "pending_review"
+    },
+    {
+      "id": "shanlinxi",
+      "name": "杉林溪森林生態渡假園區",
+      "official_info_url": "https://www.taiwan.net.tw/m1.aspx?id=c100_247&sno=0001016",
+      "official_facebook_url": "https://www.facebook.com/goto307/",
+      "source_status": "pending_review"
+    },
+    {
+      "id": "wuling",
+      "name": "武陵農場",
+      "official_info_url": "https://www.taiwan.net.tw/m1.aspx?id=9547&sno=0001016",
+      "official_facebook_url": "https://www.facebook.com/WulingFarm0510/",
+      "source_status": "pending_review"
+    },
+    {
+      "id": "dongshi-forest",
+      "name": "東勢林場遊樂區",
+      "official_info_url": "https://www.tad.gov.tw/m1.aspx?id=694&sNo=0001016",
+      "official_facebook_url": "https://www.facebook.com/tsfa.firefly/",
+      "source_status": "pending_review"
+    },
+    {
+      "id": "maple-valley",
+      "name": "楓之谷－1956秘密花園",
+      "official_info_url": "https://www.trimt-nsa.gov.tw/zh-tw/attraction/83/",
+      "official_facebook_url": null,
+      "source_status": "pending_review"
+    },
+    {
+      "id": "fushoushan",
+      "name": "福壽山農場",
+      "official_info_url": "https://www.taiwan.net.tw/m1.aspx?id=695&sno=0001016",
+      "official_facebook_url": "https://www.facebook.com/fssfarm/",
+      "source_status": "pending_review"
+    },
+    {
+      "id": "daxueshan",
+      "name": "大雪山國家森林遊樂區",
+      "official_info_url": "https://www.taiwan.net.tw/m1.aspx?id=r24&sno=0001016",
+      "official_facebook_url": "https://www.facebook.com/Dasyueshan/",
+      "source_status": "pending_review"
+    },
+    {
+      "id": "yuanzui",
+      "name": "鳶嘴稍來小雪山國家步道",
+      "official_info_url": "https://recreation.forest.gov.tw/Trail/RT?tr_id=060",
+      "official_facebook_url": null,
+      "source_status": "pending_review"
+    },
+    {
+      "id": "guguan",
+      "name": "谷關風景區",
+      "official_info_url": "https://www.trimt-nsa.gov.tw/zh-tw/attraction/831/",
+      "official_facebook_url": null,
+      "source_status": "pending_review"
+    },
+    {
+      "id": "basianshan",
+      "name": "八仙山國家森林遊樂區",
+      "official_info_url": "https://www.tad.gov.tw/m1.aspx?id=R5&sNo=0001016",
+      "official_facebook_url": "https://www.facebook.com/BSSNC.tw/",
+      "source_status": "pending_review"
+    },
+    {
+      "id": "manabang",
+      "name": "馬那邦山",
+      "official_info_url": "https://recreation.forest.gov.tw/Trail/RT?tr_id=047",
+      "official_facebook_url": null,
+      "source_status": "pending_review"
+    },
+    {
+      "id": "alishan",
+      "name": "阿里山國家森林遊樂區",
+      "official_info_url": "https://www.taiwan.net.tw/m1.aspx?id=10949&sno=0001016",
+      "official_facebook_url": "https://www.facebook.com/AlishanForest/",
+      "source_status": "pending_review"
+    },
+    {
+      "id": "lijia-maple",
+      "name": "里佳賞楓步道",
+      "official_info_url": "https://www.ali-nsa.net/zh-tw/attractions/detail/194",
+      "official_facebook_url": null,
+      "source_status": "pending_review"
+    },
+    {
+      "id": "hongye-park",
+      "name": "關子嶺紅葉公園",
+      "official_info_url": "https://www.siraya-nsa.gov.tw/zh-tw/attractions/detail/157",
+      "official_facebook_url": null,
+      "source_status": "pending_review"
+    },
+    {
+      "id": "danongdafu",
+      "name": "大農大富・南環自行車道",
+      "official_info_url": "https://www.taiwan.net.tw/m1.aspx?id=A12-00297&sNo=0001016",
+      "official_facebook_url": "https://www.facebook.com/MASADIFOREST/",
+      "source_status": "pending_review"
+    },
+    {
+      "id": "taipingshan-beech",
+      "name": "太平山・台灣山毛櫸步道",
+      "official_info_url": "https://recreation.forest.gov.tw/Trail/RT?tr_id=013",
+      "official_facebook_url": "https://www.facebook.com/tps100.forest/",
+      "source_status": "pending_review"
+    },
+    {
+      "id": "beichatianshan",
+      "name": "北插天山登山步道",
+      "official_info_url": "https://recreation.forest.gov.tw/Trail/RT?tr_id=025",
+      "official_facebook_url": null,
+      "source_status": "pending_review"
+    }
+  ]
+}
