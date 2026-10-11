@@ -983,3 +983,18 @@ body {
  }
  section.map-area #map > #detail.detail .sheet-grip{display:none!important}
 }
+
+/* Desktop: compact geographic popover beside selected map pin. */
+@media screen and (min-width:701px){
+ section.map-area #map > #detail.detail:not([hidden]):has(> .detail-head){
+  position:absolute!important;
+  inset:var(--desktop-card-top,90px) auto auto var(--desktop-card-left,20px)!important;
+  width:var(--desktop-card-width,360px)!important;
+  height:auto!important;
+  max-height:min(520px,calc(100% - 30px))!important;
+  min-height:0!important;
+  overflow-y:auto!important;
+  box-shadow:0 16px 38px #1b34273b!important;
+ }
+ section.map-area #map > #detail.detail .detail-head{position:sticky;top:0;z-index:3;background:#fffdf7}
+}
