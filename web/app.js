@@ -252,18 +252,18 @@ function renderPlaceLabels(data){
   }
  };
  // Give destination names first priority; keep overview uncluttered.
- const showPlaceNames=px>=.48;
+ const showPlaceNames=true;
  if(showPlaceNames)for(let i=0;i<markerGroups.length;i++){
   const g=markerGroups[i];
-  if(g.items.length!==1||g.items[0].id===selected)continue;
-  const name=g.items[0].name,p=pins[i];
-  const width=Math.min(240,Math.max(50,[...name].length*13+16)),height=24;
+  if(g.items[0].id===selected)continue;
+  const name=g.items.length>1?`${g.items.length} 處景點` : g.items[0].name,p=pins[i];
+  const width=Math.min(240,Math.max(50,[...name].length*12+12)),height=22;
   let offset=null;
-  for(const [dx,dy] of [[0,31],[0,-31],[34,0],[-34,0],[0,52],[0,-52]]){
+  for(const [dx,dy] of [[0,31],[0,-31],[0,50],[0,-50],[0,70],[0,-70]]){
    const box={left:p.x+dx-width/2,right:p.x+dx+width/2,top:p.y+dy-height/2,bottom:p.y+dy+height/2};
    if(box.left<bounds.left+6||box.right>bounds.right-6||box.top<bounds.top+6||box.bottom>bounds.bottom-6)continue;
    if(overlays.some(o=>hit(box,o))||occupied.some(o=>hit(box,o,8)))continue;
-   if(pins.some((q,j)=>j!==i&&hit(box,{left:q.x-24,right:q.x+24,top:q.y-24,bottom:q.y+24})))continue;
+   if(pins.some((q,j)=>j!==i&&hit(box,{left:q.x-16,right:q.x+16,top:q.y-16,bottom:q.y+16})))continue;
    offset=[dx,dy,box];break;
   }
   if(!offset)continue;
@@ -602,15 +602,7 @@ function choose(id){
 $('#list').onclick=e=>{let el=e.target.closest('[data-id]');if(el)choose(el.dataset.id);};$('#markers').onclick=markerAction;$('#markers').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();markerAction(e);}};
 $('#region').onchange=e=>{region=e.target.value;county='all';populateCounties();selected=null;render();};$('#county').onchange=e=>{county=e.target.value;selected=null;render();};
 $('#search').oninput=e=>{query=e.target.value.trim();render();};$('#month').onchange=e=>{month=e.target.value;loadPlaces();};$('.filters').onclick=e=>{let b=e.target.closest('[data-filter]');if(!b)return;filter=b.dataset.filter;document.querySelectorAll('[data-filter]').forEach(el=>el.classList.toggle('active',el===b));render();};$('#mobile-list').onclick=()=>{const open=$('#sidebar').classList.toggle('open');if(open){selected=null;renderDetail();}$('#mobile-list').textContent=open?'× 關閉清單':'☰ 景點清單';$('#mobile-list').setAttribute('aria-expanded',String(open));};
-const world=$('#map-world'),svg=$('#map-svg');let placeLabelFrame=0;
-function scheduleVisiblePlaceLabels(){
- if(placeLabelFrame)return;
- placeLabelFrame=requestAnimationFrame(()=>{
-  placeLabelFrame=0;
-  if(markerGroups.length)renderPlaceLabels(visible());
- });
-}
-function transform(updateMarkers=true) {
+const world=$('#map-world'),svg=$('#map-svg');function transform(updateMarkers=true) {
   const movement = 'translate(' + panX + ' ' + panY + ')';
   const center = 'translate(400 450)';
   const sizing = 'scale(' + scale + ')';
@@ -622,7 +614,7 @@ function transform(updateMarkers=true) {
   );
 
   if(updateMarkers)renderMarkers();
- else scheduleVisiblePlaceLabels();
+ // Keep labels attached to their pins during panning; recompute only at gesture end.
  if(selected)requestAnimationFrame(()=>{positionMobilePlaceCard();positionDesktopPlaceCard();});
 };
 function zoom(f){
