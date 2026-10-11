@@ -269,8 +269,19 @@ function renderPlaceLabels(data){
    const box={left:p.x+dx-w/2,right:p.x+dx+w/2,top:p.y+dy-h/2,bottom:p.y+dy+h/2};
    if(box.left<bounds.left+8||box.right>bounds.right-8||box.top<bounds.top+8||box.bottom>bounds.bottom-8)continue;
    if(overlays.some(o=>hit(box,o,3))||occupied.some(o=>hit(box,o,5)))continue;
-   if(pins.some((q,j)=>j!==markerGroups.indexOf(g)&&hit(box,{left:q.x-19,right:q.x+19,top:q.y-19,bottom:q.y+19},2)))continue;
+   // Nearby pins must not suppress every attraction name: allow labels next to pins,
+   // while still avoiding collisions with other labels and floating controls.
+   if(pins.some((q,j)=>j!==i&&hit(box,{left:q.x-11,right:q.x+11,top:q.y-11,bottom:q.y+11},0)))continue;
    chosen={dx,dy,box};break;
+  }
+  if(!chosen){
+   // Keep a readable name even in dense areas; prioritise names over hiding all of them.
+   for(const [dx,dy] of [[0,56],[0,-57],[w/2+35,0],[-w/2-35,0],[0,76],[0,-77]]){
+    const box={left:p.x+dx-w/2,right:p.x+dx+w/2,top:p.y+dy-h/2,bottom:p.y+dy+h/2};
+    if(box.left<bounds.left+5||box.right>bounds.right-5||box.top<bounds.top+5||box.bottom>bounds.bottom-5)continue;
+    if(overlays.some(o=>hit(box,o,2))||occupied.some(o=>hit(box,o,2)))continue;
+    chosen={dx,dy,box};break;
+   }
   }
   if(!chosen)continue;
   occupied.push(chosen.box);
