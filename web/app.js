@@ -181,13 +181,11 @@ function renderMarkers(){
  // Use actual CSS-pixel zoom rather than the SVG scale alone, so desktop and
  // narrow mobile screens switch from clusters to separate pins consistently.
  const pixelsPerUnit=Math.max(.001,scale*unit);
- const individualZoom=pixelsPerUnit>=0.85;
- const allGroups=individualZoom
-  ? data.map(p=>({items:[p],x:p.x,y:p.y}))
-  : groupNearbyPlaces(data.filter(p=>p.id!==selected),pixelsPerUnit,phone?44:54);
- // At overview, show the selected place as an individual pin; at detailed zoom
- // the spreading pass already includes it, preventing selected-pin collisions.
- if(!individualZoom&&selectedPlace)allGroups.push({items:[selectedPlace],x:selectedPlace.x,y:selectedPlace.y});
+ // Cluster by real on-screen separation at every zoom level. This prevents
+ // dense attractions from piling up after selecting a place or zooming.
+ // The selected place is always an independent, accurately located pin.
+ const allGroups=groupNearbyPlaces(data.filter(p=>p.id!==selected),pixelsPerUnit,phone?48:62);
+ if(selectedPlace)allGroups.push({items:[selectedPlace],x:selectedPlace.x,y:selectedPlace.y});
  markerGroups=allGroups;
  $('#markers').innerHTML=markerGroups.map((g,i)=>{
   const p=g.items[0],cluster=g.items.length>1,s=cluster?clusterStage(g.items):leafStage(p),sel=g.items.some(p=>p.id===selected);
@@ -594,7 +592,8 @@ function positionDesktopPlaceCard(){if(innerWidth>700)positionPlaceCard();}
 function choose(id){
  fittedView=false;selected=id;
  const p=places.find(p=>p.id===id);if(!p)return;
- scale=Math.min(Math.max(scale,1.5),2.35);
+ // Never zoom out when selecting a place: preserve the user's current detail level.
+ scale=Math.min(10,Math.max(scale,2.35));
  $('#sidebar').classList.remove('open');$('#mobile-list').textContent='☰ 景點清單';$('#mobile-list').setAttribute('aria-expanded','false');render();
  const mapRect=svg.getBoundingClientRect();
  const target=svg.createSVGPoint();
