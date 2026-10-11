@@ -481,56 +481,49 @@ function renderDetail(){
  $('.save').onclick=()=>{if(saved.has(p.id))saved.delete(p.id);else saved.add(p.id);try{localStorage.setItem('maple-saved',JSON.stringify([...saved]));}catch{}render();};
 }
 
-function positionMobilePlaceCard(){
- if(innerWidth>700||!selected)return;
- const card=document.querySelector('#detail'),map=document.querySelector('#map');
- if(!card||card.hidden||!map)return;
- // Use the actual selected geographical point, even when markers are clustered.
- const p=places.find(item=>item.id===selected);
- const svgPoint=svg.createSVGPoint();
- svgPoint.x=p.x;svgPoint.y=p.y;
- const screen=svgPoint.matrixTransform(world.getScreenCTM());
- const bounds=map.getBoundingClientRect();
- const markerX=screen.x,markerY=screen.y;
- const margin=12,gap=16;
- const cardWidth=Math.min(340,innerWidth-24);
- const topLimit=Math.max(bounds.top+8,85);
- const bottomLimit=Math.min(bounds.bottom-8,innerHeight-8);
- const above=markerY-gap-topLimit,below=bottomLimit-markerY-gap;
- const desired=card.classList.contains('sheet-expanded')?Math.min(410,innerHeight*.60):Math.min(245,innerHeight*.38);
- const showBelow=below>=desired || below>=above;
- const room=Math.max(90,showBelow?below:above);
- const height=Math.min(desired,room);
- const top=showBelow?markerY+gap:markerY-gap-height;
- const left=Math.max(12,Math.min(innerWidth-cardWidth-12,markerX-cardWidth/2));
- card.style.setProperty('--mobile-card-top',Math.round(top)+'px');
- card.style.setProperty('--mobile-card-left',Math.round(left)+'px');
- card.style.setProperty('--mobile-card-height',Math.round(height)+'px');
-}
-function positionDesktopPlaceCard(){
- if(innerWidth<=700||!selected)return;
+function positionPlaceCard(){
+ if(!selected)return;
  const card=document.querySelector('#detail'),map=document.querySelector('#map');
  const p=places.find(item=>item.id===selected);
  if(!card||card.hidden||!map||!p)return;
  const pt=svg.createSVGPoint();pt.x=p.x;pt.y=p.y;
- const screen=pt.matrixTransform(world.getScreenCTM()),bounds=map.getBoundingClientRect();
- const width=Math.min(360,Math.max(260,bounds.width*.37));
- const leftSpace=screen.x-bounds.left,rightSpace=bounds.right-screen.x;
- const onRight=rightSpace>=width+34||rightSpace>=leftSpace;
- const left=Math.max(bounds.left+12,Math.min(bounds.right-width-12,onRight?screen.x+28:screen.x-width-28));
- const top=Math.max(bounds.top+12,Math.min(bounds.bottom-170,screen.y-45));
- card.style.setProperty('--desktop-card-left',Math.round(left-bounds.left)+'px');
- card.style.setProperty('--desktop-card-top',Math.round(top-bounds.top)+'px');
- card.style.setProperty('--desktop-card-width',Math.round(width)+'px');
+ const matrix=world.getScreenCTM();
+ if(!matrix)return;
+ const point=pt.matrixTransform(matrix),bounds=map.getBoundingClientRect();
+ const mobile=innerWidth<=700,gap=20;
+ if(mobile){
+  const w=Math.min(320,innerWidth-24);
+  const left=Math.max(12,Math.min(innerWidth-w-12,point.x-w/2));
+  const topLimit=Math.max(bounds.top+8,75),bottomLimit=Math.min(bounds.bottom-8,innerHeight-8);
+  const above=point.y-gap-topLimit,below=bottomLimit-point.y-gap;
+  const desired=card.classList.contains('sheet-expanded')?Math.min(400,innerHeight*.55):210;
+  const useBelow=below>=desired||(below>=above&&below>=145);
+  const space=Math.max(100,useBelow?below:above);
+  const height=Math.min(desired,space);
+  const top=Math.max(topLimit,Math.min(bottomLimit-height,useBelow?point.y+gap:point.y-gap-height));
+  card.style.setProperty('--mobile-card-top',Math.round(top)+'px');
+  card.style.setProperty('--mobile-card-left',Math.round(left)+'px');
+  card.style.setProperty('--mobile-card-height',Math.round(height)+'px');
+ }else{
+  const width=Math.min(340,Math.max(280,bounds.width*.34));
+  const right=bounds.right-point.x,leftSpace=point.x-bounds.left;
+  const toRight=right>=width+gap||right>=leftSpace;
+  const left=Math.max(bounds.left+12,Math.min(bounds.right-width-12,toRight?point.x+gap:point.x-gap-width));
+  const top=Math.max(bounds.top+12,Math.min(bounds.bottom-180,point.y-40));
+  card.style.setProperty('--desktop-card-left',Math.round(left-bounds.left)+'px');
+  card.style.setProperty('--desktop-card-top',Math.round(top-bounds.top)+'px');
+  card.style.setProperty('--desktop-card-width',Math.round(width)+'px');
+ }
 }
+function positionMobilePlaceCard(){if(innerWidth<=700)positionPlaceCard();}
+function positionDesktopPlaceCard(){if(innerWidth>700)positionPlaceCard();}
 function choose(id){
  fittedView=false;selected=id;
  const p=places.find(p=>p.id===id);if(!p)return;
  scale=Math.min(Math.max(scale,1.5),2.35);
  $('#sidebar').classList.remove('open');$('#mobile-list').textContent='☰ 景點清單';$('#mobile-list').setAttribute('aria-expanded','false');render();
- const mapRect=svg.getBoundingClientRect(),card=$('#detail').getBoundingClientRect();
+ const mapRect=svg.getBoundingClientRect();
  const target=svg.createSVGPoint();
- // Center within the visible map area to the left of the desktop detail panel.
  const freeRight=mapRect.right;
  target.x=mapRect.left+(freeRight-mapRect.left)/2;
  target.y=mapRect.top+mapRect.height/2;
