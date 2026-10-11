@@ -280,15 +280,15 @@ function currentShares(p){
  return (p.recent_shares||[]).filter(o=>publicShareUrl(o.url)&&o.source&&/^\d{4}-\d{2}-\d{2}$/.test(o.published_on||'')&&Number.isFinite(Date.parse(o.published_on))&&o.published_on<=today).sort((a,b)=>b.published_on.localeCompare(a.published_on)).slice(0,2);
 }
 function photosBlock(p){
- const records=currentShares(p),fb=publicShareUrl(p.official_facebook_url);
+ const records=currentShares(p);
  const additional=(p.additional_facebook_links||[]).filter(o=>publicShareUrl(o.url)&&o.name).map(o=>`<a class="share-button" href="${escapeHTML(publicShareUrl(o.url))}" target="_blank" rel="noopener noreferrer">${escapeHTML(o.name)} Facebook ↗</a><p class="share-source">${escapeHTML(o.kind||'在地分享')} · ${escapeHTML(o.name)}</p>`).join('');
- if(!records.length&&!fb&&!additional)return '<section class="photos-panel"><div class="panel-title"><h3>最新現場分享</h3></div><p class="share-empty">尚無近期賞楓貼文</p></section>';
+ if(!records.length&&!additional)return '<section class="photos-panel"><div class="panel-title"><h3>最新現場分享</h3></div><p class="share-empty">尚無近期賞楓貼文</p></section>';
  const cards=records.map(o=>{
   const stale=Date.now()-Date.parse(o.observed_on||o.published_on)>14*86400000;
   const thumb=o.thumbnail_url&&o.thumbnail_permission&&/^https:\/\//.test(o.thumbnail_url)?o.thumbnail_url:null;
   return `<article class="share-card"><a class="share-preview" href="${escapeHTML(publicShareUrl(o.url))}" target="_blank" rel="noopener noreferrer">${thumb?`<img src="${escapeHTML(thumb)}" alt="${escapeHTML(o.title||p.name+'現場分享')}" loading="lazy" decoding="async" referrerpolicy="no-referrer"><span class="share-image-fallback" hidden>📷 查看原始貼文照片 ↗</span>`:'<span>📷 查看原始貼文照片 ↗</span>'}</a><div class="share-caption"><strong>${escapeHTML(o.title||'現場分享')}</strong><p>貼文日期：${escapeHTML(o.published_on)}${o.observed_on?` · 拍攝日期：${escapeHTML(o.observed_on)}`:' · 拍攝日期未標示'}</p><p>來源：${escapeHTML(o.source)}</p>${stale?'<p class="foliage-warning">這則分享已超過 14 天，請查看較新的貼文。</p>':''}</div></article>`;
  }).join('');
- return `<section class="photos-panel"><div class="panel-title"><h3>最新現場分享</h3><span class="share-label">${records.length?'公開貼文':'官方入口'}</span></div>${cards||'<p class="share-empty">尚無近期賞楓貼文</p>'}${fb?`<a class="share-button" href="${escapeHTML(fb)}" target="_blank" rel="noopener noreferrer">${p.official_facebook_kind==='recommended'?'查看官方推薦 Facebook 分享':'查看官方 Facebook 現場分享'} ↗</a><p class="share-source">來源：${escapeHTML(p.official_facebook_name||p.name+'官方 Facebook')}</p>`:''}${additional}<p class="share-note">可至原站查看貼文日期與照片；Facebook 可能需要登入。</p></section>`;
+ return `<section class="photos-panel"><div class="panel-title"><h3>最新現場分享</h3><span class="share-label">${records.length?'公開貼文':'尚無近期貼文'}</span></div>${cards||'<p class="share-empty">尚無近期賞楓貼文</p>'}${additional}<p class="share-note">可至原站查看貼文日期與照片；Facebook 可能需要登入。</p></section>`;
 }
 function historicalPhotosBlock(p){
  const seen=new Set();
@@ -344,7 +344,7 @@ function renderDetail(){
  let p=places.find(p=>p.id===selected);
  if(!p){$('#detail').innerHTML='';$('#detail').hidden=true;return;}
  $('#detail').hidden=false;$('#detail').scrollTop=0;const s=stage(p);
- $('#detail').innerHTML=`<div class="detail-head"><button class="detail-close" aria-label="關閉景點資訊">×</button><h2>${escapeHTML(p.name)}</h2><p>${escapeHTML(p.city)}</p><nav class="detail-nav" aria-label="景點資訊區塊"><button data-section="latest-panel">楓況與分享</button><button data-section="season-panel">歷年時間</button><button data-section="species-panel">品種</button><button data-section="location-disclosure">官方資訊</button></nav></div><div class="detail-body">${latestBlock(p)}<section class="season-panel"><h3>歷年賞楓時間</h3><p class="reference-note">${escapeHTML(p.dates||'尚無資料')}</p>${historicalPhotosBlock(p)}</section>${relatedRoutesBlock(p)}${speciesBlock(p)}<section class="location-disclosure"><h3>位置與交通</h3><div class="location-info">${navigationLink(p)}${officialInfoLink(p)}${liveCamerasBlock(p)}</div></section><button class="save" type="button">${saved.has(p.id)?'★ 已收藏':'☆ 加入收藏'}</button></div>`;
+ $('#detail').innerHTML=`<div class="detail-head"><button class="detail-close" aria-label="關閉景點資訊">×</button><h2>${escapeHTML(p.name)}</h2><p>${escapeHTML(p.city)}</p><nav class="detail-nav" aria-label="景點資訊區塊"><button data-section="latest-panel">楓況與分享</button><button data-section="season-panel">歷年時間</button><button data-section="species-panel">品種</button><button data-section="location-disclosure">官方資訊</button></nav></div><div class="detail-body">${latestBlock(p)}<section class="season-panel"><h3>歷年賞楓時間</h3><p class="reference-note">${escapeHTML(p.dates||'尚無資料')}</p>${historicalPhotosBlock(p)}</section>${relatedRoutesBlock(p)}${speciesBlock(p)}<section class="location-disclosure"><h3>位置與交通</h3><div class="location-info">${officialInfoLink(p)}${navigationLink(p)}${liveCamerasBlock(p)}</div></section><button class="save" type="button">${saved.has(p.id)?'★ 已收藏':'☆ 加入收藏'}</button></div>`;
  $('#detail').scrollTop=0;
  deduplicateDetailLinks($('#detail'));
  $('#detail').querySelectorAll('[data-section]').forEach(button=>{button.onclick=()=>{const target=$('#detail').querySelector('.'+button.dataset.section);if(target){if(target.tagName==='DETAILS')target.open=true;const head=$('#detail').querySelector('.detail-head');const container=$('#detail');container.scrollTop=Math.max(0,target.getBoundingClientRect().top-container.getBoundingClientRect().top+container.scrollTop-head.offsetHeight-10);}};});
