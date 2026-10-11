@@ -165,19 +165,39 @@ function renderMarkers(){
  $('#map-location').textContent=chosen?chosen.city:(county!=='all'?county:region!=='all'?region+'景點':'台灣賞楓地圖');
 }
 function renderPlaceLabels(data){
+ const matrix=svg.getScreenCTM(),unit=matrix?Math.hypot(matrix.a,matrix.b):1;
+ const screen=(x,y)=>({x:matrix.a*((x-400)*scale+panX+400)+matrix.e,y:matrix.d*((y-450)*scale+panY+450)+matrix.f});
+ const pins=markerGroups.map(g=>screen(g.x,g.y));
+ const overlays=[document.querySelector('.map-controls'),document.querySelector('.legend.season-color-legend')].filter(Boolean).map(e=>e.getBoundingClientRect());
+ const bounds=svg.getBoundingClientRect();
+ const occupiedGeography=[];
+ function free(x,y,width,height){
+  const box={left:x-width/2,right:x+width/2,top:y-height/2,bottom:y+height/2};
+  if(box.left<bounds.left+6||box.right>bounds.right-6||box.top<bounds.top+6||box.bottom>bounds.bottom-6)return false;
+  if(overlays.some(b=>box.left<b.right+5&&box.right>b.left-5&&box.top<b.bottom+5&&box.bottom>b.top-5))return false;
+  if(pins.some(p=>Math.hypot(p.x-x,p.y-y)<Math.max(35,width/2+15)))return false;
+  if(occupiedGeography.some(b=>box.left<b.right+8&&box.right>b.left-8&&box.top<b.bottom+8&&box.bottom>b.top-8))return false;
+  occupiedGeography.push(box);return true;
+ }
  const counties=new Map();
  for(const p of data)for(const name of p.city.match(/[^・／]+?[縣市]/g)||[]){const group=counties.get(name)||[];group.push(p);counties.set(name,group);}
- $('#county-labels').innerHTML=[...counties].map(([name,items])=>{const x=items.reduce((a,p)=>a+p.x,0)/items.length,y=items.reduce((a,p)=>a+p.y,0)/items.length;return `<g class="county-label" transform="translate(${x} ${y})"><text transform="scale(${1/scale})" y="${scale>=3?-50:27}" text-anchor="middle">${escapeHTML(name)}</text></g>`;}).join('');
+ $('#county-labels').innerHTML=[...counties].map(([name,items])=>{
+  const x=items.reduce((a,p)=>a+p.x,0)/items.length,y=items.reduce((a,p)=>a+p.y,0)/items.length;
+  const c=screen(x,y+27/scale);
+  if(!free(c.x,c.y,name.length*14+8,20))return '';
+  return `<g class="county-label" transform="translate(${x} ${y})"><text transform="scale(${1/scale})" y="27" text-anchor="middle">${escapeHTML(name)}</text></g>`;
+ }).join('');
  $('#town-labels').replaceChildren();
- if(scale<3)return;
- const towns=new Map();
- for(const p of data){const names=p.city.split(/[・／]/).map(n=>n.trim()).filter(n=>/[鄉鎮區]$/.test(n));for(const name of names){const key=(p.city.match(/[^・／]+?[縣市]/)||[p.region])[0]+'／'+name,group=towns.get(key)||[];group.push(p);towns.set(key,group);}}
- const townOccupied=[];
- $('#town-labels').innerHTML=[...towns].map(([key,items])=>{const name=key.split('／')[1],x=items.reduce((a,p)=>a+p.x,0)/items.length,y=items.reduce((a,p)=>a+p.y,0)/items.length,width=name.length*12;
-  const screenX=(x-400)*scale+panX,screenY=(y-450)*scale+panY;
-  if(townOccupied.some(b=>Math.abs(b.x-screenX)<(b.width+width)/2+10&&Math.abs(b.y-screenY)<22))return '';
-  townOccupied.push({x:screenX,y:screenY,width});
-  return `<g class="town-label" transform="translate(${x} ${y})"><text transform="scale(${1/scale})" y="-27" text-anchor="middle">${escapeHTML(name)}</text></g>`;}).join('');
+ if(scale>=3){
+  const towns=new Map();
+  for(const p of data){const names=p.city.split(/[・／]/).map(n=>n.trim()).filter(n=>/[鄉鎮區]$/.test(n));for(const name of names){const key=(p.city.match(/[^・／]+?[縣市]/)||[p.region])[0]+'／'+name,group=towns.get(key)||[];group.push(p);towns.set(key,group);}}
+  $('#town-labels').innerHTML=[...towns].map(([key,items])=>{
+   const name=key.split('／')[1],x=items.reduce((a,p)=>a+p.x,0)/items.length,y=items.reduce((a,p)=>a+p.y,0)/items.length;
+   const c=screen(x,y-27/scale);
+   if(!free(c.x,c.y,name.length*12+8,18))return '';
+   return `<g class="town-label" transform="translate(${x} ${y})"><text transform="scale(${1/scale})" y="-27" text-anchor="middle">${escapeHTML(name)}</text></g>`;
+  }).join('');
+ }
  const occupied=[];
  const rect=svg.getBoundingClientRect();
  const svgMatrix=svg.getScreenCTM();
@@ -198,7 +218,7 @@ function renderPlaceLabels(data){
   for(const c of choices){
    const box={left:x+c.dx-width/2,right:x+c.dx+width/2,top:y+c.dy-height/2,bottom:y+c.dy+height/2};
    if(box.left<rect.left+5||box.right>rect.right-5||box.top<rect.top+5||box.bottom>rect.bottom-5)continue;
-   if(overlays.some(o=>intersects(box,o,3))||occupied.some(o=>intersects(box,o,5)))continue;
+   if(overlays.some(o=>intersects(box,o,3))||occupied.some(o=>intersects(box,o,5))||occupiedGeography.some(o=>intersects(box,o,5)))continue;
    if(markerCenters.some(m=>Math.hypot(m.x-x,m.y-y)>3&&intersects(box,{left:m.x-19,right:m.x+19,top:m.y-19,bottom:m.y+19},3)))continue;
    chosen={c,box};break;
   }
