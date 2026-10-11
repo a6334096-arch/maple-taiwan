@@ -183,7 +183,7 @@ function renderMarkers(){
  const pixelsPerUnit=Math.max(.001,scale*unit);
  const individualZoom=pixelsPerUnit>=0.85;
  const allGroups=individualZoom
-  ? spreadDetailedMarkers(data.map(p=>({items:[p],x:p.x,y:p.y})),pixelsPerUnit,phone)
+  ? data.map(p=>({items:[p],x:p.x,y:p.y}))
   : groupNearbyPlaces(data.filter(p=>p.id!==selected),pixelsPerUnit,phone?44:54);
  // At overview, show the selected place as an individual pin; at detailed zoom
  // the spreading pass already includes it, preventing selected-pin collisions.
@@ -251,36 +251,32 @@ function renderPlaceLabels(data){
    return;
   }
  };
- // Give destination names first priority; keep overview uncluttered.
- const showPlaceNames=true;
- if(showPlaceNames)for(let i=0;i<markerGroups.length;i++){
-  const g=markerGroups[i];
-  if(g.items[0].id===selected)continue;
-  const name=g.items.length>1?`${g.items.length} 處景點` : g.items[0].name,p=pins[i];
-  const width=Math.min(240,Math.max(50,[...name].length*12+12)),height=22;
-  let offset=null;
-  for(const [dx,dy] of [[0,31],[0,-31],[0,50],[0,-50],[0,70],[0,-70]]){
-   const box={left:p.x+dx-width/2,right:p.x+dx+width/2,top:p.y+dy-height/2,bottom:p.y+dy+height/2};
-   if(box.left<bounds.left+6||box.right>bounds.right-6||box.top<bounds.top+6||box.bottom>bounds.bottom-6)continue;
-   if(overlays.some(o=>hit(box,o))||occupied.some(o=>hit(box,o,8)))continue;
-   if(pins.some((q,j)=>j!==i&&hit(box,{left:q.x-16,right:q.x+16,top:q.y-16,bottom:q.y+16})))continue;
-   offset=[dx,dy,box];break;
-  }
-  if(!offset)continue;
-  occupied.push(offset[2]);
-  const gLabel=document.createElementNS('http://www.w3.org/2000/svg','g');
-  gLabel.setAttribute('class','place-map-label');
-  gLabel.setAttribute('transform',`translate(${g.x} ${g.y}) scale(${1/px}) translate(${offset[0]} ${offset[1]})`);
-  gLabel.setAttribute('pointer-events','none');
-  gLabel.setAttribute('aria-hidden','true');
+ // Labels use the same geographic anchor as their marker, like a standard map.
+ // Never move labels to the sea or hide them merely because another label overlaps.
+ // A compact overview uses a few labels; zooming reveals all names in place.
+ const detailLevel=px>=.85;
+ for(let i=0;i<markerGroups.length;i++){
+  const g=markerGroups[i],p=pins[i];
+  if(g.items.some(item=>item.id===selected))continue;
+  if(p.x<bounds.left+12||p.x>bounds.right-12||p.y<bounds.top+12||p.y>bounds.bottom-12)continue;
+  const name=g.items.length>1?`${g.items.length} 處景點`:g.items[0].name;
+  const label=document.createElementNS('http://www.w3.org/2000/svg','g');
+  label.setAttribute('class','place-map-label');
+  label.setAttribute('transform',`translate(${g.x} ${g.y}) scale(${1/px}) translate(0 28)`);
+  label.setAttribute('pointer-events','none');
+  label.setAttribute('aria-hidden','true');
   const text=document.createElementNS('http://www.w3.org/2000/svg','text');
-  text.setAttribute('text-anchor','middle');text.setAttribute('dominant-baseline','middle');text.textContent=name;
-  const leader=document.createElementNS('http://www.w3.org/2000/svg','line');
-  leader.setAttribute('x1','0');leader.setAttribute('y1','0');
-  leader.setAttribute('x2','0');leader.setAttribute('y2',String(-offset[1]+(offset[1]>0?10:-10)));
-  leader.setAttribute('class','place-label-leader');
-  gLabel.appendChild(leader);
-  gLabel.appendChild(text);markers.appendChild(gLabel);
+  text.setAttribute('text-anchor','middle');
+  text.setAttribute('dominant-baseline','middle');
+  text.textContent=name;
+  label.appendChild(text);
+  // Keep all place labels visible at local zoom. At overview, thin crowded
+  // labels deterministically, without shifting any labels off their location.
+  const w=Math.min(240,Math.max(48,[...name].length*12));
+  const box={left:p.x-w/2,right:p.x+w/2,top:p.y+17,bottom:p.y+40};
+  if(!detailLevel&&(overlays.some(o=>hit(box,o))||occupied.some(o=>hit(box,o,3))))continue;
+  if(!detailLevel)occupied.push(box);
+  markers.appendChild(label);
  }
  // Geographic administrative names fill only remaining space after destinations.
  if(px>=.55){
