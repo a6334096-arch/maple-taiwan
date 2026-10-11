@@ -137,9 +137,9 @@ function renderMarkers(){
  const unit=matrix?Math.hypot(matrix.a,matrix.b):1;
  const markerScale=1/(scale*unit);
  const phone=window.matchMedia('(max-width:700px)').matches;
- markerGroups=phone?data.map(p=>({items:[p],x:p.x,y:p.y})):scale>1.15?data.map(p=>({items:[p],x:p.x,y:p.y})):groupNearbyPlaces(data,scale*unit,64);
+ markerGroups=data.map(p=>({items:[p],x:p.x,y:p.y}));
  // At high zoom, spread coincident pins instead of permanently clustering them.
- if(phone||scale>1.15){
+ {
   const placed=[];
   for(const g of markerGroups){
    const originalX=g.x,originalY=g.y;
@@ -165,8 +165,8 @@ function renderMarkers(){
  $('#map-location').textContent=chosen?chosen.city:(county!=='all'?county:region!=='all'?region+'景點':'台灣賞楓地圖');
 }
 function renderPlaceLabels(data){
- // Mobile map labels use CSS-pixel geometry and prioritize place names over administrative labels.
- if(window.matchMedia('(max-width:700px)').matches){
+ // Unified desktop/mobile map labels use screen-pixel geometry and prioritize place names.
+ {
   const counties=$('#county-labels'),towns=$('#town-labels'),markers=$('#markers');
   counties.replaceChildren();towns.replaceChildren();
   const m=svg.getScreenCTM(),unit=m?Math.hypot(m.a,m.b):1;
@@ -197,7 +197,7 @@ function renderPlaceLabels(data){
   for(const g of markerGroups){
    if(g.items.length!==1)continue;
    const p=g.items[0];if(p.id===selected)continue;
-   add(markers,p.name.length>18?p.name.slice(0,17)+'…':p.name,g.x,g.y,'place',[[0,41],[0,-41],[110,0],[-110,0]]);
+   add(markers,p.name.length>18?p.name.slice(0,17)+'…':p.name,g.x,g.y,'place',[[0,44],[0,-44],[125,0],[-125,0]]);
   }
   if(scale>=2){
    const groups=new Map();
