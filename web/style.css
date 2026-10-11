@@ -555,3 +555,17 @@ body {
 }
 .location-info .location-navigation:hover { background: #e4ede1; border-color: #adc09e; }
 .location-info .location-navigation:focus-visible { outline: 3px solid #b87546; outline-offset: 2px; }
+
+/* 地圖導航短按鈕：手機與電腦共用 */
+.location-info .location-navigation {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  min-width: 116px;
+  max-width: 100%;
+  min-height: 44px;
+  padding: 10px 14px;
+  margin-top: 0;
+  white-space: nowrap;
+}
