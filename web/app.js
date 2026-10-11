@@ -165,12 +165,33 @@ function renderPlaceLabels(data){
   townOccupied.push({x:screenX,y:screenY,width});
   return `<g class="town-label" transform="translate(${x} ${y})"><text transform="scale(${1/scale})" y="-27" text-anchor="middle">${escapeHTML(name)}</text></g>`;}).join('');
  const occupied=[];
+ const rect=svg.getBoundingClientRect();
+ const svgMatrix=svg.getScreenCTM();
+ const pxPerUnit=svgMatrix?Math.hypot(svgMatrix.a,svgMatrix.b)*scale:scale;
+ const phone=innerWidth<=700;
+ const overlays=[document.querySelector('.map-controls'),document.querySelector('.legend.season-color-legend'),document.querySelector('.map-toolbar')].filter(Boolean).map(el=>el.getBoundingClientRect());
+ const markerCenters=markerGroups.map(g=>({x:svgMatrix.a*((g.x-400)*scale+panX+400)+svgMatrix.e,y:svgMatrix.d*((g.y-450)*scale+panY+450)+svgMatrix.f}));
+ function intersects(a,b,pad=4){return a.left<b.right+pad&&a.right>b.left-pad&&a.top<b.bottom+pad&&a.bottom>b.top-pad;}
  for(const g of markerGroups){
   if(g.items.length!==1||g.items[0].id===selected)continue;
-  const p=g.items[0],width=Math.min(200,p.name.length*11),x=(p.x-400)*scale+panX,y=(p.y-450)*scale+panY+34;
-  if(occupied.some(b=>Math.abs(b.x-x)<(b.width+width)/2+8&&Math.abs(b.y-y)<24))continue;
-  occupied.push({x,y,width});
-  $('#markers').insertAdjacentHTML('beforeend',`<g class="place-map-label" transform="translate(${p.x} ${p.y})" aria-hidden="true"><text transform="scale(${1/scale})" y="34" text-anchor="middle">${escapeHTML(p.name.length>18?p.name.slice(0,17)+'…':p.name)}</text></g>`);
+  const p=g.items[0],label=p.name.length>18?p.name.slice(0,17)+'…':p.name;
+  const width=Math.min(phone?145:210,label.length*(phone?10:12)+12),height=phone?17:20;
+  const x=svgMatrix.a*((p.x-400)*scale+panX+400)+svgMatrix.e;
+  const y=svgMatrix.d*((p.y-450)*scale+panY+450)+svgMatrix.f;
+  // Prefer below the pin, then above or to either side if UI obscures it.
+  const choices=[{dx:0,dy:36},{dx:0,dy:-33},{dx:width/2+24,dy:3},{dx:-width/2-24,dy:3}];
+  let chosen=null;
+  for(const c of choices){
+   const box={left:x+c.dx-width/2,right:x+c.dx+width/2,top:y+c.dy-height/2,bottom:y+c.dy+height/2};
+   if(box.left<rect.left+5||box.right>rect.right-5||box.top<rect.top+5||box.bottom>rect.bottom-5)continue;
+   if(overlays.some(o=>intersects(box,o,3))||occupied.some(o=>intersects(box,o,5)))continue;
+   if(markerCenters.some(m=>Math.hypot(m.x-x,m.y-y)>3&&intersects(box,{left:m.x-19,right:m.x+19,top:m.y-19,bottom:m.y+19},3)))continue;
+   chosen={c,box};break;
+  }
+  if(!chosen)continue;
+  occupied.push(chosen.box);
+  const dx=chosen.c.dx/pxPerUnit,dy=chosen.c.dy/pxPerUnit;
+  $('#markers').insertAdjacentHTML('beforeend',`<g class="place-map-label" transform="translate(${p.x} ${p.y})" aria-hidden="true"><text transform="scale(${1/scale})" x="${dx*scale}" y="${dy*scale}" text-anchor="middle" dominant-baseline="middle">${escapeHTML(label)}</text></g>`);
  }
 }
 function openCluster(index){
