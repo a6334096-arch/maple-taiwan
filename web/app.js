@@ -126,6 +126,31 @@ function clusterLeaves(items){
  const colors=[...new Set(items.map(p=>leafStage(p).color))];
  return colors.map((color,index)=>`<g transform="translate(${colors.length===1?-5:-9+index*4} -2) scale(${colors.length===1?.86:.65})">${markerLeaf(items.find(p=>leafStage(p).color===color),color)}</g>`).join('');
 }
+// Spread only visually overlapping detailed-zoom pins; the leader line
+// preserves the actual geographic location of each attraction.
+function spreadDetailedMarkers(groups,pixelsPerUnit,phone){
+ const minDistance=phone?35:49,placed=[];
+ for(const g of groups){
+  const original={x:g.x,y:g.y};
+  const nearby=placed.some(q=>Math.hypot((q.x-g.x)*pixelsPerUnit,(q.y-g.y)*pixelsPerUnit)<minDistance);
+  if(!nearby){placed.push({x:g.x,y:g.y});continue;}
+  let best=null;
+  for(let ring=1;ring<=7;ring++){
+   for(let step=0;step<16;step++){
+    const a=2*Math.PI*step/16+Math.PI/8;
+    const radius=ring*minDistance;
+    const x=original.x+Math.cos(a)*radius/pixelsPerUnit;
+    const y=original.y+Math.sin(a)*radius/pixelsPerUnit;
+    const nearest=placed.length?Math.min(...placed.map(q=>Math.hypot((q.x-x)*pixelsPerUnit,(q.y-y)*pixelsPerUnit))):Infinity;
+    if(nearest>=minDistance){best={x,y};break;}
+   }
+   if(best)break;
+  }
+  if(best){g.trueX=original.x;g.trueY=original.y;g.x=best.x;g.y=best.y;}
+  placed.push({x:g.x,y:g.y});
+ }
+ return groups;
+}
 function renderMarkers(){
  const data=visible();
  // Convert SVG viewBox units to CSS pixels so touch targets stay usable on phones.
@@ -140,7 +165,7 @@ function renderMarkers(){
  // At overview zoom, cluster only when pins would visually collide.
  const individualZoom=scale>=3.2;
  markerGroups=individualZoom
-  ? data.filter(p=>p.id!==selected).map(p=>({items:[p],x:p.x,y:p.y}))
+  ? spreadDetailedMarkers(data.filter(p=>p.id!==selected).map(p=>({items:[p],x:p.x,y:p.y})),scale*unit,phone)
   : groupNearbyPlaces(data.filter(p=>p.id!==selected),scale*unit,phone?36:42);
  // Keep nearby destinations visible when selecting another place; selected pin renders last.
  if(selectedPlace){
@@ -148,7 +173,7 @@ function renderMarkers(){
  }
  $('#markers').innerHTML=markerGroups.map((g,i)=>{
   const p=g.items[0],cluster=g.items.length>1,s=cluster?clusterStage(g.items):leafStage(p),sel=g.items.some(p=>p.id===selected);
-  return `<g class="marker ${sel?'selected':''}" ${cluster?`data-cluster="${i}"`:`data-id="${escapeHTML(p.id)}"`} transform="translate(${g.x},${g.y})" tabindex="0" role="button" aria-label="${cluster?`${g.items.length} 處鄰近景點，${s.name}，點選展開`:escapeHTML(p.name)+'，地圖代表：'+escapeHTML(representativeSpecies(p)||'品種待確認')+'，'+s.name}"><title>${g.items.map(p=>escapeHTML(p.name)+'（'+escapeHTML(p.city)+'）｜代表：'+escapeHTML(representativeSpecies(p)||'品種待確認')+'｜'+leafStage(p).name).join('、')}</title><g transform="scale(${markerScale})"><circle class="marker-hit" r="22" fill="transparent" stroke="none"/><circle class="marker-disc" r="${phone?14:22}" fill="${cluster?'#fffef8':s.bg}" ${s.stale?'stroke="#7b8175" stroke-width="1.5" stroke-dasharray="3 2"':''}/>${markerLeaf(p,s.color)}${cluster?`<g class="cluster-badge" transform="translate(9 -10)"><circle cx="11" cy="11" r="9"/><text class="cluster-count" x="11" y="14" text-anchor="middle">${g.items.length}</text></g>`:''}</g></g>`;
+  return `${g.trueX!==undefined?`<path d="M${g.trueX} ${g.trueY} L${g.x} ${g.y}" fill="none" stroke="#365847" stroke-width="${1.3/(scale*unit)}" stroke-dasharray="${3/(scale*unit)} ${3/(scale*unit)}" opacity=".8" pointer-events="none"/>`:''}<g class="marker ${sel?'selected':''}" ${cluster?`data-cluster="${i}"`:`data-id="${escapeHTML(p.id)}"`} transform="translate(${g.x},${g.y})" tabindex="0" role="button" aria-label="${cluster?`${g.items.length} 處鄰近景點，${s.name}，點選展開`:escapeHTML(p.name)+'，地圖代表：'+escapeHTML(representativeSpecies(p)||'品種待確認')+'，'+s.name}"><title>${g.items.map(p=>escapeHTML(p.name)+'（'+escapeHTML(p.city)+'）｜代表：'+escapeHTML(representativeSpecies(p)||'品種待確認')+'｜'+leafStage(p).name).join('、')}</title><g transform="scale(${markerScale})"><circle class="marker-hit" r="22" fill="transparent" stroke="none"/><circle class="marker-disc" r="${phone?14:22}" fill="${cluster?'#fffef8':s.bg}" ${s.stale?'stroke="#7b8175" stroke-width="1.5" stroke-dasharray="3 2"':''}/>${markerLeaf(p,s.color)}${cluster?`<g class="cluster-badge" transform="translate(9 -10)"><circle cx="11" cy="11" r="9"/><text class="cluster-count" x="11" y="14" text-anchor="middle">${g.items.length}</text></g>`:''}</g></g>`;
  }).join('');
  renderPlaceLabels(data);
  const chosen=data.find(p=>p.id===selected);
