@@ -206,13 +206,13 @@ function renderPlaceLabels(data){
    return;
   }
  };
- if(px>=.55){
+ if(px>=.55&&px<=2.8){
   for(const [county,[lon,lat]] of Object.entries(countyCenters)){
    if(!countyKeys.has(county))continue;
    addAreaLabel(county,'county',(lon-118.703)*174.6,(26.013-lat)*190.8);
   }
  }
- if(px>=1.05){
+ if(px>=1.05&&px<=2.8){
   const townGroups=new Map();
   for(const p of data){
    const [county,townRaw]=String(p.city||'').split('・').map(x=>x.trim());
@@ -237,7 +237,7 @@ function renderPlaceLabels(data){
   const name=g.items[0].name,p=pins[i];
   const width=Math.min(240,Math.max(50,[...name].length*13+16)),height=24;
   let offset=null;
-  for(const [dx,dy] of [[0,39],[0,-39],[105,0],[-105,0]]){
+  for(const [dx,dy] of [[0,31],[0,-31]]){
    const box={left:p.x+dx-width/2,right:p.x+dx+width/2,top:p.y+dy-height/2,bottom:p.y+dy+height/2};
    if(box.left<bounds.left+6||box.right>bounds.right-6||box.top<bounds.top+6||box.bottom>bounds.bottom-6)continue;
    if(overlays.some(o=>hit(box,o))||occupied.some(o=>hit(box,o,8)))continue;
@@ -253,6 +253,11 @@ function renderPlaceLabels(data){
   gLabel.setAttribute('aria-hidden','true');
   const text=document.createElementNS('http://www.w3.org/2000/svg','text');
   text.setAttribute('text-anchor','middle');text.setAttribute('dominant-baseline','middle');text.textContent=name;
+  const leader=document.createElementNS('http://www.w3.org/2000/svg','line');
+  leader.setAttribute('x1','0');leader.setAttribute('y1','0');
+  leader.setAttribute('x2','0');leader.setAttribute('y2',String(-offset[1]+(offset[1]>0?10:-10)));
+  leader.setAttribute('class','place-label-leader');
+  gLabel.appendChild(leader);
   gLabel.appendChild(text);markers.appendChild(gLabel);
  }
 }
