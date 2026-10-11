@@ -281,7 +281,7 @@ function openCluster(index){
   const delta=e.clientY-startY;
   if(delta < -35)panel.classList.add('sheet-expanded');
   else if(delta > 35){panel.classList.remove('sheet-expanded');panel.scrollTop=0;}
-  else panel.classList.toggle('sheet-expanded');
+  else panel.classList.toggle('sheet-expanded');requestAnimationFrame(positionMobilePlaceCard);
  });
  panel.addEventListener('pointercancel',()=>{active=false;});
 })();
@@ -469,7 +469,7 @@ function renderDetail(){
  if(!p){$('#detail').innerHTML='';$('#detail').hidden=true;return;}
  $('#detail').hidden=false;$('#detail').classList.remove('sheet-expanded');$('#detail').scrollTop=0;const s=stage(p);
  $('#detail').innerHTML=`<div class="detail-head"><button class="detail-close" aria-label="關閉景點資訊">×</button><h2>${escapeHTML(p.name)}</h2><p>${escapeHTML(p.city)}</p></div><div class="detail-body"><div class="place-quick-info" aria-label="景點賞楓資訊摘要"><div class="quick-row"><strong>歷年賞楓時間</strong><span>${escapeHTML(p.dates||'尚無資料')}</span></div><div class="quick-row"><strong>最新楓況</strong><span>${escapeHTML(p.foliage?.observed_on?'觀測日期：'+p.foliage.observed_on:'請參考下方最新楓況與官方公告')}</span></div><div class="quick-row"><strong>楓葉品種</strong><span>${escapeHTML([...new Set(p.species||[])].join('、')||'樹種資料待補')}</span></div></div><details class="place-more-info"><summary>查看照片、楓況紀錄與詳細資訊</summary><div class="place-more-body">${latestBlock(p)}<section class="season-panel"><h3>歷年賞楓時間</h3><p class="reference-note">${escapeHTML(p.dates||'尚無資料')}</p>${historicalPhotosBlock(p)}</section>${relatedRoutesBlock(p)}${speciesBlock(p)}<section class="location-disclosure"><h3>位置與交通</h3><div class="location-info">${officialInfoLink(p)}${navigationLink(p)}${liveCamerasBlock(p)}</div></section><button class="save" type="button">${saved.has(p.id)?'★ 已收藏':'☆ 加入收藏'}</button></div></details></div>`;
- if(innerWidth<=700){$('#detail').querySelector('.detail-head')?.insertAdjacentHTML('afterbegin','<button type="button" class="sheet-grip" aria-label="點選展開或收合景點資訊"><span></span></button>');$('#detail').querySelector('.place-more-info')?.addEventListener('toggle',e=>{if(e.target.open)$('#detail').classList.add('sheet-expanded');});}
+ if(innerWidth<=700){$('#detail').querySelector('.detail-head')?.insertAdjacentHTML('afterbegin','<button type="button" class="sheet-grip" aria-label="點選展開或收合景點資訊"><span></span></button>');$('#detail').querySelector('.place-more-info')?.addEventListener('toggle',e=>{if(e.target.open)$('#detail').classList.add('sheet-expanded');else $('#detail').classList.remove('sheet-expanded');requestAnimationFrame(positionMobilePlaceCard);});requestAnimationFrame(positionMobilePlaceCard);}
  $('#detail').scrollTop=0;
  deduplicateDetailLinks($('#detail'));
  $('#detail').querySelectorAll('[data-section]').forEach(button=>{button.onclick=()=>{const target=$('#detail').querySelector('.'+button.dataset.section);if(target){if(target.tagName==='DETAILS')target.open=true;const head=$('#detail').querySelector('.detail-head');const container=$('#detail');container.scrollTop=Math.max(0,target.getBoundingClientRect().top-container.getBoundingClientRect().top+container.scrollTop-head.offsetHeight-10);}};});
@@ -480,6 +480,25 @@ function renderDetail(){
  $('.save').onclick=()=>{if(saved.has(p.id))saved.delete(p.id);else saved.add(p.id);try{localStorage.setItem('maple-saved',JSON.stringify([...saved]));}catch{}render();};
 }
 
+function positionMobilePlaceCard(){
+ if(innerWidth>700||!selected)return;
+ const card=document.querySelector('#detail');
+ const marker=[...document.querySelectorAll('#markers [data-id]')].find(el=>el.dataset.id===selected);
+ const map=document.querySelector('#map');
+ if(!card||card.hidden||!marker||!map)return;
+ const m=marker.getBoundingClientRect(),bounds=map.getBoundingClientRect();
+ const midX=m.left+m.width/2,midY=m.top+m.height/2;
+ const topLimit=Math.max(bounds.top+12,95),bottomLimit=Math.min(bounds.bottom-10,innerHeight-12);
+ const availableBelow=bottomLimit-(midY+28),availableAbove=(midY-28)-topLimit;
+ const below=availableBelow>=180||availableBelow>=availableAbove;
+ const space=Math.max(110,below?availableBelow:availableAbove);
+ const height=Math.min(card.classList.contains('sheet-expanded')?410:250,space);
+ const top=below?midY+28:midY-28-height;
+ const left=Math.max(8,Math.min(innerWidth-card.offsetWidth-8,midX-card.offsetWidth/2));
+ card.style.setProperty('--mobile-card-top',Math.round(top)+'px');
+ card.style.setProperty('--mobile-card-left',Math.round(left)+'px');
+ card.style.setProperty('--mobile-card-height',Math.round(height)+'px');
+}
 function choose(id){
  fittedView=false;selected=id;
  const p=places.find(p=>p.id===id);if(!p)return;
@@ -492,7 +511,7 @@ function choose(id){
  target.x=mapRect.left+(freeRight-mapRect.left)/2;
  target.y=innerWidth<=1050&&card.top>mapRect.top?mapRect.top+(card.top-mapRect.top)/2:mapRect.top+mapRect.height/2;
  const q=target.matrixTransform(svg.getScreenCTM().inverse());
- panX=q.x-400-(p.x-400)*scale;panY=q.y-450-(p.y-450)*scale;transform();
+ panX=q.x-400-(p.x-400)*scale;panY=q.y-450-(p.y-450)*scale;transform();if(innerWidth<=700)requestAnimationFrame(positionMobilePlaceCard);
 }
 $('#list').onclick=e=>{let el=e.target.closest('[data-id]');if(el)choose(el.dataset.id);};$('#markers').onclick=markerAction;$('#markers').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();markerAction(e);}};
 $('#region').onchange=e=>{region=e.target.value;county='all';populateCounties();selected=null;render();};$('#county').onchange=e=>{county=e.target.value;selected=null;render();};
