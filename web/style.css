@@ -901,3 +901,34 @@ body {
 
 /* Hide failed photo previews reliably across desktop and mobile. */
 .history-photo .photo-image-link[hidden],.history-photo .photo-source-fallback[hidden]{display:none!important}
+
+/* Mobile: show selected place details immediately without scrolling the webpage.
+   The sheet is viewport anchored, with independent internal scrolling. */
+@media screen and (max-width:700px){
+ section.map-area #map > #detail.detail:not([hidden]):has(> .detail-head){
+   position:fixed!important;
+   top:auto!important;
+   right:10px!important;
+   bottom:calc(76px + env(safe-area-inset-bottom))!important;
+   left:10px!important;
+   width:auto!important;
+   height:min(34dvh,290px)!important;
+   max-height:calc(100dvh - 130px - env(safe-area-inset-bottom))!important;
+   min-height:0!important;
+   transform:none!important;
+   z-index:1200!important;
+   overflow-x:hidden!important;
+   overflow-y:auto!important;
+   overscroll-behavior:contain;
+   -webkit-overflow-scrolling:touch;
+ }
+ section.map-area #map > #detail.detail.sheet-expanded:not([hidden]):has(> .detail-head){
+   height:calc(100dvh - 132px - env(safe-area-inset-bottom))!important;
+   max-height:calc(100dvh - 132px - env(safe-area-inset-bottom))!important;
+ }
+ section.map-area #map > #detail.detail .detail-head{
+   position:sticky;
+   top:0;
+   z-index:3;
+ }
+}
