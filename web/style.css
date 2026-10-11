@@ -864,3 +864,6 @@ body {
 .legend.season-color-legend .phase-end{background:#854a7c;color:#fff}
 .legend.season-color-legend .legend-unred{background:#80a36e}
 .legend.season-color-legend .legend-unknown{background:#9ca29d}
+
+/* Deep-zoom destination labels stay visually tied to their real marker. */
+.place-map-label .place-label-leader{stroke:#556b58;stroke-width:1.4px;stroke-linecap:round;opacity:.8;paint-order:normal}
