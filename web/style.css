@@ -891,3 +891,10 @@ body {
  }
  section.map-area #map > #detail.detail[hidden]{display:none!important}
 }
+
+/* Shared responsive historical photo source fallback; no broken-image boxes. */
+.photo-source-fallback{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:130px;padding:18px 12px;border:1px dashed #c9d2c6;border-radius:10px;background:#f3f6ef;text-align:center;color:#385242}
+.photo-source-fallback>span{font-size:24px;color:#809481}
+.photo-source-fallback p{margin:0;font-size:13px}
+.photo-source-fallback a{display:inline-block;color:#265c43;font-weight:700;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
+@media(max-width:700px){.photo-source-fallback{min-height:110px;padding:14px 10px}}
