@@ -691,3 +691,50 @@ body {
     margin-top:0;
   }
 }
+
+/* Mobile touch ergonomics: native momentum scrolling and content-sized clusters. */
+@media (max-width:700px) {
+  #sidebar,
+  #detail {
+    -webkit-overflow-scrolling:touch;
+    overscroll-behavior-y:contain;
+    touch-action:pan-y;
+    scroll-behavior:auto;
+  }
+  #sidebar { overflow-y:auto; }
+  #detail {
+    overflow-x:hidden;
+    overflow-y:auto;
+    max-height:min(76dvh,calc(100% - 110px));
+  }
+  #detail:has(> .cluster-list) {
+    height:auto;
+    max-height:min(68dvh,calc(100% - 110px));
+  }
+  #detail > .cluster-list { padding:18px 16px 16px; }
+  #detail .cluster-list h2 { margin:0 44px 6px 0; }
+  #detail .cluster-hint { margin:0 0 10px; }
+  #detail .cluster-place {
+    min-height:56px;
+    padding:10px 12px;
+    touch-action:manipulation;
+  }
+  #detail .cluster-list > .detail-close {
+    position:absolute;
+    top:12px;
+    right:12px;
+    display:grid;
+    place-items:center;
+    width:36px;
+    height:36px;
+    padding:0;
+    border:1px solid #d9ddcf;
+    border-radius:50%;
+    background:#fffdf7;
+    color:#304f40;
+    font:400 23px/1 Arial,sans-serif;
+  }
+  #sidebar button,
+  #detail button,
+  #mobile-list { touch-action:manipulation; }
+}
