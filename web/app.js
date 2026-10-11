@@ -210,6 +210,7 @@ function renderPlaceLabels(data){
  const occupied=[];
  const overlays=[...document.querySelectorAll('.map-controls,.legend,.map-toolbar')].filter(e=>e.getClientRects().length).map(e=>e.getBoundingClientRect());
  const point=(x,y)=>{const p=svg.createSVGPoint();p.x=x;p.y=y;return p.matrixTransform(matrix);};
+ const phone=window.matchMedia('(max-width:700px)').matches;
  const pins=markerGroups.map(g=>point(g.x,g.y));
  const hit=(a,b,p=5)=>a.left<b.right+p&&a.right>b.left-p&&a.top<b.bottom+p&&a.bottom>b.top-p;
  // Fixed county anchors use geographic coordinates, not averages of sightseeing spots.
