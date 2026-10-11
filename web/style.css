@@ -499,3 +499,40 @@ body {
   fill: #253c32;
   stroke: none;
 }
+
+/* 2026-10: mobile typography, compact navigation and clean cluster labels */
+@media (max-width:700px) {
+  .detail-head h2 { font-size:19px; line-height:1.4; overflow-wrap:anywhere; }
+  .detail-head p { font-size:13px; line-height:1.5; }
+  .detail-nav { gap:6px; }
+  .detail-nav button {
+    font-size:13px;
+    line-height:1.35;
+    min-height:42px;
+    padding:7px 5px;
+    white-space:normal;
+  }
+  .detail-body { font-size:14px; line-height:1.65; }
+  .detail-body h3 { font-size:16px; line-height:1.45; }
+  .detail-body p, .foliage-summary, .share-note, .reference-note {
+    font-size:14px;
+    line-height:1.65;
+    overflow-wrap:anywhere;
+  }
+  .detail-body .foliage-meta, .detail-body .share-source,
+  .detail-body .camera-note { font-size:12px; line-height:1.55; }
+  .detail-body a.share-button, .detail-body .official-links a {
+    font-size:14px;
+    line-height:1.4;
+    min-height:44px;
+  }
+  .detail-body .latest-panel .panel-title:empty { display:none; }
+}
+.marker .cluster-badge { pointer-events:none; }
+.marker .cluster-badge circle { fill:#fffef8; }
+.marker .cluster-badge .cluster-count {
+  font-size:11px;
+  font-weight:700;
+  fill:#253c32;
+  stroke:none;
+}
