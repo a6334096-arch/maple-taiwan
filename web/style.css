@@ -857,3 +857,10 @@ body {
 .area-map-label{pointer-events:none;user-select:none}
 .area-map-label text{font-family:system-ui,"Noto Sans TC",sans-serif;paint-order:stroke;stroke:#fffdf4;stroke-width:3.5px;stroke-linejoin:round;fill:#354d43;font-weight:700;font-size:14px}
 .area-map-label.area-town text{font-size:12px;font-weight:600;fill:#566452;stroke-width:3px}
+
+/* Match map legend swatches to the exact colors used by leafStage(). */
+.legend.season-color-legend .phase-start{background:#c6a43d;color:#1f281f;text-shadow:none}
+.legend.season-color-legend .phase-peak{background:#dc6030;color:#fff}
+.legend.season-color-legend .phase-end{background:#854a7c;color:#fff}
+.legend.season-color-legend .legend-unred{background:#80a36e}
+.legend.season-color-legend .legend-unknown{background:#9ca29d}
