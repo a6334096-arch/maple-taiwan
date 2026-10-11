@@ -872,7 +872,7 @@ body {
 @media (min-width:701px){
  section.map-area{position:relative;isolation:isolate}
  section.map-area > #map{position:relative;z-index:1}
- section.map-area > #detail.detail:not([hidden]){
+ section.map-area #map > #detail.detail:not([hidden]){
   display:block!important;
   position:absolute!important;
   z-index:50!important;
@@ -889,5 +889,5 @@ body {
   opacity:1!important;
   pointer-events:auto!important;
  }
- section.map-area > #detail.detail[hidden]{display:none!important}
+ section.map-area #map > #detail.detail[hidden]{display:none!important}
 }
