@@ -166,7 +166,7 @@ function renderMarkers(){
 }
 function renderPlaceLabels(data){
  const matrix=svg.getScreenCTM(),unit=matrix?Math.hypot(matrix.a,matrix.b):1;
- const labelUnit=innerWidth<=700?Math.max(unit,.65):1;
+ const labelUnit=innerWidth<=700?Math.max(unit,.01):1;
  const screen=(x,y)=>({x:matrix.a*((x-400)*scale+panX+400)+matrix.e,y:matrix.d*((y-450)*scale+panY+450)+matrix.f});
  const pins=markerGroups.map(g=>screen(g.x,g.y));
  const overlays=[document.querySelector('.map-controls'),document.querySelector('.legend.season-color-legend')].filter(Boolean).map(e=>e.getBoundingClientRect());
