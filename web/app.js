@@ -415,7 +415,7 @@ async function loadPlaces({refresh=false}={}){
     const responses=await Promise.all([fetch('places.json'),fetch('seasons.json',{cache:'no-store'}),fetch('foliage.json',{cache:'no-store'})]);
     if(responses.some(r=>!r.ok))throw new Error('無法讀取季節資料');
     const [base,references,foliageData]=await Promise.all(responses.map(r=>r.json()));
-    const data={mode:'seasonal',places:base.map(p=>{const r=references[p.id];return {...p,foliage:foliageData.foliage?.[p.id]||null,status:null,kind:'season-reference',season_months:r?.months||[],dates:r?.period||'尚無季節資料',season_in:r?.months? r.months.includes(Number(month.slice(5))):null,source:r?.source,source_url:r?.source_url,note:r?.note,checked_at:r?.checked_at};})};
+    const data={mode:'seasonal',places:base.map(p=>{const r=references[p.id];return {...p,foliage:foliageData.foliage?.[p.id]||null,status:null,kind:'season-reference',season_months:r?.months||[],dates:r?.period||(foliageData.foliage?.[p.id]?.observed_on||foliageData.foliage?.[p.id]?.reported_at?'歷年月份待確認':'尚無季節資料'),season_in:r?.months? r.months.includes(Number(month.slice(5))):null,source:r?.source,source_url:r?.source_url,note:r?.note,checked_at:r?.checked_at};})};
     if(ticket!==loadCounter)return;
         places=data.places;dataMode=data.mode;populateCounties();$('#directory-total').textContent=places.length;$('#about-total').textContent=places.length;
     $('.demo-pill').textContent='楓況＋季節參考';
