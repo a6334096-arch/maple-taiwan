@@ -490,29 +490,30 @@ function positionPlaceCard(){
  const matrix=world.getScreenCTM();
  if(!matrix)return;
  const point=pt.matrixTransform(matrix),bounds=map.getBoundingClientRect();
- const mobile=innerWidth<=700,gap=20;
+ const mobile=innerWidth<=700,gap=18;
+ const set=(key,value)=>card.style.setProperty(key,value,'important');
+ // Inline important declarations outrank all historical stylesheet rules.
+ set('right','auto');set('bottom','auto');set('transform','none');
+ set('min-height','0');set('overflow-y','auto');
  if(mobile){
-  const w=Math.min(320,innerWidth-24);
-  const left=Math.max(12,Math.min(innerWidth-w-12,point.x-w/2));
-  const topLimit=Math.max(bounds.top+8,75),bottomLimit=Math.min(bounds.bottom-8,innerHeight-8);
+  const width=Math.min(320,innerWidth-24);
+  const topLimit=Math.max(bounds.top+8,80),bottomLimit=Math.min(bounds.bottom-8,innerHeight-8);
   const above=point.y-gap-topLimit,below=bottomLimit-point.y-gap;
-  const desired=card.classList.contains('sheet-expanded')?Math.min(400,innerHeight*.55):210;
-  const useBelow=below>=desired||(below>=above&&below>=145);
-  const space=Math.max(100,useBelow?below:above);
-  const height=Math.min(desired,space);
+  const desired=card.classList.contains('sheet-expanded')?Math.min(400,innerHeight*.55):225;
+  const useBelow=below>=desired||(below>=above&&below>=150);
+  const height=Math.max(100,Math.min(desired,useBelow?below:above));
   const top=Math.max(topLimit,Math.min(bottomLimit-height,useBelow?point.y+gap:point.y-gap-height));
-  card.style.setProperty('--mobile-card-top',Math.round(top)+'px');
-  card.style.setProperty('--mobile-card-left',Math.round(left)+'px');
-  card.style.setProperty('--mobile-card-height',Math.round(height)+'px');
+  const left=Math.max(12,Math.min(innerWidth-width-12,point.x-width/2));
+  set('position','fixed');set('top',Math.round(top)+'px');set('left',Math.round(left)+'px');
+  set('width',width+'px');set('height',Math.round(height)+'px');set('max-height',Math.round(height)+'px');
  }else{
   const width=Math.min(340,Math.max(280,bounds.width*.34));
-  const right=bounds.right-point.x,leftSpace=point.x-bounds.left;
-  const toRight=right>=width+gap||right>=leftSpace;
+  const toRight=bounds.right-point.x>=width+gap||bounds.right-point.x>=point.x-bounds.left;
   const left=Math.max(bounds.left+12,Math.min(bounds.right-width-12,toRight?point.x+gap:point.x-gap-width));
   const top=Math.max(bounds.top+12,Math.min(bounds.bottom-180,point.y-40));
-  card.style.setProperty('--desktop-card-left',Math.round(left-bounds.left)+'px');
-  card.style.setProperty('--desktop-card-top',Math.round(top-bounds.top)+'px');
-  card.style.setProperty('--desktop-card-width',Math.round(width)+'px');
+  set('position','absolute');set('left',Math.round(left-bounds.left)+'px');
+  set('top',Math.round(top-bounds.top)+'px');set('width',Math.round(width)+'px');
+  set('height','auto');set('max-height','min(500px, calc(100% - 24px))');
  }
 }
 function positionMobilePlaceCard(){if(innerWidth<=700)positionPlaceCard();}
@@ -528,7 +529,7 @@ function choose(id){
  target.x=mapRect.left+(freeRight-mapRect.left)/2;
  target.y=mapRect.top+mapRect.height/2;
  const q=target.matrixTransform(svg.getScreenCTM().inverse());
- panX=q.x-400-(p.x-400)*scale;panY=q.y-450-(p.y-450)*scale;transform();requestAnimationFrame(()=>{positionMobilePlaceCard();positionDesktopPlaceCard();});
+ panX=q.x-400-(p.x-400)*scale;panY=q.y-450-(p.y-450)*scale;transform();positionPlaceCard();
 }
 $('#list').onclick=e=>{let el=e.target.closest('[data-id]');if(el)choose(el.dataset.id);};$('#markers').onclick=markerAction;$('#markers').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();markerAction(e);}};
 $('#region').onchange=e=>{region=e.target.value;county='all';populateCounties();selected=null;render();};$('#county').onchange=e=>{county=e.target.value;selected=null;render();};
