@@ -109,7 +109,7 @@ function renderForecastList(data){
 }
 $('#list').addEventListener('click',e=>{if(e.target.closest('#empty-reset'))clearFilters();});
 $('#travel-date').onchange=e=>{if(!e.target.value)return;month=e.target.value.slice(0,7);$('#month').value=month;loadPlaces();};
-$('.forecast-tabs').onclick=e=>{const b=e.target.closest('[data-list-mode]');if(!b)return;listMode=b.dataset.listMode;if(listMode==='recent'&&filter==='peak'){filter='all';document.querySelectorAll('[data-filter]').forEach(el=>el.classList.toggle('active',el.dataset.filter==='all'));}sortOrder=listMode==='recent'?'recent':'season';document.querySelectorAll('[data-list-mode]').forEach(el=>el.setAttribute('aria-pressed',String(el===b)));render();};
+$('.forecast-tabs').onclick=e=>{const b=e.target.closest('[data-list-mode]');if(!b)return;listMode=b.dataset.listMode;if(listMode==='recent'&&filter==='peak'){filter='all';document.querySelectorAll('[data-filter]').forEach(el=>el.classList.toggle('active',el.dataset.filter==='all'));}sortOrder=listMode==='recent'?'recent':'season';document.querySelectorAll('[data-list-mode]').forEach(el=>el.setAttribute('aria-pressed',String(el===b)));fitIsland();transform();render();};
 $('#close-list').onclick=()=>{if($('#sidebar').classList.contains('open'))$('#mobile-list').click();};
 let markerGroups=[];
 function groupNearbyPlaces(data,pixelsPerUnit){
