@@ -399,12 +399,28 @@ function photosBlock(p){
 }
 function historicalPhotosBlock(p){
  const seen=new Set();
- const photos=(p.historical_photos||[]).filter(o=>{const key=o.src||o.source_url;if(!key||seen.has(key))return false;seen.add(key);return true;});
- if(!photos.length)return `<div class="historical-photos"><h4>歷年秋色照片</h4><p class="share-note">尚未找到可直接展示且確認來源的秋色照片，待補。</p></div>`;
- const dateText=o=>o.date_kind==='captured'?`拍攝 ${o.date}`:o.date?`${o.date_kind==='source-updated'?'來源更新':'來源公告'} ${o.date}（拍攝日未標）`:'拍攝日期未標示';
- return `<div class="historical-photos"><h4>歷年秋色照片</h4><p class="share-note">歷年景觀參考，非目前楓況。已確認授權的照片可直接預覽並開啟大圖；其他照片請透過來源查看。</p>${photos.map(o=>`<figure class="history-photo">${p.name==='武陵農場' && o.source_url.includes('2020%20Maple%20Foliage') ? `<a class="photo-image-link" href="https://commons.wikimedia.org/wiki/Special:FilePath/2020_Maple_Foliage_at_Wuling_Farm_Taiwan.jpg" data-photo-title="${escapeHTML(o.title)}" data-photo-caption="${escapeHTML(dateText(o)+' · 攝影：'+o.author)}" data-photo-source="${escapeHTML(o.source_url)}"><img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/2020_Maple_Foliage_at_Wuling_Farm_Taiwan.jpg?width=640" alt="${escapeHTML(o.title)}" loading="lazy" decoding="async"><span class="photo-open-label">開啟大圖 ↗</span></a>` : `<div class="photo-source-fallback"><span aria-hidden="true">▧</span><p>本站照片尚未建檔</p><a href="${escapeHTML(o.source_url)}" target="_blank" rel="noopener noreferrer">前往原始照片／官方來源 ↗</a></div>`}<figcaption><p class="photo-date">${escapeHTML(o.title)} · ${escapeHTML(dateText(o))}</p><p class="photo-credit">來源：${escapeHTML(o.author||'原始網站')}</p>${o.note?`<p class="share-note">${escapeHTML(o.note)}</p>`:''}</figcaption></figure>`).join('')}</div>`;
-
+ const photos=(p.historical_photos||[]).filter(o=>{const key=o.source_url||o.src;if(!key||seen.has(key))return false;seen.add(key);return true;});
+ if(!photos.length)return '<div class="historical-photos"><h4>歷年秋色照片</h4><p class="share-note">目前尚無經確認可展示的歷年秋色照片；請參考官方資訊與旅遊文章。</p></div>';
+ const dateText=o=>o.date_kind==='captured'?'拍攝 '+o.date:o.date?(o.date_kind==='source-updated'?'來源更新':'來源公告')+' '+o.date+'（拍攝日未標）':'拍攝日期未標示';
+ const commonsName=o=>{try{const u=new URL(o.source_url);if(u.hostname!=='commons.wikimedia.org')return '';const file=decodeURIComponent(u.pathname.split('/File:')[1]||'');return file.replace(/ /g,'_');}catch{return '';}};
+ return `<div class="historical-photos"><h4>歷年秋色照片</h4><p class="share-note">歷年景觀參考，非即時楓況；點照片可查看大圖，載入失敗時可開啟原始來源。</p>${photos.map(o=>{
+  const filename=commonsName(o);
+  const src=filename?'https://commons.wikimedia.org/wiki/Special:Redirect/file/'+encodeURIComponent(filename)+'?width=640':o.original_image_url||'';
+  const large=filename?'https://commons.wikimedia.org/wiki/Special:FilePath/'+encodeURIComponent(filename):o.original_image_url||o.source_url;
+  const caption=dateText(o)+' · 攝影／來源：'+(o.author||'官方網站');
+  return `<figure class="history-photo"><a class="photo-image-link" href="${escapeHTML(large)}" data-photo-title="${escapeHTML(o.title)}" data-photo-caption="${escapeHTML(caption)}" data-photo-source="${escapeHTML(o.source_url)}"><img src="${escapeHTML(src)}" alt="${escapeHTML(o.title)}" loading="lazy" decoding="async"><span class="photo-open-label">開啟大圖 ↗</span></a><div class="photo-source-fallback" hidden><span aria-hidden="true">▧</span><p>此照片目前無法直接載入</p><a href="${escapeHTML(o.source_url)}" target="_blank" rel="noopener noreferrer">前往原始照片／官方來源 ↗</a></div><figcaption><p class="photo-date">${escapeHTML(o.title)} · ${escapeHTML(dateText(o))}</p><p class="photo-credit">攝影／來源：${escapeHTML(o.author||'官方網站')} · <a href="${escapeHTML(o.source_url)}" target="_blank" rel="noopener noreferrer">原始來源 ↗</a>${o.license_url?` · <a href="${escapeHTML(o.license_url)}" target="_blank" rel="noopener noreferrer">授權：${escapeHTML(o.license||'詳見來源')}</a>`:''}</p>${o.note?`<p class="share-note">${escapeHTML(o.note)}</p>`:''}</figcaption></figure>`;
+ }).join('')}</div>`;
 }
+// Lazy-loaded images can fail independently on mobile and desktop; keep a source link visible.
+document.addEventListener('error',e=>{
+ const img=e.target;
+ if(!(img instanceof HTMLImageElement)||!img.closest('.history-photo'))return;
+ const figure=img.closest('.history-photo');
+ const link=figure.querySelector('.photo-image-link');
+ const fallback=figure.querySelector('.photo-source-fallback');
+ if(link)link.hidden=true;
+ if(fallback)fallback.hidden=false;
+},true);
 function openPhotoViewer(link){
  const dialog=$('#photo-dialog');
  $('#photo-viewer-title').textContent=link.dataset.photoTitle;
