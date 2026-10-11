@@ -54,8 +54,10 @@ function matchesFilters(p){
  return normalize(text).includes(normalize(query))&&(region==='all'||p.region===region)&&(county==='all'||p.city.includes(county))&&matchesLeaf(p)&&(filter==='all'||filter==='best'&&peak||filter==='saved'&&saved.has(p.id));
 }
 function reportDate(p){return p.foliage?.observed_on||p.foliage?.reported_at||'';}
+function recencyRank(p){const o=p.foliage;if(!o||!Number.isInteger(o.status)||!stages[o.status])return 2;const date=reportDate(p);if(!/^\d{4}-\d{2}-\d{2}$/.test(date))return 2;const age=Math.floor((Date.now()-Date.parse(date+'T00:00:00+08:00'))/86400000);return !Number.isFinite(age)||age<0?2:age<=14?0:1;}
+function recencyLabel(p){return ['近期楓況','歷史楓況','尚無資料'][recencyRank(p)];}
 function orderPlaces(data){
- return data.map((p,index)=>({p,index})).sort((a,b)=>sortOrder==='season'?(Number(b.p.season_in===true)-Number(a.p.season_in===true)||a.index-b.index):sortOrder==='recent'?(reportDate(b.p).localeCompare(reportDate(a.p))||a.index-b.index):a.index-b.index).map(o=>o.p);
+ return data.map((p,index)=>({p,index})).sort((a,b)=>sortOrder==='season'?(Number(b.p.season_in===true)-Number(a.p.season_in===true)||a.index-b.index):sortOrder==='recent'?(recencyRank(a.p)-recencyRank(b.p)||reportDate(b.p).localeCompare(reportDate(a.p))||a.index-b.index):a.index-b.index).map(o=>o.p);
 }
 const visible=()=>orderPlaces(places.filter(matchesFilters));
 function syncFilterUI(){
@@ -79,17 +81,17 @@ $('#sort-order').onchange=e=>{sortOrder=e.target.value;render();};
 
 function render(){syncFilterUI();const data=visible();$('#count').textContent=`${data.length} 處`;$('#saved-count').textContent=places.filter(p=>saved.has(p.id)).length;renderForecastList(data);renderMarkers();if(!data.some(p=>p.id===selected))selected=null;renderDetail();}
 function renderForecastList(data){
- const groups=['北部','中部','南部','東部'];
+ const groups=listMode==='recent'?['近期楓況','歷史楓況','尚無資料']:['北部','中部','南部','東部'];
  const eligible=data.filter(p=>p.season_in===true).length;
  const best=data.filter(p=>foliageStage(p).name==='最佳觀賞').length;
  const partial=data.filter(p=>foliageStage(p).name==='初期變色').length;
- $('#forecast-summary').innerHTML=listMode==='seasonal'?`參考季節內 <b>${eligible}</b> 處 · 共 <b>${data.length}</b> 處`:`盛期 <b>${best}</b> 處 · 轉色中 <b>${partial}</b> 處`;
+ $('#forecast-summary').innerHTML=listMode==='seasonal'?`參考季節內 <b>${eligible}</b> 處 · 共 <b>${data.length}</b> 處`:`近期 <b>${data.filter(p=>recencyRank(p)===0).length}</b> 處 · 歷史 <b>${data.filter(p=>recencyRank(p)===1).length}</b> 處 · 尚無資料 <b>${data.filter(p=>recencyRank(p)===2).length}</b> 處`;
  $('.forecast-heading h2').textContent=listMode==='seasonal'?'賞楓季節清單':'近期楓況清單';
- $('#list').innerHTML=data.length?groups.map(r=>{const items=data.filter(p=>p.region===r);return items.length?`<section class="forecast-region"><h3>${r}景點</h3>`+items.map(p=>{
+ $('#list').innerHTML=data.length?groups.map(r=>{const items=data.filter(p=>listMode==='recent'?recencyLabel(p)===r:p.region===r);return items.length?`<section class="forecast-region"><h3>${listMode==='recent'?r:r+'景點'}</h3>`+items.map(p=>{
   const state=listMode==='seasonal'?stage(p):leafStage(p),leaf=leafStage(p);
   const meta=listMode==='recent'?reportDate(p):'';
-  const caption=meta?'紀錄 '+meta:'尚無近期紀錄';
-  const quiet=listMode==='seasonal'?p.season_in!==true:state.color===unknownStage.color;
+  const caption=meta?(recencyRank(p)===0?'近期更新 ':'歷史紀錄 ')+meta:'尚無資料';
+  const quiet=listMode==='seasonal'?p.season_in!==true:recencyRank(p)!==0;
   return `<button class="forecast-row ${quiet?'quiet':''} ${selected===p.id?'selected':''}" data-id="${escapeHTML(p.id)}" aria-label="${escapeHTML(p.name+'，'+p.city+'，'+leaf.name+'，'+p.dates)}"><span class="forecast-swatch ${leaf.stale?'stale-leaf':''}" style="color:${leaf.color};background:${leaf.bg}" title="${escapeHTML(leaf.name)}" aria-hidden="true"><svg viewBox="-26 -26 52 52">${markerLeaf(p,leaf.color)}</svg></span><span class="forecast-place"><strong>${escapeHTML(p.name)}</strong><small>${escapeHTML(p.city)}${listMode==='recent'?`<span class="row-report-date">${escapeHTML(caption)}</span>`:leaf.stale?'<span class="row-report-date">葉色：舊紀錄待更新</span>':''}</small></span><span class="forecast-period">${escapeHTML(listMode==='seasonal'?p.dates:state.name)}</span></button>`;
  }).join('')+'</section>':'';}).join(''):'<div class="empty"><strong>目前沒有符合條件的景點</strong><p>可清除篩選，或切換歷年季節查看其他月份。</p><button id="empty-reset">清除篩選</button></div>';
 }
