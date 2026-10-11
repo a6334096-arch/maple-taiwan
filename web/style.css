@@ -998,3 +998,34 @@ body {
  }
  section.map-area #map > #detail.detail .detail-head{position:sticky;top:0;z-index:3;background:#fffdf7}
 }
+
+/* Final position authority: override historical fixed sidebar/bottom-sheet declarations. */
+@media(min-width:701px){
+ section.map-area #map > #detail.detail:not([hidden]):has(> .detail-head){
+  position:absolute!important;
+  top:var(--desktop-card-top,90px)!important;
+  left:var(--desktop-card-left,20px)!important;
+  right:auto!important;
+  bottom:auto!important;
+  width:var(--desktop-card-width,360px)!important;
+  height:fit-content!important;
+  max-height:min(520px,calc(100% - 30px))!important;
+  min-height:0!important;
+  transform:none!important;
+ }
+}
+@media(max-width:700px){
+ section.map-area #map > #detail.detail:not([hidden]):has(> .detail-head),
+ section.map-area #map > #detail.detail.sheet-expanded:not([hidden]):has(> .detail-head){
+  position:fixed!important;
+  top:var(--mobile-card-top,38vh)!important;
+  left:var(--mobile-card-left,12px)!important;
+  right:auto!important;
+  bottom:auto!important;
+  width:min(340px,calc(100vw - 24px))!important;
+  height:var(--mobile-card-height,240px)!important;
+  max-height:var(--mobile-card-height,240px)!important;
+  min-height:0!important;
+  transform:none!important;
+ }
+}
