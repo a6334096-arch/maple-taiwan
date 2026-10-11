@@ -207,69 +207,7 @@ function renderPlaceLabels(data){
   return;
  }
 
- const matrix=svg.getScreenCTM(),unit=matrix?Math.hypot(matrix.a,matrix.b):1;
- const labelUnit=innerWidth<=700?Math.max(unit,.01):1;
- const screen=(x,y)=>({x:matrix.a*((x-400)*scale+panX+400)+matrix.e,y:matrix.d*((y-450)*scale+panY+450)+matrix.f});
- const pins=markerGroups.map(g=>screen(g.x,g.y));
- const overlays=[document.querySelector('.map-controls'),document.querySelector('.legend.season-color-legend')].filter(Boolean).map(e=>e.getBoundingClientRect());
- const bounds=svg.getBoundingClientRect();
- const occupiedGeography=[];
- function free(x,y,width,height){
-  const box={left:x-width/2,right:x+width/2,top:y-height/2,bottom:y+height/2};
-  if(box.left<bounds.left+6||box.right>bounds.right-6||box.top<bounds.top+6||box.bottom>bounds.bottom-6)return false;
-  if(overlays.some(b=>box.left<b.right+5&&box.right>b.left-5&&box.top<b.bottom+5&&box.bottom>b.top-5))return false;
-  if(pins.some(p=>Math.abs(p.x-x)<width/2+23&&Math.abs(p.y-y)<height/2+24))return false;
-  if(occupiedGeography.some(b=>box.left<b.right+8&&box.right>b.left-8&&box.top<b.bottom+8&&box.bottom>b.top-8))return false;
-  occupiedGeography.push(box);return true;
- }
- const counties=new Map();
- for(const p of data)for(const name of p.city.match(/[^・／]+?[縣市]/g)||[]){const group=counties.get(name)||[];group.push(p);counties.set(name,group);}
- $('#county-labels').innerHTML=[...counties].map(([name,items])=>{
-  const x=items.reduce((a,p)=>a+p.x,0)/items.length,y=items.reduce((a,p)=>a+p.y,0)/items.length;
-  const c=screen(x,y+27/scale);
-  if(!free(c.x,c.y,name.length*14+8,20))return '';
-  return `<g class="county-label" transform="translate(${x} ${y})"><text transform="scale(${1/(scale*labelUnit)})" y="${27}" text-anchor="middle">${escapeHTML(name)}</text></g>`;
- }).join('');
- $('#town-labels').replaceChildren();
- if(scale>=3){
-  const towns=new Map();
-  for(const p of data){const names=p.city.split(/[・／]/).map(n=>n.trim()).filter(n=>/[鄉鎮區]$/.test(n));for(const name of names){const key=(p.city.match(/[^・／]+?[縣市]/)||[p.region])[0]+'／'+name,group=towns.get(key)||[];group.push(p);towns.set(key,group);}}
-  $('#town-labels').innerHTML=[...towns].map(([key,items])=>{
-   const name=key.split('／')[1],x=items.reduce((a,p)=>a+p.x,0)/items.length,y=items.reduce((a,p)=>a+p.y,0)/items.length;
-   const c=screen(x,y-27/scale);
-   if(!free(c.x,c.y,name.length*12+8,18))return '';
-   return `<g class="town-label" transform="translate(${x} ${y})"><text transform="scale(${1/(scale*labelUnit)})" y="${-27}" text-anchor="middle">${escapeHTML(name)}</text></g>`;
-  }).join('');
- }
- const occupied=[];
- const rect=svg.getBoundingClientRect();
- const svgMatrix=svg.getScreenCTM();
- const pxPerUnit=svgMatrix?Math.hypot(svgMatrix.a,svgMatrix.b)*scale:scale;
- const phone=innerWidth<=700;
- const overlays=[document.querySelector('.map-controls'),document.querySelector('.legend.season-color-legend'),document.querySelector('.map-toolbar')].filter(Boolean).map(el=>el.getBoundingClientRect());
- const markerCenters=markerGroups.map(g=>({x:svgMatrix.a*((g.x-400)*scale+panX+400)+svgMatrix.e,y:svgMatrix.d*((g.y-450)*scale+panY+450)+svgMatrix.f}));
- function intersects(a,b,pad=4){return a.left<b.right+pad&&a.right>b.left-pad&&a.top<b.bottom+pad&&a.bottom>b.top-pad;}
- for(const g of markerGroups){
-  if(g.items.length!==1||g.items[0].id===selected)continue;
-  const p=g.items[0],label=p.name.length>18?p.name.slice(0,17)+'…':p.name;
-  const width=Math.min(phone?190:210,label.length*(phone?13:12)+12),height=phone?23:20;
-  const x=svgMatrix.a*((g.x-400)*scale+panX+400)+svgMatrix.e;
-  const y=svgMatrix.d*((g.y-450)*scale+panY+450)+svgMatrix.f;
-  // Prefer below the pin, then above or to either side if UI obscures it.
-  const choices=[{dx:0,dy:42},{dx:0,dy:-42},{dx:width/2+28,dy:3},{dx:-width/2-28,dy:3}];
-  let chosen=null;
-  for(const c of choices){
-   const box={left:x+c.dx-width/2,right:x+c.dx+width/2,top:y+c.dy-height/2,bottom:y+c.dy+height/2};
-   if(box.left<rect.left+5||box.right>rect.right-5||box.top<rect.top+5||box.bottom>rect.bottom-5)continue;
-   if(overlays.some(o=>intersects(box,o,3))||occupied.some(o=>intersects(box,o,5))||occupiedGeography.some(o=>intersects(box,o,5)))continue;
-   if(markerCenters.some(m=>Math.hypot(m.x-x,m.y-y)>3&&intersects(box,{left:m.x-19,right:m.x+19,top:m.y-19,bottom:m.y+19},3)))continue;
-   chosen={c,box};break;
-  }
-  if(!chosen)continue;
-  occupied.push(chosen.box);
-  const dx=chosen.c.dx/pxPerUnit,dy=chosen.c.dy/pxPerUnit;
-  $('#markers').insertAdjacentHTML('beforeend',`<g class="place-map-label" transform="translate(${g.x} ${g.y})" aria-hidden="true"><text transform="scale(${1/(scale*labelUnit)})" x="${dx*scale*labelUnit}" y="${dy*scale*labelUnit}" text-anchor="middle" dominant-baseline="middle">${escapeHTML(label)}</text></g>`);
- }
+
 }
 function openCluster(index){
  const g=markerGroups[index];if(!g)return;const items=[...g.items];selected=null;scale=Math.min(10,scale*2);panX=-(g.x-400)*scale;panY=-(g.y-450)*scale;transform();
