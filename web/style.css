@@ -651,3 +651,43 @@ body {
   .detail .foliage-panel { margin-top:14px; }
   .detail .latest-panel { margin-bottom:12px; }
 }
+
+/* Mobile detail refinements: readable close control and compact section rhythm. */
+@media (max-width:700px) {
+  #detail .detail-head { position:sticky; }
+  #detail .detail-head > .detail-close {
+    display:grid;
+    place-items:center;
+    position:absolute;
+    top:12px;
+    right:12px;
+    width:36px;
+    height:36px;
+    min-width:36px;
+    min-height:36px;
+    padding:0 0 2px;
+    border:1px solid #d9ddcf;
+    border-radius:50%;
+    background:#fffdf7;
+    color:#304f40;
+    box-shadow:0 1px 3px #253c3212;
+    font:400 23px/1 Arial,sans-serif;
+    -webkit-appearance:none;
+    appearance:none;
+  }
+  #detail .detail-head > .detail-close:focus-visible {
+    outline:2px solid #3a5948;
+    outline-offset:2px;
+  }
+  #detail .detail-body > .latest-panel {
+    margin-bottom:0;
+    padding-bottom:12px;
+  }
+  #detail .detail-body > .season-panel {
+    margin-top:12px;
+    padding-top:12px;
+  }
+  #detail .detail-body > .season-panel > h3 {
+    margin-top:0;
+  }
+}
