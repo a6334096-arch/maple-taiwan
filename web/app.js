@@ -114,7 +114,7 @@ function groupNearbyPlaces(data,pixelsPerUnit){
 }
 function clusterLeaves(items){
  const colors=[...new Set(items.map(p=>leafStage(p).color))];
- return colors.map((color,index)=>`<g transform="translate(${colors.length===1?-6:-10+index*5} 0) scale(${colors.length===1?1:.72})">${markerLeaf(items.find(p=>leafStage(p).color===color),color)}</g>`).join('');
+ return colors.map((color,index)=>`<g transform="translate(${colors.length===1?-5:-9+index*4} -2) scale(${colors.length===1?.86:.65})">${markerLeaf(items.find(p=>leafStage(p).color===color),color)}</g>`).join('');
 }
 function renderMarkers(){
  const data=visible();
@@ -126,7 +126,7 @@ function renderMarkers(){
  markerGroups=groupNearbyPlaces(data,scale*unit);
  $('#markers').innerHTML=markerGroups.map((g,i)=>{
   const p=g.items[0],cluster=g.items.length>1,s=cluster?clusterStage(g.items):leafStage(p),sel=g.items.some(p=>p.id===selected);
-  return `<g class="marker ${sel?'selected':''}" ${cluster?`data-cluster="${i}"`:`data-id="${escapeHTML(p.id)}"`} transform="translate(${g.x},${g.y})" tabindex="0" role="button" aria-label="${cluster?`${g.items.length} 處鄰近景點，${s.name}，點選展開`:escapeHTML(p.name)+'，地圖代表：'+escapeHTML(representativeSpecies(p)||'品種待確認')+'，'+s.name}"><title>${g.items.map(p=>escapeHTML(p.name)+'（'+escapeHTML(p.city)+'）｜代表：'+escapeHTML(representativeSpecies(p)||'品種待確認')+'｜'+leafStage(p).name).join('、')}</title><g transform="scale(${markerScale})"><circle class="marker-hit" r="22" fill="transparent" stroke="none"/><circle class="marker-disc" r="${phone?(cluster?16:14):(cluster?24:22)}" fill="${cluster?'#fffef8':s.bg}" ${s.stale?'stroke="#7b8175" stroke-width="1.5" stroke-dasharray="3 2"':''}/>${cluster?clusterLeaves(g.items):markerLeaf(p,s.color)}${cluster?`<text class="cluster-count" x="7" y="4" text-anchor="middle">${g.items.length}</text>`:''}</g></g>`;
+  return `<g class="marker ${sel?'selected':''}" ${cluster?`data-cluster="${i}"`:`data-id="${escapeHTML(p.id)}"`} transform="translate(${g.x},${g.y})" tabindex="0" role="button" aria-label="${cluster?`${g.items.length} 處鄰近景點，${s.name}，點選展開`:escapeHTML(p.name)+'，地圖代表：'+escapeHTML(representativeSpecies(p)||'品種待確認')+'，'+s.name}"><title>${g.items.map(p=>escapeHTML(p.name)+'（'+escapeHTML(p.city)+'）｜代表：'+escapeHTML(representativeSpecies(p)||'品種待確認')+'｜'+leafStage(p).name).join('、')}</title><g transform="scale(${markerScale})"><circle class="marker-hit" r="22" fill="transparent" stroke="none"/><circle class="marker-disc" r="${phone?(cluster?16:14):(cluster?24:22)}" fill="${cluster?'#fffef8':s.bg}" ${s.stale?'stroke="#7b8175" stroke-width="1.5" stroke-dasharray="3 2"':''}/>${cluster?clusterLeaves(g.items):markerLeaf(p,s.color)}${cluster?`<g class="cluster-badge"><circle cx="11" cy="11" r="9"/><text class="cluster-count" x="11" y="14" text-anchor="middle">${g.items.length}</text></g>`:''}</g></g>`;
  }).join('');
  renderPlaceLabels(data);
  const chosen=data.find(p=>p.id===selected);
@@ -168,7 +168,7 @@ function markerAction(e){const el=e.target.closest('[data-cluster],[data-id]');i
 $('#detail').addEventListener('click',e=>{const p=e.target.closest('[data-place]');if(p)choose(p.dataset.place);});
 function foliageBlock(p){
  const o=p.foliage;
- if(!o)return `<section class="foliage-panel"><div class="panel-title"><h3>最新楓葉狀況</h3><span class="badge" style="--c:#7d877d;--bg:#edf0eb">尚無資料</span></div><p class="foliage-summary">目前楓況尚無資料</p><p class="foliage-meta">尚未確認有日期與來源的近期紀錄；一般賞楓月份不代表現在已轉紅。</p></section>`;
+ if(!o)return `<section class="foliage-panel"><div class="panel-title"><h3>最新楓葉狀況</h3><span class="badge" style="--c:#7d877d;--bg:#edf0eb">尚無資料</span></div><p class="foliage-summary">目前楓況尚無資料</p><p class="foliage-meta">尚無近期可靠紀錄；賞楓月份僅供參考。</p></section>`;
  const status=reportStage(p,o.status)||unknownStage;
  const referenceDate=o.observed_on||o.reported_at;
  const days=Math.floor((Date.now()-Date.parse(referenceDate+'T00:00:00+08:00'))/86400000);
@@ -187,7 +187,7 @@ function blogPhotosBlock(p){
 function latestBlock(p){
  const observation=p.foliage?foliageBlock(p).replace(/<h3>.*?<\/h3>/,''):'';
  const shares=photosBlock(p).replace(/<div class="panel-title">.*?<\/div>/,'');
- return `<section class="latest-panel"><h3>最新楓況與現場分享</h3>${observation}${shares}${blogPhotosBlock(p)}</section>`;
+ return `<section class="latest-panel"><h3>近期楓況與分享</h3>${observation}${shares}${blogPhotosBlock(p)}</section>`;
 }
 function viewingAreasBlock(p,group){
  const areas=(p.viewing_areas||[]).filter(a=>a.group===group);
@@ -274,7 +274,7 @@ function photosBlock(p){
   const thumb=o.thumbnail_url&&o.thumbnail_permission&&/^https:\/\//.test(o.thumbnail_url)?o.thumbnail_url:null;
   return `<article class="share-card"><a class="share-preview" href="${escapeHTML(publicShareUrl(o.url))}" target="_blank" rel="noopener noreferrer">${thumb?`<img src="${escapeHTML(thumb)}" alt="${escapeHTML(o.title||p.name+'現場分享')}" loading="lazy" decoding="async" referrerpolicy="no-referrer"><span class="share-image-fallback" hidden>📷 查看原始貼文照片 ↗</span>`:'<span>📷 查看原始貼文照片 ↗</span>'}</a><div class="share-caption"><strong>${escapeHTML(o.title||'現場分享')}</strong><p>貼文日期：${escapeHTML(o.published_on)}${o.observed_on?` · 拍攝日期：${escapeHTML(o.observed_on)}`:' · 拍攝日期未標示'}</p><p>來源：${escapeHTML(o.source)}</p>${stale?'<p class="foliage-warning">這則分享已超過 14 天，請查看較新的貼文。</p>':''}</div></article>`;
  }).join('');
- return `<section class="photos-panel"><div class="panel-title"><h3>最新現場分享</h3><span class="share-label">${records.length?'公開貼文':'官方入口'}</span></div>${cards||'<p class="share-empty">尚無近期賞楓貼文</p>'}${fb?`<a class="share-button" href="${escapeHTML(fb)}" target="_blank" rel="noopener noreferrer">${p.official_facebook_kind==='recommended'?'查看官方推薦 Facebook 分享':'查看官方 Facebook 現場分享'} ↗</a><p class="share-source">來源：${escapeHTML(p.official_facebook_name||p.name+'官方 Facebook')}</p>`:''}${additional}<p class="share-note">開啟原站查看照片與發文日期；Facebook 可能需要登入。此入口不代表已有最新楓況。</p></section>`;
+ return `<section class="photos-panel"><div class="panel-title"><h3>最新現場分享</h3><span class="share-label">${records.length?'公開貼文':'官方入口'}</span></div>${cards||'<p class="share-empty">尚無近期賞楓貼文</p>'}${fb?`<a class="share-button" href="${escapeHTML(fb)}" target="_blank" rel="noopener noreferrer">${p.official_facebook_kind==='recommended'?'查看官方推薦 Facebook 分享':'查看官方 Facebook 現場分享'} ↗</a><p class="share-source">來源：${escapeHTML(p.official_facebook_name||p.name+'官方 Facebook')}</p>`:''}${additional}<p class="share-note">可至原站查看貼文日期與照片；Facebook 可能需要登入。</p></section>`;
 }
 function historicalPhotosBlock(p){
  const seen=new Set();
@@ -329,10 +329,11 @@ function deduplicateDetailLinks(root){
 function renderDetail(){
  let p=places.find(p=>p.id===selected);
  if(!p){$('#detail').innerHTML='';$('#detail').hidden=true;return;}
- $('#detail').hidden=false;const s=stage(p);
+ $('#detail').hidden=false;$('#detail').scrollTop=0;const s=stage(p);
  $('#detail').innerHTML=`<div class="detail-head"><button class="detail-close" aria-label="關閉景點資訊">×</button><h2>${escapeHTML(p.name)}</h2><p>${escapeHTML(p.city)}</p><nav class="detail-nav" aria-label="景點資訊區塊"><button data-section="latest-panel">楓況與分享</button><button data-section="season-panel">歷年時間</button><button data-section="species-panel">品種</button><button data-section="location-disclosure">官方資訊</button></nav></div><div class="detail-body">${latestBlock(p)}<section class="season-panel"><h3>歷年賞楓時間</h3><p class="reference-note">${escapeHTML(p.dates||'尚無資料')}</p>${historicalPhotosBlock(p)}</section>${relatedRoutesBlock(p)}${speciesBlock(p)}<section class="location-disclosure"><h3>位置與交通</h3><div class="location-info">${navigationLink(p)}${officialInfoLink(p)}${liveCamerasBlock(p)}</div></section><button class="save" type="button">${saved.has(p.id)?'★ 已收藏':'☆ 加入收藏'}</button></div>`;
+ $('#detail').scrollTop=0;
  deduplicateDetailLinks($('#detail'));
- $('#detail').querySelectorAll('[data-section]').forEach(button=>{button.onclick=()=>{const target=$('#detail').querySelector('.'+button.dataset.section);if(target){if(target.tagName==='DETAILS')target.open=true;const head=$('#detail').querySelector('.detail-head');const container=$('#detail');container.scrollTop=target.offsetTop-head.offsetHeight-14;}};});
+ $('#detail').querySelectorAll('[data-section]').forEach(button=>{button.onclick=()=>{const target=$('#detail').querySelector('.'+button.dataset.section);if(target){if(target.tagName==='DETAILS')target.open=true;const head=$('#detail').querySelector('.detail-head');const container=$('#detail');container.scrollTop=Math.max(0,target.getBoundingClientRect().top-container.getBoundingClientRect().top+container.scrollTop-head.offsetHeight-10);}};});
  $('#detail').querySelectorAll('.share-preview img').forEach(img=>{img.onerror=()=>{img.hidden=true;img.nextElementSibling.hidden=false;};});
  $('#detail').querySelectorAll('.history-photo img').forEach(img=>{img.onerror=()=>{img.closest('.photo-image-link').hidden=true;img.closest('.history-photo').querySelector('.photo-unavailable').hidden=false;};});
  $('#detail').querySelectorAll('.photo-image-link').forEach(link=>{link.onclick=e=>{e.preventDefault();openPhotoViewer(link);};});
