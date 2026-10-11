@@ -137,7 +137,21 @@ function renderMarkers(){
  const unit=matrix?Math.hypot(matrix.a,matrix.b):1;
  const markerScale=1/(scale*unit);
  const phone=window.matchMedia('(max-width:700px)').matches;
- markerGroups=groupNearbyPlaces(data,scale*unit,phone?48:64);
+ markerGroups=scale>=7?data.map(p=>({items:[p],x:p.x,y:p.y})):groupNearbyPlaces(data,scale*unit,phone?48:64);
+ // At high zoom, spread coincident pins instead of permanently clustering them.
+ if(scale>=7){
+  const placed=[];
+  for(const g of markerGroups){
+   const originalX=g.x,originalY=g.y;
+   for(let step=0;step<20;step++){
+    const radius=step===0?0:Math.ceil(step/8)*30/(scale*unit);
+    const angle=step*2.399963229728653;
+    const x=originalX+radius*Math.cos(angle),y=originalY+radius*Math.sin(angle);
+    if(placed.every(q=>Math.hypot(q.x-x,q.y-y)*scale*unit>=34)){g.x=x;g.y=y;break;}
+   }
+   placed.push({x:g.x,y:g.y});
+  }
+ }
  $('#markers').innerHTML=markerGroups.map((g,i)=>{
   const p=g.items[0],cluster=g.items.length>1,s=cluster?clusterStage(g.items):leafStage(p),sel=g.items.some(p=>p.id===selected);
   return `<g class="marker ${sel?'selected':''}" ${cluster?`data-cluster="${i}"`:`data-id="${escapeHTML(p.id)}"`} transform="translate(${g.x},${g.y})" tabindex="0" role="button" aria-label="${cluster?`${g.items.length} 處鄰近景點，${s.name}，點選展開`:escapeHTML(p.name)+'，地圖代表：'+escapeHTML(representativeSpecies(p)||'品種待確認')+'，'+s.name}"><title>${g.items.map(p=>escapeHTML(p.name)+'（'+escapeHTML(p.city)+'）｜代表：'+escapeHTML(representativeSpecies(p)||'品種待確認')+'｜'+leafStage(p).name).join('、')}</title><g transform="scale(${markerScale})"><circle class="marker-hit" r="22" fill="transparent" stroke="none"/><circle class="marker-disc" r="${phone?(cluster?16:14):(cluster?24:22)}" fill="${cluster?'#fffef8':s.bg}" ${s.stale?'stroke="#7b8175" stroke-width="1.5" stroke-dasharray="3 2"':''}/>${cluster?clusterLeaves(g.items):markerLeaf(p,s.color)}${cluster?`<g class="cluster-badge"><circle cx="11" cy="11" r="9"/><text class="cluster-count" x="11" y="14" text-anchor="middle">${g.items.length}</text></g>`:''}</g></g>`;
@@ -176,8 +190,8 @@ function renderPlaceLabels(data){
   if(g.items.length!==1||g.items[0].id===selected)continue;
   const p=g.items[0],label=p.name.length>18?p.name.slice(0,17)+'…':p.name;
   const width=Math.min(phone?145:210,label.length*(phone?10:12)+12),height=phone?17:20;
-  const x=svgMatrix.a*((p.x-400)*scale+panX+400)+svgMatrix.e;
-  const y=svgMatrix.d*((p.y-450)*scale+panY+450)+svgMatrix.f;
+  const x=svgMatrix.a*((g.x-400)*scale+panX+400)+svgMatrix.e;
+  const y=svgMatrix.d*((g.y-450)*scale+panY+450)+svgMatrix.f;
   // Prefer below the pin, then above or to either side if UI obscures it.
   const choices=[{dx:0,dy:36},{dx:0,dy:-33},{dx:width/2+24,dy:3},{dx:-width/2-24,dy:3}];
   let chosen=null;
@@ -191,7 +205,7 @@ function renderPlaceLabels(data){
   if(!chosen)continue;
   occupied.push(chosen.box);
   const dx=chosen.c.dx/pxPerUnit,dy=chosen.c.dy/pxPerUnit;
-  $('#markers').insertAdjacentHTML('beforeend',`<g class="place-map-label" transform="translate(${p.x} ${p.y})" aria-hidden="true"><text transform="scale(${1/scale})" x="${dx*scale}" y="${dy*scale}" text-anchor="middle" dominant-baseline="middle">${escapeHTML(label)}</text></g>`);
+  $('#markers').insertAdjacentHTML('beforeend',`<g class="place-map-label" transform="translate(${g.x} ${g.y})" aria-hidden="true"><text transform="scale(${1/scale})" x="${dx*scale}" y="${dy*scale}" text-anchor="middle" dominant-baseline="middle">${escapeHTML(label)}</text></g>`);
  }
 }
 function openCluster(index){
