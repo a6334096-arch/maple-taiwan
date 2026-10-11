@@ -251,6 +251,38 @@ function renderPlaceLabels(data){
    return;
   }
  };
+ // Give destination names first priority; keep overview uncluttered.
+ const showPlaceNames=px>=.48;
+ if(showPlaceNames)for(let i=0;i<markerGroups.length;i++){
+  const g=markerGroups[i];
+  if(g.items.length!==1||g.items[0].id===selected)continue;
+  const name=g.items[0].name,p=pins[i];
+  const width=Math.min(240,Math.max(50,[...name].length*13+16)),height=24;
+  let offset=null;
+  for(const [dx,dy] of [[0,31],[0,-31],[34,0],[-34,0],[0,52],[0,-52]]){
+   const box={left:p.x+dx-width/2,right:p.x+dx+width/2,top:p.y+dy-height/2,bottom:p.y+dy+height/2};
+   if(box.left<bounds.left+6||box.right>bounds.right-6||box.top<bounds.top+6||box.bottom>bounds.bottom-6)continue;
+   if(overlays.some(o=>hit(box,o))||occupied.some(o=>hit(box,o,8)))continue;
+   if(pins.some((q,j)=>j!==i&&hit(box,{left:q.x-24,right:q.x+24,top:q.y-24,bottom:q.y+24})))continue;
+   offset=[dx,dy,box];break;
+  }
+  if(!offset)continue;
+  occupied.push(offset[2]);
+  const gLabel=document.createElementNS('http://www.w3.org/2000/svg','g');
+  gLabel.setAttribute('class','place-map-label');
+  gLabel.setAttribute('transform',`translate(${g.x} ${g.y}) scale(${1/px}) translate(${offset[0]} ${offset[1]})`);
+  gLabel.setAttribute('pointer-events','none');
+  gLabel.setAttribute('aria-hidden','true');
+  const text=document.createElementNS('http://www.w3.org/2000/svg','text');
+  text.setAttribute('text-anchor','middle');text.setAttribute('dominant-baseline','middle');text.textContent=name;
+  const leader=document.createElementNS('http://www.w3.org/2000/svg','line');
+  leader.setAttribute('x1','0');leader.setAttribute('y1','0');
+  leader.setAttribute('x2','0');leader.setAttribute('y2',String(-offset[1]+(offset[1]>0?10:-10)));
+  leader.setAttribute('class','place-label-leader');
+  gLabel.appendChild(leader);
+  gLabel.appendChild(text);markers.appendChild(gLabel);
+ }
+ // Geographic administrative names fill only remaining space after destinations.
  if(px>=.55){
   for(const [county,[lon,lat]] of Object.entries(countyCenters)){
    if(!countyKeys.has(county))continue;
@@ -274,37 +306,7 @@ function renderPlaceLabels(data){
    addAreaLabel(key.split('|')[1],'town',p.x,p.y);
   }
  }
- // On overview show symbols only; names progressively appear as the user zooms.
- if(px<.75)return;
- for(let i=0;i<markerGroups.length;i++){
-  const g=markerGroups[i];
-  if(g.items.length!==1||g.items[0].id===selected)continue;
-  const name=g.items[0].name,p=pins[i];
-  const width=Math.min(240,Math.max(50,[...name].length*13+16)),height=24;
-  let offset=null;
-  for(const [dx,dy] of [[0,31],[0,-31]]){
-   const box={left:p.x+dx-width/2,right:p.x+dx+width/2,top:p.y+dy-height/2,bottom:p.y+dy+height/2};
-   if(box.left<bounds.left+6||box.right>bounds.right-6||box.top<bounds.top+6||box.bottom>bounds.bottom-6)continue;
-   if(overlays.some(o=>hit(box,o))||occupied.some(o=>hit(box,o,8)))continue;
-   if(pins.some((q,j)=>j!==i&&hit(box,{left:q.x-24,right:q.x+24,top:q.y-24,bottom:q.y+24})))continue;
-   offset=[dx,dy,box];break;
-  }
-  if(!offset)continue;
-  occupied.push(offset[2]);
-  const gLabel=document.createElementNS('http://www.w3.org/2000/svg','g');
-  gLabel.setAttribute('class','place-map-label');
-  gLabel.setAttribute('transform',`translate(${g.x} ${g.y}) scale(${1/px}) translate(${offset[0]} ${offset[1]})`);
-  gLabel.setAttribute('pointer-events','none');
-  gLabel.setAttribute('aria-hidden','true');
-  const text=document.createElementNS('http://www.w3.org/2000/svg','text');
-  text.setAttribute('text-anchor','middle');text.setAttribute('dominant-baseline','middle');text.textContent=name;
-  const leader=document.createElementNS('http://www.w3.org/2000/svg','line');
-  leader.setAttribute('x1','0');leader.setAttribute('y1','0');
-  leader.setAttribute('x2','0');leader.setAttribute('y2',String(-offset[1]+(offset[1]>0?10:-10)));
-  leader.setAttribute('class','place-label-leader');
-  gLabel.appendChild(leader);
-  gLabel.appendChild(text);markers.appendChild(gLabel);
- }
+
 }
 
 function openCluster(index){
@@ -600,7 +602,15 @@ function choose(id){
 $('#list').onclick=e=>{let el=e.target.closest('[data-id]');if(el)choose(el.dataset.id);};$('#markers').onclick=markerAction;$('#markers').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();markerAction(e);}};
 $('#region').onchange=e=>{region=e.target.value;county='all';populateCounties();selected=null;render();};$('#county').onchange=e=>{county=e.target.value;selected=null;render();};
 $('#search').oninput=e=>{query=e.target.value.trim();render();};$('#month').onchange=e=>{month=e.target.value;loadPlaces();};$('.filters').onclick=e=>{let b=e.target.closest('[data-filter]');if(!b)return;filter=b.dataset.filter;document.querySelectorAll('[data-filter]').forEach(el=>el.classList.toggle('active',el===b));render();};$('#mobile-list').onclick=()=>{const open=$('#sidebar').classList.toggle('open');if(open){selected=null;renderDetail();}$('#mobile-list').textContent=open?'× 關閉清單':'☰ 景點清單';$('#mobile-list').setAttribute('aria-expanded',String(open));};
-const world=$('#map-world'),svg=$('#map-svg');function transform(updateMarkers=true) {
+const world=$('#map-world'),svg=$('#map-svg');let placeLabelFrame=0;
+function scheduleVisiblePlaceLabels(){
+ if(placeLabelFrame)return;
+ placeLabelFrame=requestAnimationFrame(()=>{
+  placeLabelFrame=0;
+  if(markerGroups.length)renderPlaceLabels(visible());
+ });
+}
+function transform(updateMarkers=true) {
   const movement = 'translate(' + panX + ' ' + panY + ')';
   const center = 'translate(400 450)';
   const sizing = 'scale(' + scale + ')';
@@ -612,6 +622,7 @@ const world=$('#map-world'),svg=$('#map-svg');function transform(updateMarkers=t
   );
 
   if(updateMarkers)renderMarkers();
+ else scheduleVisiblePlaceLabels();
  if(selected)requestAnimationFrame(()=>{positionMobilePlaceCard();positionDesktopPlaceCard();});
 };
 function zoom(f){
