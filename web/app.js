@@ -72,8 +72,9 @@ function orderPlaces(data){
 }
 const visible=()=>orderPlaces(places.filter(matchesFilters));
 function syncFilterUI(){
- $('[data-filter=best]').textContent=listMode==='seasonal'?'季節內':'適宜月份';
- $('#mode-note').textContent=listMode==='seasonal'?'依歷年月份找景點；葉色依官方紀錄，虛線表示舊紀錄。':'葉色依最後官方紀錄；超過 14 天標示舊紀錄，不列入適宜月份。';
+ $('[data-filter=best]').textContent='季節內';
+ $('[data-filter=best]').hidden=listMode==='recent';
+ $('#mode-note').textContent=listMode==='seasonal'?'依歷年月份找景點；葉色依官方紀錄，虛線表示舊紀錄。':'依最新官方紀錄排序；超過 14 天的紀錄歸入歷史楓況。';
  $('#clear-filters').hidden=!(query||region!=='all'||county!=='all'||leafType!=='all'||filter!=='all');
  $('#data-label').textContent=listMode==='seasonal'?'歷年月份':'近期紀錄';
  $('#sort-order').value=sortOrder;
@@ -108,7 +109,7 @@ function renderForecastList(data){
 }
 $('#list').addEventListener('click',e=>{if(e.target.closest('#empty-reset'))clearFilters();});
 $('#travel-date').onchange=e=>{if(!e.target.value)return;month=e.target.value.slice(0,7);$('#month').value=month;loadPlaces();};
-$('.forecast-tabs').onclick=e=>{const b=e.target.closest('[data-list-mode]');if(!b)return;listMode=b.dataset.listMode;sortOrder=listMode==='recent'?'recent':'season';document.querySelectorAll('[data-list-mode]').forEach(el=>el.setAttribute('aria-pressed',String(el===b)));render();};
+$('.forecast-tabs').onclick=e=>{const b=e.target.closest('[data-list-mode]');if(!b)return;listMode=b.dataset.listMode;if(listMode==='recent'&&filter==='peak'){filter='all';document.querySelectorAll('[data-filter]').forEach(el=>el.classList.toggle('active',el.dataset.filter==='all'));}sortOrder=listMode==='recent'?'recent':'season';document.querySelectorAll('[data-list-mode]').forEach(el=>el.setAttribute('aria-pressed',String(el===b)));render();};
 $('#close-list').onclick=()=>{if($('#sidebar').classList.contains('open'))$('#mobile-list').click();};
 let markerGroups=[];
 function groupNearbyPlaces(data,pixelsPerUnit){
