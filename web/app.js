@@ -399,10 +399,11 @@ function photosBlock(p){
 }
 function historicalPhotosBlock(p){
  const seen=new Set();
- const photos=(p.historical_photos||[]).filter(o=>{const key=o.src;if(!key||seen.has(key))return false;seen.add(key);return true;});
+ const photos=(p.historical_photos||[]).filter(o=>{const key=o.src||o.source_url;if(!key||seen.has(key))return false;seen.add(key);return true;});
  if(!photos.length)return `<div class="historical-photos"><h4>歷年秋色照片</h4><p class="share-note">尚未找到可直接展示且確認來源的秋色照片，待補。</p></div>`;
  const dateText=o=>o.date_kind==='captured'?`拍攝 ${o.date}`:o.date?`${o.date_kind==='source-updated'?'來源更新':'來源公告'} ${o.date}（拍攝日未標）`:'拍攝日期未標示';
- return `<div class="historical-photos"><h4>歷年秋色照片</h4><p class="share-note">點照片開啟大圖；歷年景觀參考，非目前楓況。</p>${photos.map(o=>`<figure class="history-photo"><a class="photo-image-link" href="${escapeHTML(o.large_src||o.src)}" data-photo-title="${escapeHTML(o.title)}" data-photo-caption="${escapeHTML(dateText(o)+' · 攝影／來源：'+o.author)}" data-photo-source="${escapeHTML(o.source_url)}" aria-label="開啟${escapeHTML(o.title)}大圖"><img src="${escapeHTML(o.src)}" alt="${escapeHTML(o.title)}" loading="lazy" decoding="async"><span class="photo-open-label">開啟大圖 ↗</span></a><p class="photo-unavailable" hidden>照片暫時無法載入，請由下方來源查看。</p><figcaption><p class="photo-date">${escapeHTML(o.title)} · ${escapeHTML(dateText(o))}</p><p class="photo-credit">攝影／來源：${escapeHTML(o.author)} · <a href="${escapeHTML(o.source_url)}" target="_blank" rel="noopener noreferrer">照片來源 ↗</a>${o.license&&o.license!=='原站查閱'?`<br>授權：<a href="${escapeHTML(o.license_url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(o.license)}（授權說明）</a>`:''}</p>${o.note?`<p class="share-note">${escapeHTML(o.note)}</p>`:''}</figcaption></figure>`).join('')}</div>`;
+ return `<div class="historical-photos"><h4>歷年秋色照片</h4><p class="share-note">歷年景觀參考，非目前楓況。本站尚未收錄可正常展示的照片檔案，請透過來源查看原始照片或相關公告。</p>${photos.map(o=>`<figure class="history-photo"><div class="photo-source-fallback"><span aria-hidden="true">▧</span><p>本站照片尚未建檔</p><a href="${escapeHTML(o.source_url)}" target="_blank" rel="noopener noreferrer">前往原始照片／官方來源 ↗</a></div><figcaption><p class="photo-date">${escapeHTML(o.title)} · ${escapeHTML(dateText(o))}</p><p class="photo-credit">來源：${escapeHTML(o.author||'原始網站')}</p>${o.note?`<p class="share-note">${escapeHTML(o.note)}</p>`:''}</figcaption></figure>`).join('')}</div>`;
+
 }
 function openPhotoViewer(link){
  const dialog=$('#photo-dialog');
