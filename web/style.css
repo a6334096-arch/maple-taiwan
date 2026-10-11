@@ -961,3 +961,25 @@ body {
  section.map-area #map > #detail.detail .detail-body{overflow:visible!important}
  section.map-area #map > #detail.detail .place-more-info[open] .place-more-body{display:block!important}
 }
+
+/* Mobile map callout: place the card adjacent to the selected marker, not as a bottom sheet. */
+@media screen and (max-width:700px){
+ html:has(#detail.sheet-expanded:not([hidden])),body:has(#detail.sheet-expanded:not([hidden])){overflow:auto}
+ section.map-area #map > #detail.detail:not([hidden]):has(> .detail-head),
+ section.map-area #map > #detail.detail.sheet-expanded:not([hidden]):has(> .detail-head){
+  position:fixed!important;
+  inset:var(--mobile-card-top,38vh) auto auto var(--mobile-card-left,10px)!important;
+  width:min(340px,calc(100vw - 16px))!important;
+  height:var(--mobile-card-height,240px)!important;
+  max-height:var(--mobile-card-height,240px)!important;
+  min-height:0!important;
+  transform:none!important;
+  z-index:9999!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+  box-shadow:0 12px 35px #172a2740!important;
+ }
+ section.map-area #map > #detail.detail .sheet-grip{display:none!important}
+}
