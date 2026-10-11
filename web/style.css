@@ -738,3 +738,52 @@ body {
   #detail button,
   #mobile-list { touch-action:manipulation; }
 }
+
+/* Drag-to-expand mobile bottom sheet. Handle drag is isolated from content scrolling. */
+@media (max-width:700px) {
+ #detail:not([hidden]):has(> .detail-head) {
+   height:min(42dvh,calc(100dvh - 170px));
+   max-height:none;
+   overflow-y:auto;
+   overscroll-behavior-y:contain;
+   -webkit-overflow-scrolling:touch;
+   transition:height 240ms cubic-bezier(.2,.75,.2,1);
+   will-change:height;
+ }
+ #detail.sheet-expanded:not([hidden]):has(> .detail-head) {
+   height:min(83dvh,calc(100dvh - 112px));
+ }
+ #detail .detail-head { padding-top:26px; }
+ #detail .sheet-grip {
+   position:absolute;
+   z-index:3;
+   left:50%;
+   top:0;
+   transform:translateX(-50%);
+   width:100px;
+   height:27px;
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   border:0;
+   padding:0;
+   background:transparent;
+   touch-action:none;
+   cursor:ns-resize;
+ }
+ #detail .sheet-grip span {
+   display:block;
+   width:42px;
+   height:5px;
+   border-radius:99px;
+   background:#adb7a9;
+ }
+ #detail .sheet-grip:focus-visible {outline:2px solid #3a5948;outline-offset:-2px}
+ #detail:has(> .cluster-list) {
+   height:auto;
+   max-height:min(68dvh,calc(100dvh - 170px));
+ }
+}
+@media (prefers-reduced-motion:reduce) {
+ #detail {transition:none!important}
+}
