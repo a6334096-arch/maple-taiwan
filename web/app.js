@@ -186,7 +186,7 @@ function blogPhotosBlock(p){
 }
 function latestBlock(p){
  const observation=p.foliage?foliageBlock(p).replace(/<h3>.*?<\/h3>/,''):'';
- const shares=photosBlock(p).replace(/<div class="panel-title">.*?<\/div>/,'');
+ const shares=photosBlock(p).replace(/<div class="panel-title">.*?<\/div>/,'').replace(/<strong>最近的楓況<\/strong>/g,'<strong>楓況資料</strong>');
  return `<section class="latest-panel"><h3>近期楓況與分享</h3>${observation}${shares}${blogPhotosBlock(p)}</section>`;
 }
 function viewingAreasBlock(p,group){
