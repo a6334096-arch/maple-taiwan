@@ -536,3 +536,22 @@ body {
   fill:#253c32;
   stroke:none;
 }
+
+/* 地圖導航與官方資訊連結統一樣式，維持官方連結在前 */
+.location-info .location-navigation {
+  display: block;
+  min-height: 44px;
+  margin-top: 0;
+  padding: 10px 12px;
+  border: 1px solid #d8e2d6;
+  border-radius: 10px;
+  background: #f2f5ed;
+  color: #254e3b;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.7;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.location-info .location-navigation:hover { background: #e4ede1; border-color: #adc09e; }
+.location-info .location-navigation:focus-visible { outline: 3px solid #b87546; outline-offset: 2px; }
