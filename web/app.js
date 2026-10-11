@@ -129,7 +129,7 @@ function clusterLeaves(items){
 // Spread only visually overlapping detailed-zoom pins; the leader line
 // preserves the actual geographic location of each attraction.
 function spreadDetailedMarkers(groups,pixelsPerUnit,phone){
- const minDistance=phone?35:49,placed=[];
+ const minDistance=phone?46:62,placed=[];
  for(const g of groups){
   const original={x:g.x,y:g.y};
   const nearby=placed.some(q=>Math.hypot((q.x-g.x)*pixelsPerUnit,(q.y-g.y)*pixelsPerUnit)<minDistance);
@@ -163,14 +163,17 @@ function renderMarkers(){
  const selectedPlace=data.find(p=>p.id===selected);
  // At detailed zoom, show every attraction individually even if pins overlap.
  // At overview zoom, cluster only when pins would visually collide.
- const individualZoom=scale>=3.2;
- markerGroups=individualZoom
-  ? spreadDetailedMarkers(data.filter(p=>p.id!==selected).map(p=>({items:[p],x:p.x,y:p.y})),scale*unit,phone)
-  : groupNearbyPlaces(data.filter(p=>p.id!==selected),scale*unit,phone?36:42);
- // Keep nearby destinations visible when selecting another place; selected pin renders last.
- if(selectedPlace){
-  markerGroups.push({items:[selectedPlace],x:selectedPlace.x,y:selectedPlace.y});
- }
+ // Use actual CSS-pixel zoom rather than the SVG scale alone, so desktop and
+ // narrow mobile screens switch from clusters to separate pins consistently.
+ const pixelsPerUnit=Math.max(.001,scale*unit);
+ const individualZoom=pixelsPerUnit>=1.75;
+ const allGroups=individualZoom
+  ? spreadDetailedMarkers(data.map(p=>({items:[p],x:p.x,y:p.y})),pixelsPerUnit,phone)
+  : groupNearbyPlaces(data.filter(p=>p.id!==selected),pixelsPerUnit,phone?44:54);
+ // At overview, show the selected place as an individual pin; at detailed zoom
+ // the spreading pass already includes it, preventing selected-pin collisions.
+ if(!individualZoom&&selectedPlace)allGroups.push({items:[selectedPlace],x:selectedPlace.x,y:selectedPlace.y});
+ markerGroups=allGroups;
  $('#markers').innerHTML=markerGroups.map((g,i)=>{
   const p=g.items[0],cluster=g.items.length>1,s=cluster?clusterStage(g.items):leafStage(p),sel=g.items.some(p=>p.id===selected);
   return `${g.trueX!==undefined?`<path d="M${g.trueX} ${g.trueY} L${g.x} ${g.y}" fill="none" stroke="#365847" stroke-width="${1.3/(scale*unit)}" stroke-dasharray="${3/(scale*unit)} ${3/(scale*unit)}" opacity=".8" pointer-events="none"/>`:''}<g class="marker ${sel?'selected':''}" ${cluster?`data-cluster="${i}"`:`data-id="${escapeHTML(p.id)}"`} transform="translate(${g.x},${g.y})" tabindex="0" role="button" aria-label="${cluster?`${g.items.length} 處鄰近景點，${s.name}，點選展開`:escapeHTML(p.name)+'，地圖代表：'+escapeHTML(representativeSpecies(p)||'品種待確認')+'，'+s.name}"><title>${g.items.map(p=>escapeHTML(p.name)+'（'+escapeHTML(p.city)+'）｜代表：'+escapeHTML(representativeSpecies(p)||'品種待確認')+'｜'+leafStage(p).name).join('、')}</title><g transform="scale(${markerScale})"><circle class="marker-hit" r="22" fill="transparent" stroke="none"/><circle class="marker-disc" r="${phone?14:22}" fill="${cluster?'#fffef8':s.bg}" ${s.stale?'stroke="#7b8175" stroke-width="1.5" stroke-dasharray="3 2"':''}/>${markerLeaf(p,s.color)}${cluster?`<g class="cluster-badge" transform="translate(9 -10)"><circle cx="11" cy="11" r="9"/><text class="cluster-count" x="11" y="14" text-anchor="middle">${g.items.length}</text></g>`:''}</g></g>`;
