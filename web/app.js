@@ -255,23 +255,30 @@ function renderPlaceLabels(data){
  // Always show a destination label for each visible pin. The previous collision
  // filter suppressed every label at some zoom levels, even in open map space.
  const labelCandidates=markerGroups.map((g,i)=>({g,p:pins[i],i}))
-  .filter(({p})=>p.x>=bounds.left-20&&p.x<=bounds.right+20&&p.y>=bounds.top-20&&p.y<=bounds.bottom+20);
+  .filter(({p})=>p.x>=bounds.left-20&&p.x<=bounds.right+20&&p.y>=bounds.top-20&&p.y<=bounds.bottom+20)
+  .sort((a,b)=>Number(b.g.items.some(item=>item.id===selected))-Number(a.g.items.some(item=>item.id===selected))||a.i-b.i);
+ const pinBoxes=pins.map(p=>({left:p.x-(phone?17:24),right:p.x+(phone?17:24),top:p.y-(phone?17:24),bottom:p.y+(phone?17:24)}));
  for(const {g,p,i} of labelCandidates){
   const name=g.items.length>1?`${g.items.length} 處景點`:g.items[0].name;
+  const isSelected=g.items.some(item=>item.id===selected);
   const w=Math.min(260,Math.max(50,[...name].length*(phone?11:12)+10)),h=20;
-  const offsets=[[0,32],[0,-34],[0,53],[0,-54],[w/2+28,0],[-w/2-28,0]];
+  const offsets=[[0,37],[0,-39],[0,61],[0,-63],[w/2+31,0],[-w/2-31,0],[w/2+32,32],[-w/2-32,-32],[0,86],[0,-88]];
   let chosen=null;
   for(const [dx,dy] of offsets){
    const box={left:p.x+dx-w/2,right:p.x+dx+w/2,top:p.y+dy-h/2,bottom:p.y+dy+h/2};
-   if(box.right<bounds.left||box.left>bounds.right||box.bottom<bounds.top||box.top>bounds.bottom)continue;
-   if(occupied.some(o=>hit(box,o,3)))continue;
-   if(overlays.some(o=>hit(box,o,2)))continue;
+   if(box.left<bounds.left+3||box.right>bounds.right-3||box.top<bounds.top+3||box.bottom>bounds.bottom-3)continue;
+   if(occupied.some(o=>hit(box,o,5)))continue;
+   if(overlays.some(o=>hit(box,o,3)))continue;
+   if(pinBoxes.some((pin,j)=>hit(box,pin,j===i?2:3)))continue;
    chosen={dx,dy,box};break;
   }
-  if(!chosen){
-   const dy=i%2===0?32:-34;
-   chosen={dx:0,dy,box:{left:p.x-w/2,right:p.x+w/2,top:p.y+dy-h/2,bottom:p.y+dy+h/2}};
+  // A selected destination must retain its name. Other names are suppressed
+  // rather than painted on top of each other or over another destination pin.
+  if(!chosen&&isSelected){
+   const dx=0,dy=-53;
+   chosen={dx,dy,box:{left:p.x-w/2,right:p.x+w/2,top:p.y+dy-h/2,bottom:p.y+dy+h/2}};
   }
+  if(!chosen)continue;
   occupied.push(chosen.box);
   const label=document.createElementNS('http://www.w3.org/2000/svg','g');
   label.setAttribute('class','place-map-label');
