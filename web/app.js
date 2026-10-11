@@ -137,9 +137,9 @@ function renderMarkers(){
  const unit=matrix?Math.hypot(matrix.a,matrix.b):1;
  const markerScale=1/(scale*unit);
  const phone=window.matchMedia('(max-width:700px)').matches;
- markerGroups=(phone&&scale>=2.5)||scale>=6?data.map(p=>({items:[p],x:p.x,y:p.y})):groupNearbyPlaces(data,scale*unit,phone?48:64);
+ markerGroups=scale>1.15?data.map(p=>({items:[p],x:p.x,y:p.y})):groupNearbyPlaces(data,scale*unit,phone?48:64);
  // At high zoom, spread coincident pins instead of permanently clustering them.
- if((phone&&scale>=2.5)||scale>=6){
+ if(scale>1.15){
   const placed=[];
   for(const g of markerGroups){
    const originalX=g.x,originalY=g.y;
@@ -186,7 +186,7 @@ function renderPlaceLabels(data){
   const x=items.reduce((a,p)=>a+p.x,0)/items.length,y=items.reduce((a,p)=>a+p.y,0)/items.length;
   const c=screen(x,y+27/scale);
   if(!free(c.x,c.y,name.length*14+8,20))return '';
-  return `<g class="county-label" transform="translate(${x} ${y})"><text transform="scale(${1/(scale*labelUnit)})" y="${27*labelUnit}" text-anchor="middle">${escapeHTML(name)}</text></g>`;
+  return `<g class="county-label" transform="translate(${x} ${y})"><text transform="scale(${1/(scale*labelUnit)})" y="${27}" text-anchor="middle">${escapeHTML(name)}</text></g>`;
  }).join('');
  $('#town-labels').replaceChildren();
  if(scale>=3){
@@ -196,7 +196,7 @@ function renderPlaceLabels(data){
    const name=key.split('／')[1],x=items.reduce((a,p)=>a+p.x,0)/items.length,y=items.reduce((a,p)=>a+p.y,0)/items.length;
    const c=screen(x,y-27/scale);
    if(!free(c.x,c.y,name.length*12+8,18))return '';
-   return `<g class="town-label" transform="translate(${x} ${y})"><text transform="scale(${1/(scale*labelUnit)})" y="${-27*labelUnit}" text-anchor="middle">${escapeHTML(name)}</text></g>`;
+   return `<g class="town-label" transform="translate(${x} ${y})"><text transform="scale(${1/(scale*labelUnit)})" y="${-27}" text-anchor="middle">${escapeHTML(name)}</text></g>`;
   }).join('');
  }
  const occupied=[];
