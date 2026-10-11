@@ -169,6 +169,51 @@ function renderPlaceLabels(data){
  const point=(x,y)=>{const p=svg.createSVGPoint();p.x=x;p.y=y;return p.matrixTransform(matrix);};
  const pins=markerGroups.map(g=>point(g.x,g.y));
  const hit=(a,b,p=5)=>a.left<b.right+p&&a.right>b.left-p&&a.top<b.bottom+p&&a.bottom>b.top-p;
+ // County/town labels are anchored to the locations represented in our dataset.
+ // Keep text at a stable on-screen size and avoid map controls, pins and details.
+ const placeGroups=new Map();
+ for(const p of data){
+  const parts=String(p.city||'').split('・').map(x=>x.trim());
+  const county=parts[0],town=(parts[1]||'').split('／')[0].trim();
+  if(!county)continue;
+  for(const [key,label,kind] of [[county,county,'county'],[county+'|'+town,town,'town']]){
+   if(!label)continue;
+   if(!placeGroups.has(key))placeGroups.set(key,{label,kind,items:[]});
+   placeGroups.get(key).items.push(p);
+  }
+ }
+ const mapDetail=$('#detail');
+ if(mapDetail&&!mapDetail.hidden)overlays.push(mapDetail.getBoundingClientRect());
+ const addAreaLabel=(g)=>{
+  const x=g.items.reduce((a,p)=>a+p.x,0)/g.items.length;
+  const y=g.items.reduce((a,p)=>a+p.y,0)/g.items.length;
+  const pos=point(x,y),font=g.kind==='county'?14:12;
+  const w=g.label.length*(font+1)+18,h=font+12;
+  for(const [dx,dy] of [[0,-32],[0,35],[-42,0],[42,0],[0,-55],[0,58]]){
+   const box={left:pos.x+dx-w/2,right:pos.x+dx+w/2,top:pos.y+dy-h/2,bottom:pos.y+dy+h/2};
+   if(box.left<bounds.left+8||box.right>bounds.right-8||box.top<bounds.top+8||box.bottom>bounds.bottom-8)continue;
+   if(overlays.some(o=>hit(box,o,4))||occupied.some(o=>hit(box,o,7)))continue;
+   if(pins.some(q=>hit(box,{left:q.x-23,right:q.x+23,top:q.y-23,bottom:q.y+23},3)))continue;
+   occupied.push(box);
+   const group=document.createElementNS('http://www.w3.org/2000/svg','g');
+   group.setAttribute('class','area-map-label '+(g.kind==='county'?'area-county':'area-town'));
+   group.setAttribute('transform',`translate(${x} ${y}) scale(${1/px}) translate(${dx} ${dy})`);
+   group.setAttribute('pointer-events','none');
+   const label=document.createElementNS('http://www.w3.org/2000/svg','text');
+   label.setAttribute('text-anchor','middle');
+   label.setAttribute('dominant-baseline','middle');
+   label.textContent=g.label;
+   group.appendChild(label);
+   (g.kind==='county'?counties:towns).appendChild(group);
+   return;
+  }
+ };
+ if(px>=.55){
+  [...placeGroups.values()].filter(g=>g.kind==='county').sort((a,b)=>b.items.length-a.items.length).forEach(addAreaLabel);
+ }
+ if(px>=1.05){
+  [...placeGroups.values()].filter(g=>g.kind==='town').sort((a,b)=>b.items.length-a.items.length).forEach(addAreaLabel);
+ }
  // On overview show symbols only; names progressively appear as the user zooms.
  if(px<.75)return;
  for(let i=0;i<markerGroups.length;i++){
