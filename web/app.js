@@ -499,8 +499,8 @@ function positionPlaceCard(){
   const width=Math.min(320,innerWidth-24);
   const topLimit=Math.max(bounds.top+8,80),bottomLimit=Math.min(bounds.bottom-8,innerHeight-8);
   const above=point.y-gap-topLimit,below=bottomLimit-point.y-gap;
-  const desired=card.classList.contains('sheet-expanded')?Math.min(400,innerHeight*.55):Math.min(235,innerHeight*.36);
-  const useBelow=below>=170||(below>=above&&below>=125);
+  const desired=card.classList.contains('sheet-expanded')?Math.min(440,innerHeight*.62):Math.min(365,Math.max(285,card.scrollHeight+12));
+  const useBelow=below>=desired||(below>=above&&below>=180);
   const height=Math.max(100,Math.min(desired,useBelow?below:above));
   const top=Math.max(topLimit,Math.min(bottomLimit-height,useBelow?point.y+gap:point.y-gap-height));
   const left=Math.max(12,Math.min(innerWidth-width-12,point.x-width/2));
@@ -545,7 +545,7 @@ function choose(id){
  const target=svg.createSVGPoint();
  const freeRight=mapRect.right;
  target.x=mapRect.left+(freeRight-mapRect.left)/2;
- target.y=mapRect.top+mapRect.height*(innerWidth<=700?.34:.5);
+ target.y=mapRect.top+mapRect.height*(innerWidth<=700?.29:.5);
  const q=target.matrixTransform(svg.getScreenCTM().inverse());
  panX=q.x-400-(p.x-400)*scale;panY=q.y-450-(p.y-450)*scale;transform();positionPlaceCard();
 }
