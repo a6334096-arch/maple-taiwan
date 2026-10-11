@@ -405,7 +405,45 @@ const world=$('#map-world'),svg=$('#map-svg');function transform(updateMarkers=t
 function zoom(f){fittedView=false;const before=scale;scale=Math.max(.4,Math.min(10,scale*f));panX*=scale/before;panY*=scale/before;transform();}$('#zoom-in').onclick=()=>zoom(1.2);$('#zoom-out').onclick=()=>zoom(1/1.2);$('#reset').onclick=()=>{fitIsland();transform();};$('#map').onwheel=e=>{e.preventDefault();zoom(e.deltaY>0?1/1.08:1.08);};
 let pointers=new Map(),lastDistance=null,drag=null,moved=false,suppressMapTapUntil=0;
 function point(e){const p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;return p.matrixTransform(svg.getScreenCTM().inverse());}
-$('#map').onpointerdown=e=>{if(e.button!==0&&e.pointerType==='mouse')return;fittedView=false;const p=point(e);pointers.set(e.pointerId,p);e.currentTarget.setPointerCapture(e.pointerId);drag=p;moved=false;};$('#map').onpointermove=e=>{if(!pointers.has(e.pointerId))return;const p=point(e);pointers.set(e.pointerId,p);if(pointers.size===2){const [a,b]=[...pointers.values()];const d=Math.hypot(a.x-b.x,a.y-b.y);if(lastDistance)zoom(d/lastDistance);lastDistance=d;drag=null;}else if(drag){panX=Math.max(-5000,Math.min(5000,panX+p.x-drag.x));panY=Math.max(-5000,Math.min(5000,panY+p.y-drag.y));drag=p;transform(false);moved=true;}};function end(e){pointers.delete(e.pointerId);lastDistance=null;drag=pointers.size===1?[...pointers.values()][0]:null;if(!pointers.size){if(moved){suppressMapTapUntil=Date.now()+350;renderMarkers();}moved=false;}}$('#map').onpointerup=end;$('#map').onpointercancel=end;$('#map').onkeydown=e=>{if(e.target!==$('#map'))return;if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','+','-','0'].includes(e.key)){e.preventDefault();if(e.key==='+')zoom(1.2);else if(e.key==='-')zoom(1/1.2);else if(e.key==='0')$('#reset').click();else{panX+=e.key==='ArrowLeft'?25:e.key==='ArrowRight'?-25:0;panY+=e.key==='ArrowUp'?25:e.key==='ArrowDown'?-25:0;transform();}}};
+$('#map').onpointerdown=e=>{if(e.pointerType==='touch'||(e.button!==0&&e.pointerType==='mouse'))return;fittedView=false;const p=point(e);pointers.set(e.pointerId,p);e.currentTarget.setPointerCapture(e.pointerId);drag=p;moved=false;};$('#map').onpointermove=e=>{if(e.pointerType==='touch'||!pointers.has(e.pointerId))return;const p=point(e);pointers.set(e.pointerId,p);if(pointers.size===2){const [a,b]=[...pointers.values()];const d=Math.hypot(a.x-b.x,a.y-b.y);if(lastDistance)zoom(d/lastDistance);lastDistance=d;drag=null;}else if(drag){panX=Math.max(-5000,Math.min(5000,panX+p.x-drag.x));panY=Math.max(-5000,Math.min(5000,panY+p.y-drag.y));drag=p;transform(false);moved=true;}};function end(e){if(e.pointerType==='touch')return;pointers.delete(e.pointerId);lastDistance=null;drag=pointers.size===1?[...pointers.values()][0]:null;if(!pointers.size){if(moved){suppressMapTapUntil=Date.now()+350;renderMarkers();}moved=false;}}$('#map').onpointerup=end;$('#map').onpointercancel=end;// Native touch gesture handling for iOS Safari: avoid SVG pointer capture conflicts.
+// Use one animation-frame update per display frame, regardless of finger event frequency.
+(function setupMapTouch(){
+ const el=$('#map');let fingers=[],start=null,last=null,initialTarget=null,dragged=false,pinchDistance=0,frame=0,pending=null;
+ const coord=t=>point({clientX:t.clientX,clientY:t.clientY});
+ const distance=(a,b)=>Math.hypot(a.clientX-b.clientX,a.clientY-b.clientY);
+ function paint(){frame=0;if(!pending)return;const v=pending;pending=null;panX=Math.max(-5000,Math.min(5000,panX+v.dx));panY=Math.max(-5000,Math.min(5000,panY+v.dy));transform(false);}
+ el.addEventListener('touchstart',e=>{
+  if(!e.touches.length)return;
+  e.preventDefault();fittedView=false;
+  if(frame){cancelAnimationFrame(frame);frame=0;if(pending)paint();}
+  if(e.touches.length===1){start=coord(e.touches[0]);last=start;initialTarget=e.target;dragged=false;pinchDistance=0;}
+  else{dragged=true;last=null;pinchDistance=distance(e.touches[0],e.touches[1]);}
+ },{passive:false});
+ el.addEventListener('touchmove',e=>{
+  e.preventDefault();
+  if(e.touches.length>=2){
+   dragged=true;const d=distance(e.touches[0],e.touches[1]);
+   if(pinchDistance>0&&Math.abs(d-pinchDistance)>1){const factor=d/pinchDistance;const before=scale;scale=Math.max(.4,Math.min(10,scale*factor));panX*=scale/before;panY*=scale/before;transform(false);}
+   pinchDistance=d;last=null;return;
+  }
+  if(e.touches.length!==1)return;
+  const p=coord(e.touches[0]);if(!last){last=p;return;}
+  if(start&&Math.hypot(p.x-start.x,p.y-start.y)>6)dragged=true;
+  if(dragged){const dx=p.x-last.x,dy=p.y-last.y;if(pending){pending.dx+=dx;pending.dy+=dy;}else pending={dx,dy};if(!frame)frame=requestAnimationFrame(paint);}
+  last=p;
+ },{passive:false});
+ el.addEventListener('touchend',e=>{
+  e.preventDefault();
+  if(e.touches.length){last=coord(e.touches[0]);dragged=true;return;}
+  if(frame){cancelAnimationFrame(frame);frame=0;}if(pending)paint();
+  suppressMapTapUntil=Date.now()+500;
+  if(!dragged&&initialTarget){const target=initialTarget.closest?.('[data-cluster],[data-id]');if(target)markerAction({type:'touchend',target});}
+  else renderMarkers();
+  start=last=initialTarget=null;pinchDistance=0;dragged=false;
+ },{passive:false});
+ el.addEventListener('touchcancel',()=>{if(frame)cancelAnimationFrame(frame);frame=0;pending=null;start=last=initialTarget=null;pinchDistance=0;dragged=false;renderMarkers();},{passive:true});
+})();
+$('#map').onkeydown=e=>{if(e.target!==$('#map'))return;if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','+','-','0'].includes(e.key)){e.preventDefault();if(e.key==='+')zoom(1.2);else if(e.key==='-')zoom(1/1.2);else if(e.key==='0')$('#reset').click();else{panX+=e.key==='ArrowLeft'?25:e.key==='ArrowRight'?-25:0;panY+=e.key==='ArrowUp'?25:e.key==='ArrowDown'?-25:0;transform();}}};
 
 let fittedView=false;
 function fitIsland(){
