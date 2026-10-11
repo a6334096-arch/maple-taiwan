@@ -8,9 +8,9 @@ const kindLabel=k=>({demo:'模擬資料',prediction:'匯入預測',observation:'
 const maplePath = 'M0-20 5-10 9-13 8-3 14-7 14-2 20-3 17 4 21 6 6 15 2 14 2 22 -2 22 -2 14 -6 15 -21 6 -17 4 -20-3 -14-2 -14-7 -8-3 -9-13 -5-10Z';
 const beechPath = 'M0-21C-15-15-19-3-14 8L-10 10L-8 14L-3 16L0 19L3 16L8 14L10 10L14 8C19-3 15-15 0-21ZM-1 17V23H1V17Z';
 const isBeech=p=>(p.species||[]).some(n=>n.includes('山毛櫸'));
-const reportStage=(p,status)=>isBeech(p)?{...stages[status],...(status===0?{name:'未轉色'}:[1,2].includes(status)?{color:'#d6aa32',bg:'#faf0d3'}:{})}:stages[status];
+const reportStage=(p,status)=>isBeech(p)?{...stages[status],...(status===0?{name:'未轉色'}:[1,2].includes(status)?{color:'#d6aa32',bg:'#faf0d3',name:status===1?'初期轉黃':'金黃觀賞期'}:{})}:stages[status];
 const mapleIcon = `<svg viewBox="-26 -26 52 52" aria-hidden="true" focusable="false"><path d="${maplePath}" fill="currentColor"/><path d="M0-12V17M0 8L-11 1M0 8L11 1" fill="none" stroke="white" stroke-opacity=".35" stroke-width="1.4" stroke-linecap="round"/></svg>`;
-const stages=[{name:'未轉紅',color:'#80a36e',bg:'#edf2e7'},{name:'初期變色',color:'#679641',bg:'#edf3e5'},{name:'最佳觀賞',color:'#dc6030',bg:'#fbe8dc'},{name:'觀賞尾聲',color:'#854a7c',bg:'#f1e5ef'}];
+const stages=[{name:'未轉紅',color:'#80a36e',bg:'#edf2e7'},{name:'初期變色',color:'#c6a43d',bg:'#f8f0d7'},{name:'最佳觀賞',color:'#dc6030',bg:'#fbe8dc'},{name:'觀賞尾聲',color:'#854a7c',bg:'#f1e5ef'}];
 function foliageStage(p){
  const state=leafStage(p);
  return state.stale?{...unknownStage,name:'紀錄過期／待更新'}:state;
@@ -25,7 +25,7 @@ function leafStage(p){
  const days=Math.floor((Date.now()-timestamp)/86400000);
  if(!Number.isFinite(days)||days<0)return unknownStage;
  const state=reportStage(p,o.status);
- return {...state,stale:days>14,name:state.name+(days>14?'（舊紀錄）':'')};
+ return days>14?{...unknownStage,stale:true,name:'舊紀錄：'+state.name+'（不代表目前葉色）',lastColor:state.color}:state;
 }
 function clusterStage(items){
  const states=items.map(leafStage);
@@ -270,7 +270,7 @@ $('#detail').addEventListener('click',e=>{const p=e.target.closest('[data-place]
 function foliageBlock(p){
  const o=p.foliage;
  if(!o)return `<section class="foliage-panel"><div class="panel-title"><h3>最新楓葉狀況</h3><span class="badge" style="--c:#7d877d;--bg:#edf0eb">尚無資料</span></div><p class="foliage-summary">目前楓況尚無資料</p><p class="foliage-meta">尚無近期可靠紀錄；賞楓月份僅供參考。</p></section>`;
- const status=reportStage(p,o.status)||unknownStage;
+ const status=leafStage(p);
  const referenceDate=o.observed_on||o.reported_at;
  const days=Math.floor((Date.now()-Date.parse(referenceDate+'T00:00:00+08:00'))/86400000);
  const stale=days>14;
