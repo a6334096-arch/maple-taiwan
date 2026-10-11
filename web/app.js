@@ -129,24 +129,39 @@ function clusterLeaves(items){
 // Spread only visually overlapping detailed-zoom pins; the leader line
 // preserves the actual geographic location of each attraction.
 function spreadDetailedMarkers(groups,pixelsPerUnit,phone){
- const minDistance=phone?46:62,placed=[];
- for(const g of groups){
+ // All distances are in real screen pixels. Spread each nearby destination
+ // without altering its source coordinates; leader lines point to the source.
+ const gap=phone?43:59;
+ const placed=[];
+ // Most constrained geographic pairs first, then stable by place id.
+ const ordered=groups.map((g,i)=>({g,i,neighbors:groups.filter(q=>q!==g&&Math.hypot(q.x-g.x,q.y-g.y)*pixelsPerUnit<gap*2).length}))
+  .sort((a,b)=>b.neighbors-a.neighbors||a.i-b.i);
+ for(const {g} of ordered){
   const original={x:g.x,y:g.y};
-  const nearby=placed.some(q=>Math.hypot((q.x-g.x)*pixelsPerUnit,(q.y-g.y)*pixelsPerUnit)<minDistance);
-  if(!nearby){placed.push({x:g.x,y:g.y});continue;}
-  let best=null;
-  for(let ring=1;ring<=7;ring++){
-   for(let step=0;step<16;step++){
-    const a=2*Math.PI*step/16+Math.PI/8;
-    const radius=ring*minDistance;
+  const distance=(x,y,q)=>Math.hypot((q.x-x)*pixelsPerUnit,(q.y-y)*pixelsPerUnit);
+  if(placed.every(q=>distance(g.x,g.y,q)>=gap)){
+   placed.push({x:g.x,y:g.y});continue;
+  }
+  let best=null,bestCost=Infinity;
+  for(let ring=1;ring<=12;ring++){
+   const radius=ring*gap*.55;
+   for(let step=0;step<24;step++){
+    const a=2*Math.PI*step/24;
     const x=original.x+Math.cos(a)*radius/pixelsPerUnit;
     const y=original.y+Math.sin(a)*radius/pixelsPerUnit;
-    const nearest=placed.length?Math.min(...placed.map(q=>Math.hypot((q.x-x)*pixelsPerUnit,(q.y-y)*pixelsPerUnit))):Infinity;
-    if(nearest>=minDistance){best={x,y};break;}
+    if(placed.some(q=>distance(x,y,q)<gap))continue;
+    // Prefer small offsets and avoid putting a pin on another attraction's
+    // actual position, even if that attraction has not yet been placed.
+    const sourcePenalty=groups.reduce((sum,q)=>sum+(q!==g&&distance(x,y,q)<gap*.55?gap:0),0);
+    const cost=radius+sourcePenalty;
+    if(cost<bestCost){best={x,y};bestCost=cost;}
    }
-   if(best)break;
+   if(best&&bestCost<=radius)break;
   }
-  if(best){g.trueX=original.x;g.trueY=original.y;g.x=best.x;g.y=best.y;}
+  if(best){
+   g.trueX=original.x;g.trueY=original.y;
+   g.x=best.x;g.y=best.y;
+  }
   placed.push({x:g.x,y:g.y});
  }
  return groups;
@@ -166,7 +181,7 @@ function renderMarkers(){
  // Use actual CSS-pixel zoom rather than the SVG scale alone, so desktop and
  // narrow mobile screens switch from clusters to separate pins consistently.
  const pixelsPerUnit=Math.max(.001,scale*unit);
- const individualZoom=pixelsPerUnit>=1.75;
+ const individualZoom=pixelsPerUnit>=0.85;
  const allGroups=individualZoom
   ? spreadDetailedMarkers(data.map(p=>({items:[p],x:p.x,y:p.y})),pixelsPerUnit,phone)
   : groupNearbyPlaces(data.filter(p=>p.id!==selected),pixelsPerUnit,phone?44:54);
