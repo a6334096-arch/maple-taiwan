@@ -254,24 +254,25 @@ function renderPlaceLabels(data){
  // place text only in free screen space. At low zoom clusters carry the count.
  // Always show a destination label for each visible pin. The previous collision
  // filter suppressed every label at some zoom levels, even in open map space.
+ // Labels must avoid both other labels and every marker icon; never cover the detail panel.
  const labelCandidates=markerGroups.map((g,i)=>({g,p:pins[i],i}))
   .filter(({p})=>p.x>=bounds.left-20&&p.x<=bounds.right+20&&p.y>=bounds.top-20&&p.y<=bounds.bottom+20);
+ const pinBoxes=pins.map(p=>({left:p.x-(phone?19:26),right:p.x+(phone?19:26),top:p.y-(phone?19:26),bottom:p.y+(phone?19:26)}));
  for(const {g,p,i} of labelCandidates){
   const name=g.items.length>1?`${g.items.length} 處景點`:g.items[0].name;
   const w=Math.min(260,Math.max(50,[...name].length*(phone?11:12)+10)),h=20;
-  const offsets=[[0,32],[0,-34],[0,53],[0,-54],[w/2+28,0],[-w/2-28,0]];
+  const offsets=[[0,34],[0,-36],[0,58],[0,-60],[w/2+32,0],[-w/2-32,0],[w/2+32,30],[-w/2-32,-30],[0,82],[0,-84]];
   let chosen=null;
   for(const [dx,dy] of offsets){
    const box={left:p.x+dx-w/2,right:p.x+dx+w/2,top:p.y+dy-h/2,bottom:p.y+dy+h/2};
-   if(box.right<bounds.left||box.left>bounds.right||box.bottom<bounds.top||box.top>bounds.bottom)continue;
-   if(occupied.some(o=>hit(box,o,3)))continue;
-   if(overlays.some(o=>hit(box,o,2)))continue;
+   if(box.left<bounds.left+4||box.right>bounds.right-4||box.top<bounds.top+4||box.bottom>bounds.bottom-4)continue;
+   if(occupied.some(o=>hit(box,o,5)))continue;
+   if(overlays.some(o=>hit(box,o,4)))continue;
+   if(pinBoxes.some((pin,j)=>j!==i&&hit(box,pin,3)))continue;
    chosen={dx,dy,box};break;
   }
-  if(!chosen){
-   const dy=i%2===0?32:-34;
-   chosen={dx:0,dy,box:{left:p.x-w/2,right:p.x+w/2,top:p.y+dy-h/2,bottom:p.y+dy+h/2}};
-  }
+  // A crowded viewport is better served by fewer readable labels than overlapping text.
+  if(!chosen)continue;
   occupied.push(chosen.box);
   const label=document.createElementNS('http://www.w3.org/2000/svg','g');
   label.setAttribute('class','place-map-label');
