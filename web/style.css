@@ -932,3 +932,32 @@ body {
    z-index:3;
  }
 }
+
+/* Mobile detail sheet: fix conflicting legacy 32/36dvh rules and keep the full card usable. */
+@media screen and (max-width:700px){
+ html:has(#detail.sheet-expanded:not([hidden])){overflow:hidden}
+ body:has(#detail.sheet-expanded:not([hidden])){overflow:hidden}
+ section.map-area #map > #detail.detail:not([hidden]):has(> .detail-head){
+  position:fixed!important;
+  inset:auto 8px calc(12px + env(safe-area-inset-bottom)) 8px!important;
+  width:auto!important;
+  box-sizing:border-box!important;
+  height:min(42dvh,340px)!important;
+  max-height:calc(100dvh - 100px - env(safe-area-inset-bottom))!important;
+  z-index:9999!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+ }
+ section.map-area #map > #detail.detail.sheet-expanded:not([hidden]):has(> .detail-head){
+  height:calc(100dvh - 100px - env(safe-area-inset-bottom))!important;
+  max-height:calc(100dvh - 100px - env(safe-area-inset-bottom))!important;
+ }
+ section.map-area #map > #detail.detail .detail-head{
+  position:sticky!important;top:0!important;z-index:5!important;
+  background:#fffdf7!important;
+ }
+ section.map-area #map > #detail.detail .detail-body{overflow:visible!important}
+ section.map-area #map > #detail.detail .place-more-info[open] .place-more-body{display:block!important}
+}
