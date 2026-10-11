@@ -593,3 +593,26 @@ body {
   overflow-wrap: anywhere;
   text-align: left;
 }
+
+/* Mobile place detail: links shrink to their labels, not the card width. */
+@media (max-width:700px) {
+  .detail .detail-body .location-info .official-links {
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    width:100%;
+  }
+  .detail .detail-body .location-info .official-links > a,
+  .detail .detail-body .location-info > a.location-navigation {
+    display:inline-flex;
+    align-self:flex-start;
+    flex:none;
+    width:auto;
+    max-width:100%;
+    min-height:44px;
+    padding:10px 13px;
+    white-space:normal;
+    overflow-wrap:anywhere;
+    text-align:left;
+  }
+}
