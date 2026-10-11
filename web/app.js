@@ -137,17 +137,17 @@ function renderMarkers(){
  const unit=matrix?Math.hypot(matrix.a,matrix.b):1;
  const markerScale=1/(scale*unit);
  const phone=window.matchMedia('(max-width:700px)').matches;
- markerGroups=scale>=7?data.map(p=>({items:[p],x:p.x,y:p.y})):groupNearbyPlaces(data,scale*unit,phone?48:64);
+ markerGroups=(phone&&scale>=2.5)||scale>=6?data.map(p=>({items:[p],x:p.x,y:p.y})):groupNearbyPlaces(data,scale*unit,phone?48:64);
  // At high zoom, spread coincident pins instead of permanently clustering them.
- if(scale>=7){
+ if((phone&&scale>=2.5)||scale>=6){
   const placed=[];
   for(const g of markerGroups){
    const originalX=g.x,originalY=g.y;
    for(let step=0;step<20;step++){
-    const radius=step===0?0:Math.ceil(step/8)*30/(scale*unit);
+    const radius=step===0?0:Math.ceil(step/8)*38/(scale*unit);
     const angle=step*2.399963229728653;
     const x=originalX+radius*Math.cos(angle),y=originalY+radius*Math.sin(angle);
-    if(placed.every(q=>Math.hypot(q.x-x,q.y-y)*scale*unit>=34)){g.x=x;g.y=y;break;}
+    if(placed.every(q=>Math.hypot(q.x-x,q.y-y)*scale*unit >=42)){g.x=x;g.y=y;break;}
    }
    placed.push({x:g.x,y:g.y});
   }
@@ -166,6 +166,7 @@ function renderMarkers(){
 }
 function renderPlaceLabels(data){
  const matrix=svg.getScreenCTM(),unit=matrix?Math.hypot(matrix.a,matrix.b):1;
+ const labelUnit=innerWidth<=700?Math.max(unit,.65):1;
  const screen=(x,y)=>({x:matrix.a*((x-400)*scale+panX+400)+matrix.e,y:matrix.d*((y-450)*scale+panY+450)+matrix.f});
  const pins=markerGroups.map(g=>screen(g.x,g.y));
  const overlays=[document.querySelector('.map-controls'),document.querySelector('.legend.season-color-legend')].filter(Boolean).map(e=>e.getBoundingClientRect());
@@ -175,7 +176,7 @@ function renderPlaceLabels(data){
   const box={left:x-width/2,right:x+width/2,top:y-height/2,bottom:y+height/2};
   if(box.left<bounds.left+6||box.right>bounds.right-6||box.top<bounds.top+6||box.bottom>bounds.bottom-6)return false;
   if(overlays.some(b=>box.left<b.right+5&&box.right>b.left-5&&box.top<b.bottom+5&&box.bottom>b.top-5))return false;
-  if(pins.some(p=>Math.hypot(p.x-x,p.y-y)<Math.max(35,width/2+15)))return false;
+  if(pins.some(p=>Math.abs(p.x-x)<width/2+23&&Math.abs(p.y-y)<height/2+24))return false;
   if(occupiedGeography.some(b=>box.left<b.right+8&&box.right>b.left-8&&box.top<b.bottom+8&&box.bottom>b.top-8))return false;
   occupiedGeography.push(box);return true;
  }
@@ -185,7 +186,7 @@ function renderPlaceLabels(data){
   const x=items.reduce((a,p)=>a+p.x,0)/items.length,y=items.reduce((a,p)=>a+p.y,0)/items.length;
   const c=screen(x,y+27/scale);
   if(!free(c.x,c.y,name.length*14+8,20))return '';
-  return `<g class="county-label" transform="translate(${x} ${y})"><text transform="scale(${1/scale})" y="27" text-anchor="middle">${escapeHTML(name)}</text></g>`;
+  return `<g class="county-label" transform="translate(${x} ${y})"><text transform="scale(${1/(scale*labelUnit)})" y="${27*labelUnit}" text-anchor="middle">${escapeHTML(name)}</text></g>`;
  }).join('');
  $('#town-labels').replaceChildren();
  if(scale>=3){
@@ -195,7 +196,7 @@ function renderPlaceLabels(data){
    const name=key.split('／')[1],x=items.reduce((a,p)=>a+p.x,0)/items.length,y=items.reduce((a,p)=>a+p.y,0)/items.length;
    const c=screen(x,y-27/scale);
    if(!free(c.x,c.y,name.length*12+8,18))return '';
-   return `<g class="town-label" transform="translate(${x} ${y})"><text transform="scale(${1/scale})" y="-27" text-anchor="middle">${escapeHTML(name)}</text></g>`;
+   return `<g class="town-label" transform="translate(${x} ${y})"><text transform="scale(${1/(scale*labelUnit)})" y="${-27*labelUnit}" text-anchor="middle">${escapeHTML(name)}</text></g>`;
   }).join('');
  }
  const occupied=[];
@@ -209,11 +210,11 @@ function renderPlaceLabels(data){
  for(const g of markerGroups){
   if(g.items.length!==1||g.items[0].id===selected)continue;
   const p=g.items[0],label=p.name.length>18?p.name.slice(0,17)+'…':p.name;
-  const width=Math.min(phone?145:210,label.length*(phone?10:12)+12),height=phone?17:20;
+  const width=Math.min(phone?190:210,label.length*(phone?13:12)+12),height=phone?23:20;
   const x=svgMatrix.a*((g.x-400)*scale+panX+400)+svgMatrix.e;
   const y=svgMatrix.d*((g.y-450)*scale+panY+450)+svgMatrix.f;
   // Prefer below the pin, then above or to either side if UI obscures it.
-  const choices=[{dx:0,dy:36},{dx:0,dy:-33},{dx:width/2+24,dy:3},{dx:-width/2-24,dy:3}];
+  const choices=[{dx:0,dy:42},{dx:0,dy:-42},{dx:width/2+28,dy:3},{dx:-width/2-28,dy:3}];
   let chosen=null;
   for(const c of choices){
    const box={left:x+c.dx-width/2,right:x+c.dx+width/2,top:y+c.dy-height/2,bottom:y+c.dy+height/2};
@@ -225,7 +226,7 @@ function renderPlaceLabels(data){
   if(!chosen)continue;
   occupied.push(chosen.box);
   const dx=chosen.c.dx/pxPerUnit,dy=chosen.c.dy/pxPerUnit;
-  $('#markers').insertAdjacentHTML('beforeend',`<g class="place-map-label" transform="translate(${g.x} ${g.y})" aria-hidden="true"><text transform="scale(${1/scale})" x="${dx*scale}" y="${dy*scale}" text-anchor="middle" dominant-baseline="middle">${escapeHTML(label)}</text></g>`);
+  $('#markers').insertAdjacentHTML('beforeend',`<g class="place-map-label" transform="translate(${g.x} ${g.y})" aria-hidden="true"><text transform="scale(${1/(scale*labelUnit)})" x="${dx*scale*labelUnit}" y="${dy*scale*labelUnit}" text-anchor="middle" dominant-baseline="middle">${escapeHTML(label)}</text></g>`);
  }
 }
 function openCluster(index){
