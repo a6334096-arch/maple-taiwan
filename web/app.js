@@ -252,50 +252,34 @@ function renderPlaceLabels(data){
  };
  // Adaptive labels: keep pins at their true geographic coordinates, and
  // place text only in free screen space. At low zoom clusters carry the count.
- const detailLevel=px>=1.35;
+ // Always show a destination label for each visible pin. The previous collision
+ // filter suppressed every label at some zoom levels, even in open map space.
  const labelCandidates=markerGroups.map((g,i)=>({g,p:pins[i],i}))
-  .filter(({g,p})=>!g.items.some(item=>item.id===selected)&&p.x>=bounds.left+12&&p.x<=bounds.right-12&&p.y>=bounds.top+12&&p.y<=bounds.bottom-12)
-  .sort((a,b)=>a.g.items.length-b.g.items.length||a.i-b.i);
- for(const {g,p} of labelCandidates){
+  .filter(({p})=>p.x>=bounds.left-20&&p.x<=bounds.right+20&&p.y>=bounds.top-20&&p.y<=bounds.bottom+20);
+ for(const {g,p,i} of labelCandidates){
   const name=g.items.length>1?`${g.items.length} 處景點`:g.items[0].name;
-  const w=Math.min(260,Math.max(50,[...name].length*(phone?11:12)+10));
-  const h=20;
-  // Prefer beneath the pin, then above or to either side. These are small
-  // label offsets only; marker positions themselves never change.
-  const candidates=detailLevel?[[0,31],[0,-32],[0,47],[0,-47],[w/2+25,0],[-w/2-25,0]]:
-   [[0,31],[0,-32],[w/2+25,0],[-w/2-25,0]];
+  const w=Math.min(260,Math.max(50,[...name].length*(phone?11:12)+10)),h=20;
+  const offsets=[[0,32],[0,-34],[0,53],[0,-54],[w/2+28,0],[-w/2-28,0]];
   let chosen=null;
-  for(const [dx,dy] of candidates){
+  for(const [dx,dy] of offsets){
    const box={left:p.x+dx-w/2,right:p.x+dx+w/2,top:p.y+dy-h/2,bottom:p.y+dy+h/2};
-   if(box.left<bounds.left+8||box.right>bounds.right-8||box.top<bounds.top+8||box.bottom>bounds.bottom-8)continue;
-   if(overlays.some(o=>hit(box,o,3))||occupied.some(o=>hit(box,o,5)))continue;
-   // Nearby pins must not suppress every attraction name: allow labels next to pins,
-   // while still avoiding collisions with other labels and floating controls.
-   if(pins.some((q,j)=>j!==i&&hit(box,{left:q.x-11,right:q.x+11,top:q.y-11,bottom:q.y+11},0)))continue;
+   if(box.right<bounds.left||box.left>bounds.right||box.bottom<bounds.top||box.top>bounds.bottom)continue;
+   if(occupied.some(o=>hit(box,o,3)))continue;
+   if(overlays.some(o=>hit(box,o,2)))continue;
    chosen={dx,dy,box};break;
   }
   if(!chosen){
-   // Keep a readable name even in dense areas; prioritise names over hiding all of them.
-   for(const [dx,dy] of [[0,56],[0,-57],[w/2+35,0],[-w/2-35,0],[0,76],[0,-77]]){
-    const box={left:p.x+dx-w/2,right:p.x+dx+w/2,top:p.y+dy-h/2,bottom:p.y+dy+h/2};
-    if(box.left<bounds.left+5||box.right>bounds.right-5||box.top<bounds.top+5||box.bottom>bounds.bottom-5)continue;
-    if(overlays.some(o=>hit(box,o,2))||occupied.some(o=>hit(box,o,2)))continue;
-    chosen={dx,dy,box};break;
-   }
+   const dy=i%2===0?32:-34;
+   chosen={dx:0,dy,box:{left:p.x-w/2,right:p.x+w/2,top:p.y+dy-h/2,bottom:p.y+dy+h/2}};
   }
-  if(!chosen)continue;
   occupied.push(chosen.box);
   const label=document.createElementNS('http://www.w3.org/2000/svg','g');
   label.setAttribute('class','place-map-label');
   label.setAttribute('transform',`translate(${g.x} ${g.y}) scale(${1/px}) translate(${chosen.dx} ${chosen.dy})`);
   label.setAttribute('pointer-events','none');
-  label.setAttribute('aria-hidden','true');
-  const text=document.createElementNS('http://www.w3.org/2000/svg','text');
-  text.setAttribute('text-anchor','middle');
-  text.setAttribute('dominant-baseline','middle');
-  text.textContent=name;
-  label.appendChild(text);
-  markers.appendChild(label);
+  const txt=document.createElementNS('http://www.w3.org/2000/svg','text');
+  txt.setAttribute('text-anchor','middle');txt.setAttribute('dominant-baseline','middle');txt.textContent=name;
+  label.appendChild(txt);markers.appendChild(label);
  }
  // Geographic administrative names fill only remaining space after destinations.
  if(px>=.55){
