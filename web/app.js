@@ -137,7 +137,13 @@ function renderMarkers(){
  // The selected destination must never remain hidden inside a nearby-place cluster.
  const selectedPlace=data.find(p=>p.id===selected);
  markerGroups=groupNearbyPlaces(data.filter(p=>p.id!==selected),scale*unit,phone?48:58);
- if(selectedPlace)markerGroups.push({items:[selectedPlace],x:selectedPlace.x,y:selectedPlace.y});
+ // While details are open, reserve a clear 66px focus area around the selected pin.
+ // Nearby destinations stay in the list and return to the map when selection closes.
+ if(selectedPlace){
+  const clearRadius=phone?54:66;
+  markerGroups=markerGroups.filter(g=>Math.hypot(g.x-selectedPlace.x,g.y-selectedPlace.y)*scale*unit>=clearRadius);
+  markerGroups.push({items:[selectedPlace],x:selectedPlace.x,y:selectedPlace.y});
+ }
  $('#markers').innerHTML=markerGroups.map((g,i)=>{
   const p=g.items[0],cluster=g.items.length>1,s=cluster?clusterStage(g.items):leafStage(p),sel=g.items.some(p=>p.id===selected);
   return `<g class="marker ${sel?'selected':''}" ${cluster?`data-cluster="${i}"`:`data-id="${escapeHTML(p.id)}"`} transform="translate(${g.x},${g.y})" tabindex="0" role="button" aria-label="${cluster?`${g.items.length} 處鄰近景點，${s.name}，點選展開`:escapeHTML(p.name)+'，地圖代表：'+escapeHTML(representativeSpecies(p)||'品種待確認')+'，'+s.name}"><title>${g.items.map(p=>escapeHTML(p.name)+'（'+escapeHTML(p.city)+'）｜代表：'+escapeHTML(representativeSpecies(p)||'品種待確認')+'｜'+leafStage(p).name).join('、')}</title><g transform="scale(${markerScale})"><circle class="marker-hit" r="22" fill="transparent" stroke="none"/><circle class="marker-disc" r="${phone?(cluster?16:14):(cluster?24:22)}" fill="${cluster?'#fffef8':s.bg}" ${s.stale?'stroke="#7b8175" stroke-width="1.5" stroke-dasharray="3 2"':''}/>${cluster?clusterLeaves(g.items):markerLeaf(p,s.color)}${cluster?`<g class="cluster-badge"><circle cx="11" cy="11" r="9"/><text class="cluster-count" x="11" y="14" text-anchor="middle">${g.items.length}</text></g>`:''}</g></g>`;
@@ -146,7 +152,7 @@ function renderMarkers(){
  const chosen=data.find(p=>p.id===selected);
  if(chosen){
   const width=Math.max(140,chosen.name.length*12+24,chosen.city.length*10+24);
-  $('#markers').insertAdjacentHTML('beforeend',`<g class="selected-location" transform="translate(${chosen.x} ${chosen.y})" aria-hidden="true"><g transform="scale(${1/scale})"><path d="M0 -22V-34"/><rect x="${-width/2}" y="-88" width="${width}" height="54" rx="10"/><text class="location-name" y="-65" text-anchor="middle">${escapeHTML(chosen.name)}</text><text class="location-city" y="-47" text-anchor="middle">${escapeHTML(chosen.city)}</text></g></g>`);
+  $('#markers').insertAdjacentHTML('beforeend',`<g class="selected-location" transform="translate(${chosen.x} ${chosen.y})" aria-hidden="true"><g transform="scale(${1/(scale*unit)})"><path d="M0 -22V-34"/><rect x="${-width/2}" y="-88" width="${width}" height="54" rx="10"/><text class="location-name" y="-65" text-anchor="middle">${escapeHTML(chosen.name)}</text><text class="location-city" y="-47" text-anchor="middle">${escapeHTML(chosen.city)}</text></g></g>`);
  }
  $('#map-location').textContent=chosen?chosen.city:(county!=='all'?county:region!=='all'?region+'景點':'台灣賞楓地圖');
 }
