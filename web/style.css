@@ -438,3 +438,15 @@ body {
     font-size: 15px;
   }
 }
+/* 手機版：景點資訊視窗靠近頂部，增加閱讀空間 */
+@media (max-width: 700px) {
+  .detail {
+    top: 82px;
+    bottom: 8px;
+    left: 8px;
+    right: 8px;
+    width: auto;
+    max-height: calc(100dvh - 90px);
+    border-radius: 16px;
+  }
+}
