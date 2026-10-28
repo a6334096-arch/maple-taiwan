@@ -25,7 +25,7 @@ function leafStage(p){
  const days=Math.floor((Date.now()-timestamp)/86400000);
  if(!Number.isFinite(days)||days<0)return unknownStage;
  const state=reportStage(p,o.status);
- return days>14?{...unknownStage,stale:true,name:'舊紀錄：'+state.name+'（不代表目前葉色）',lastColor:state.color}:state;
+ return days>14?{...state,stale:true,name:'舊紀錄：'+state.name+'（不代表目前葉色）'}:state;
 }
 function clusterStage(items){
  const states=items.map(leafStage);
@@ -189,7 +189,7 @@ function renderMarkers(){
  markerGroups=allGroups;
  $('#markers').innerHTML=markerGroups.map((g,i)=>{
   const p=g.items[0],cluster=g.items.length>1,s=cluster?clusterStage(g.items):leafStage(p),sel=g.items.some(p=>p.id===selected);
-  return `${g.trueX!==undefined?`<path d="M${g.trueX} ${g.trueY} L${g.x} ${g.y}" fill="none" stroke="#365847" stroke-width="${1.3/(scale*unit)}" stroke-dasharray="${3/(scale*unit)} ${3/(scale*unit)}" opacity=".8" pointer-events="none"/>`:''}<g class="marker ${sel?'selected':''}" ${cluster?`data-cluster="${i}"`:`data-id="${escapeHTML(p.id)}"`} transform="translate(${g.x},${g.y})" tabindex="0" role="button" aria-label="${cluster?`${g.items.length} 處鄰近景點，${s.name}，點選展開`:escapeHTML(p.name)+'，地圖代表：'+escapeHTML(representativeSpecies(p)||'品種待確認')+'，'+s.name}"><title>${g.items.map(p=>escapeHTML(p.name)+'（'+escapeHTML(p.city)+'）｜代表：'+escapeHTML(representativeSpecies(p)||'品種待確認')+'｜'+leafStage(p).name).join('、')}</title><g transform="scale(${markerScale})"><circle class="marker-hit" r="22" fill="transparent" stroke="none"/><circle class="marker-disc" r="${phone?14:22}" fill="${cluster?'#fffef8':s.bg}" ${s.stale?'stroke="#7b8175" stroke-width="1.5" stroke-dasharray="3 2"':''}/>${markerLeaf(p,s.color)}${cluster?`<g class="cluster-badge" transform="translate(9 -10)"><circle cx="11" cy="11" r="9"/><text class="cluster-count" x="11" y="14" text-anchor="middle">${g.items.length}</text></g>`:''}</g></g>`;
+  return `${g.trueX!==undefined?`<path d="M${g.trueX} ${g.trueY} L${g.x} ${g.y}" fill="none" stroke="#365847" stroke-width="${1.3/(scale*unit)}" stroke-dasharray="${3/(scale*unit)} ${3/(scale*unit)}" opacity=".8" pointer-events="none"/>`:''}<g class="marker ${sel?'selected':''}" ${cluster?`data-cluster="${i}"`:`data-id="${escapeHTML(p.id)}"`} transform="translate(${g.x},${g.y})" tabindex="0" role="button" aria-label="${cluster?`${g.items.length} 處鄰近景點，${s.name}，點選展開`:escapeHTML(p.name)+'，地圖代表：'+escapeHTML(representativeSpecies(p)||'品種待確認')+'，'+s.name}"><title>${g.items.map(p=>escapeHTML(p.name)+'（'+escapeHTML(p.city)+'）｜代表：'+escapeHTML(representativeSpecies(p)||'品種待確認')+'｜'+leafStage(p).name).join('、')}</title><g transform="scale(${markerScale})"><circle class="marker-hit" r="22" fill="transparent" stroke="none"/><circle class="marker-disc" r="${phone?14:22}" fill="${cluster?'#fffef8':s.bg}" ${s.stale?'stroke="#7b8175" stroke-width="1.5" stroke-dasharray="3 2"':''}/>${s.stale?'<g opacity="0.62">':''}${markerLeaf(p,s.color)}${s.stale?'</g>':''}${cluster?`<g class="cluster-badge" transform="translate(9 -10)"><circle cx="11" cy="11" r="9"/><text class="cluster-count" x="11" y="14" text-anchor="middle">${g.items.length}</text></g>`:''}</g></g>`;
  }).join('');
  renderPlaceLabels(data);
  const chosen=data.find(p=>p.id===selected);
